@@ -1,0 +1,12 @@
+/************데이타베이스 접속정보[localhost]****************
+String driverClass="oracle.jdbc.OracleDriver";
+String url="jdbc:oracle:thin:localhost:1521:xe";
+String user="scott";
+String password="tiger";
+*********************************************************/
+		
+/************데이타베이스 접속정보[124.198.47.195]*************/
+String driverClass="oracle.jdbc.OracleDriver";
+String url="jdbc:oracle:thin:@124.198.47.195:1521:xe";
+String user="jdeveloper00";
+String password="jdeveloper00";
