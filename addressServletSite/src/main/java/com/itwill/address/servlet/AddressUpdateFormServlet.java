@@ -3,6 +3,9 @@ package com.itwill.address.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.itwill.address.Address;
+import com.itwill.address.AddressService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,6 +43,9 @@ public class AddressUpdateFormServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			String noStr = request.getParameter("no");
 
+			AddressService addressService = new AddressService();
+			Address address= addressService.addressDetail(Integer.parseInt(noStr));
+			
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<!DOCTYPE html>");
@@ -49,7 +55,7 @@ public class AddressUpdateFormServlet extends HttpServlet {
 			out.println("<title>Insert title here</title>");
 			out.println("</head>");
 			out.println("<body>");
-			out.println("<h1>[김경호님 주소록 수정폼]</h1><hr>");
+			out.printf("<h1>[%s님 주소록 수정폼]</h1><hr>",address.getName());
 			out.println("<hr>");
 			out.println("	<div>");
 			out.println("		<a href='address_main'>[메인]</a>");
@@ -57,8 +63,8 @@ public class AddressUpdateFormServlet extends HttpServlet {
 			out.println("		<a href='address_list'>[주소록리스트]</a>");
 			out.println("	</div>");
 			out.println("	<form method='post' action='address_update_action'>");
-			out.println("		번호----<input type='text' name='no' value='1'><br>");
-			out.println("		이름----<input type='text' name='name' value='김경호'><br>");
+			out.printf("		번호----<input type='text' name='no' value=%d><br>",address.getNo());
+			out.printf("		이름----<input type='text' name='name' value=%s><br>",address.getName());
 			out.println("		전화번호<input type='text' name='phone' value='123-4568'><br>");
 			out.println("		주소----<input type='text' name='address' value='경기도 성남시'><br> ");
 			out.println("		<input type='submit' value='주소록수정'>");
