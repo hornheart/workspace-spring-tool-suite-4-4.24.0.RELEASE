@@ -101,7 +101,7 @@
 
 				
 				
-			<Context docBase="servletSite1" path="/servletSite1" reloadable="true" source="org.eclipse.jst.jee.server:servletSite1"/><Context docBase="htmlSite" path="/htmlSite" reloadable="true" source="org.eclipse.jst.jee.server:htmlSite"/><Context docBase="addressServletSite" path="/addressServletSite" reloadable="true" source="org.eclipse.jst.jee.server:addressServletSite"/></Host>
+			</Host>
 		</Engine>
 	</Service>
 </Server>
