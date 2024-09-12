@@ -6,14 +6,14 @@ public class AddressDao1TestMain {
 		AddressDao1 addressDao1=new AddressDao1();
 		System.out.println("1.insert");
 		addressDao1.insert();
-		System.out.println("2.updateByNo");
-		addressDao1.updateByNo();
-		System.out.println("3.deleteByNo");
-		addressDao1.deleteByNo();
-		System.out.println("4.selectByNo");
-		addressDao1.selectByNo();
-		System.out.println("5.selectAll");
-		addressDao1.selectAll();
+//		System.out.println("2.updateByNo");
+//		addressDao1.updateByNo();
+//		System.out.println("3.deleteByNo");
+//		addressDao1.deleteByNo();
+//		System.out.println("4.selectByNo");
+//		addressDao1.selectByNo();
+//		System.out.println("5.selectAll");
+//		addressDao1.selectAll();
 		
 	}
 

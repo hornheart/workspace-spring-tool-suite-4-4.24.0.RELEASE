@@ -12,17 +12,17 @@ import java.sql.Statement;
 
 public class AddressDao1 {
 	/************ 데이타베이스 접속정보[124.198.47.195] *************/
-	String driverClass = "oracle.jdbc.OracleDriver";
+	String driverClassName = "oracle.jdbc.OracleDriver";
 	String url = "jdbc:oracle:thin:@124.198.47.195:1521:xe";
-	String user = "jdeveloper00";
-	String password = "jdeveloper00";
+	String username = "jdeveloper01";
+	String password = "jdeveloper01";
 	/**************************************************************/
 	public void insert() throws Exception {
 		
 		String insertSql = "insert into address values(address_no_seq.nextval,'김경호','123-6779','서울시 여러분')";
 		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Class.forName(driverClassName);
+		Connection con = DriverManager.getConnection(url, username, password);
 		Statement stmt = con.createStatement();
 		
 		int rowCount = stmt.executeUpdate(insertSql);
@@ -36,8 +36,8 @@ public class AddressDao1 {
 	
 		String deleteSql = "delete from address where no=1";
 		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Class.forName(driverClassName);
+		Connection con = DriverManager.getConnection(url, username, password);
 		Statement stmt = con.createStatement();
 		
 		int rowCount = stmt.executeUpdate(deleteSql);
@@ -50,8 +50,8 @@ public class AddressDao1 {
 		
 		String updateSql = "update address set name='김변경',phone='999-9999',address='부산시 여러분' where no=1";
 		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Class.forName(driverClassName);
+		Connection con = DriverManager.getConnection(url, username, password);
 		Statement stmt = con.createStatement();
 		
 		int rowCount = stmt.executeUpdate(updateSql);
@@ -64,8 +64,8 @@ public class AddressDao1 {
 		
 		String selectSql = "select * from address where no=1";
 
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Class.forName(driverClassName);
+		Connection con = DriverManager.getConnection(url, username, password);
 		Statement stmt = con.createStatement();
 		
 		/*
@@ -105,8 +105,8 @@ public class AddressDao1 {
 		
 		String selectSql = "select * from address";
 
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Class.forName(driverClassName);
+		Connection con = DriverManager.getConnection(url, username, password);
 		Statement stmt = con.createStatement();
 		
 		/*

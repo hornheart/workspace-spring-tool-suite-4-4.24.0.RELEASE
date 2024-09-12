@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />	
+	<title>hyperlink 요소 연습</title>
+</head>
+<body>
+	<!-- 
+		a 태그    : 다른 페이지(html,servlet,mp3,txt..)를 요청할 때 사용하는 요소 
+		 -  href속성  : 요청uri(주소) 
+		 -  target속성: target속성을 지정해서 어느 창에 보일지 선택할 수 있습니다.
+    -->
+	<!--  -->
+	[절대경로(uri)]--> http:// 로시작하는경로
+	<ul>
+		<li>======= 12.hyperlink.html 과 다른IP(도메인) 다른사이트(servletSite) 에있는 리소스 =====</li>
+		<li><a href="http://www.naver.com/index.html">네이버[클릭시 href속성에있는 URL로요청]</a></li>
+		<li><a href="http://192.168.15.31/servletSite/tomcat.gif">클릭시 강사서버에있는 고양이사진요청[static resource]</a></li>
+		<li><a href="http://192.168.15.31/servletSite/image/test.mp3">클릭시 강사서버에있는 mp3요청[static resource]</a></li>
+		<li><a href="http://192.168.15.31/servletSite/01.Hello.html">클릭시 강사서버에있는 html요청[static resource]</a></li>
+		<li><a href="http://192.168.15.31/servletSite/gugudan">클릭시 강사서버에있는 서블릿요청[dynamoc resource]</a></li>
+		<li>======= 12.hyperlink.html 과 같은IP(도메인)  같은사이트(htmlSite)에있는 리소스 =====</li>
+		<li>[http://localhost/htmlSite/12.hyperlink.html]</li>
+		<li><a href="http://localhost/htmlSite/03.div.html">03.div.html</a> </li>		
+		<li><a href="http://localhost/htmlSite/04.p.html">04.p.html</a> </li>		
+		<li><a href="http://localhost/htmlSite/05.pre.html">05.pre.html</a> </li>		
+		<li><a href="http://localhost/htmlSite/female.gif">female.gif</a> </li>		
+		<li><a href="http://localhost/htmlSite/male.jpg">male.jpg</a> </li>		
+	</ul>
+	<h3>[상대경로(uri)]--> http://으로 시작하지않는경로</h3>
+	<hr>
+	<pre>
+		
+		- 현재보여지는 리소스의URL(http://localhost/htmlSite/12.hyperlink.html) 의 
+		 	리소스이름(12.hyperlink.html)을 제외한 경로가 기준경로가 된다.
+		- 기준경로(http://localhost/htmlSite/)와 동일한 싸이트리소스들은 
+			기준경로를 생략하고 URL을 기술하면된다.  	
+		- 기준경로를 생략하고 기술하는 경로를 상대경로라고한다.
+	</pre>
+	<ul>
+		<li>======= 12.hyperlink.html 과 같은IP(도메인)  같은사이트(htmlSite)에있는 리소스 =====</li>
+		<li>[http://localhost/htmlSite/12.hyperlink.html]</li>
+		<li><a href="03.div.html">03.div.html</a> </li>		
+		<li><a href="04.p.html">04.p.html</a> </li>		
+		<li><a href="05.pre.html">05.pre.html</a> </li>		
+		<li><a href="female.gif">female.gif</a> </li>		
+		<li><a href="./male.jpg">male.jpg</a> </li>	
+			
+		<li><a href="./image/penguin1.gif">penguin1.gif</a> </li>		
+		<li><a href="./image/penguin2.gif">penguin2.gif</a> </li>		
+		
+		
+		
+	</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

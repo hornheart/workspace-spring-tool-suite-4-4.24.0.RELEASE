@@ -1,0 +1,4 @@
+Hello text1[static web resource]!!!
+Hello text2[static web resource]!!!
+Hello text3[static web resource]!!!
+Hello text4[static web resource]!!!
