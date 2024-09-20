@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+	 함수정의
+	   - 윈도객체에소속된 함수가된다.
+	 */
+	let name='block scope 이순신';
+	let msg='block scope 아직도 12척의배가 있습니다.';
+	
+	function head_function(){
+			window.document.write('head_function()'+msg+'<br>');
+			
+			return;
+	}
+	function hello1(){
+		let name="local scope 이순신";
+		let msg="local scope 아직도 12척의배가있습니다.";
+		document.write(name+" 님"+ msg+"[hello1]<br>");
+		return;
+	}
+	/************function argument**************/
+	function hello2(msg){
+		/*메쏘드파라메타 선언시 let키워드를 사용안함*/
+		document.write(name+" 님"+ msg+"[hello2(msg)]<br>");
+	}
+	function hello3(name,msg){
+		/*메쏘드파라메타 선언시 let키워드를 사용안함*/
+		document.write(name+" 님"+ msg+"[hello3(name,msg)]<br>");
+	}
+	function hello4(name,msg,count){
+		/*메쏘드파라메타 선언시 let키워드를 사용안함*/
+		if(count==undefined){
+			count=1;
+		}
+		for(let i=0;i<count;i++){
+			document.write(name+" 님"+ msg+"[hello4(name,msg)]<br>");
+		}
+	}
+	/************function return**************/
+	function add(a,b){
+		return a+b;
+	}
+	function sub(a,b){
+		return a-b;
+	}
+	function mul(a,b){
+		return a*b;
+	}
+	function div(a,b){
+		return a/b;
+	}
+	/*
+	function alert(msg){
+		document.write("<i>내가만든경고함수"+msg+"</i><br>");
+	}
+	*/
+</script>
+
+</head>
+<body>
+<h1>자바스크립트함수</h1><hr>
+<div>함수기반언어이다</div>
+<script type="text/javascript">
+	//함수호출
+	window.head_function();
+	head_function();
+	hello1();
+	hello2("뭐하세요~~~");
+	hello2("안녕하세요~~~");
+	hello3("이소라","안녕하세요!!!!");
+	hello4("김태희","비는잘있어요!!!!");
+	hello4("이효리","안녕하삼!!!!",3);
+	let result=add(1,2);
+	document.write('add result:'+result+"<br>");
+	document.write('sub result:'+sub(1,2)+"<br>");
+	document.write('mul result:'+mul(12123,78)+"<br>");
+	document.write('div result:'+div(1,2)+"<br>");
+	//window.alert("경고메세지");
+	document.write('-------------------------<br>');
+	let aaa=window.add;
+	document.write('add result:'+aaa(1111111111,333333333333)+"<br>");
+	/*
+	Uncaught ReferenceError: body_end_function is not defined
+	body_end_function();
+	*/
+	
+</script>
+
+<script type="text/javascript">
+	function body_end_function(){
+		document.write('body_end_function()<br>');
+	}
+</script>
+</body>
+</html>

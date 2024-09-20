@@ -94,7 +94,7 @@
 			</tr>
 		</table>
 	</form>
-
+<jsp:include page="6-2.action_tag_included_footer.jsp"/>
 </body>
 </html>
 

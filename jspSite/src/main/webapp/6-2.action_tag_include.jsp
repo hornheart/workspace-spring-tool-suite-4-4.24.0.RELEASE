@@ -11,6 +11,7 @@
 <h2>형태:&lt;jsp:include page="xxx.jsp"&gt;</h2>
 <hr/>
 
+<jsp:include page="6-2.action_tag_included_top.jsp"/>
 <br/>
 <br/>
 <br/>
@@ -18,8 +19,7 @@
 	<li>content</li>
 	<li>content</li>
 	<li>content</li>
-	<hr/>
-	<hr/>
+
 	<li>content</li>
 	<li>content</li>
 	<li>content</li>
@@ -32,12 +32,11 @@
 	<li>content</li>
 	<li>content</li>
 	<li>content</li>
-	<hr/>
-<jsp:include page="6-2.action_tag_included_footer.jsp"></jsp:include>
-	<hr/>
+
 	<li>content</li>
 	<li>content</li>
 	<li>content</li>
 </ol>
+<jsp:include page="6-2.action_tag_included_footer.jsp"/>
 </body>
 </html>

@@ -69,7 +69,7 @@ public class AddressDetailServlet extends HttpServlet {
 			out.printf("	<a href='address_delete_action?no=%d'>%s님삭제[GET]</a>",address.getNo(),address.getName());
 			out.printf("<form action='address_delete_action' method='post'  style='display: inline;'>");
 			out.printf("<input type='hidden' name='no' value='%s' >",address.getNo());
-			out.printf("<input type='submit' value='김경호님삭제[POST]'>");
+			out.printf("<input type='submit' value='<%=address.getName()%>님삭제[POST]'>");
 			out.printf("</form>");
 			
 			

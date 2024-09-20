@@ -12,8 +12,10 @@
  * 3.AddressService객체 addressList() 메쏘드호출
  * 4.List<Address> 리스트 출력
  */
+ response.setContentType("text/html;charset=UTF-8");
+ String noStr = request.getParameter("no");  // 파라미터 받기
  AddressService addressService = new AddressService();
-List<Address> addressList=addressService.addressList();
+ List<Address> addressList=addressService.addressList();
 %>
 <!DOCTYPE html>
 <html>
