@@ -36,7 +36,8 @@ try{
 								.guestContent(content)
 								
 								.build();
-	
+	/*** 3.GuestService객체 insertGuest(Guest객체) 메쏘드호출 ***/
+	guestService.guestWrite(guest);
 //	int insertRowCount = guestService.guestWrite(guest);
 	response.sendRedirect("address_list.jsp");
 }catch(Exception e){
