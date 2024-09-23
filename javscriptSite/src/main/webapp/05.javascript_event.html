@@ -4,15 +4,86 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	 
+	function body_load_function(){
+		/*
+		body onload event: DOM Tree생성직후 랜더링직전에호출
+		*/
+		console.log('body onload event');
+		/*
+		DOM Tree에있는 form엘레멘트객체에 접근하는방법
+			1. window.document.form태그의name속성값
+			   ex> window.document.loginForm
+			2. window.document.forms배열객체[index]
+			   ex> window.document.forms[0]
+			3. document객체의 getElementById()메쏘드를 사용해서 form객체검색
+			   ex> document.getElementById("form태그id속성값");
+				 - HTML Tag
+					 <form id='loginForm'>
+					 </form>
+					 (엘레멘트의 아이디는 HTML파일안에서 유일해야됩니다.)
+				 - javascript
+					   var loginFormObject = document.getElementById('loginForm');
+					 (DOM Tree에서 id가 loginForm인 엘레멘트객체를반환) 
+			   
+		 form객체안에있는 input엘레멘트객체접근방법
+			1.window.documentt.form객체name속성값.input태그name속성의값
+			   ex> window.document.loginForm.id
+			
+		 */
+		 console.log(window.document.loginForm+"");
+		 console.log(window.document.loginForm.id+"");
+		 
+		 window.document.loginForm.id.focus();
+		 //window.document.loginForm.id.value='guard';
+		 //window.document.loginForm.pass.value='1111';
+		 
+		 
+	}
 	
+	function login_form_button_validation_function(){
+		alert('button click!!!');
+	}
+	function input_id_check_focusout_function(){
+		let idStr=document.loginForm.id.value;
+		if(idStr==null || idStr==''){
+			console.log('아이디를 입력하세요');
+			document.loginForm.id.style='border: 1px solid red';
+		}else{
+			console.log('아이디  입력됐네요');
+			document.loginForm.id.style='border: 1px solid green';
+		}
+	}
+	function login_form_submit_validation_function(){
+		if(document.loginForm.id.value==''){
+			alert('아이디를 입력하세요');
+			document.loginForm.id.focus();
+			return false;
+		}
+		if(document.loginForm.pass.value==''){
+			alert('패쓰워드를 입력하세요');
+			document.loginForm.pass.focus();
+			return false;
+		}
+		return true;
+	}
+	function login_form_button_validation_function(){
+		if(document.loginForm.id.value==''){
+			alert('아이디를 입력하세요');
+			document.loginForm.id.focus();
+			return;
+		}
+		if(document.loginForm.pass.value==''){
+			alert('패쓰워드를 입력하세요');
+			document.loginForm.pass.focus();
+			return;
+		}
+		document.loginForm.action='login_action.jsp';
+		document.loginForm.method='POST';
+		document.loginForm.submit();
+	}
 </script>
 </head>
-<!--
-<body onclick="alert('body click!!!');" onload="window.document.forms[0].elements[0].focus();">
-	
--->
-	<body onclick="alert('body click!!!');" onload="window.document.forms[0].elements[0].value='zz';">
+<body onload="body_load_function();" >
 	<h1>
 	자바스크립트이벤트</h1>
 	<hr>
@@ -24,9 +95,11 @@
 	 이벤트발생시에 대입한자바스트립트 코드가 실행된다.
 	</pre>
 	<h3>로그인</h3>	
-	<form  action="login_action.jsp" method="post" name="joinForm" style="border: 1px solid blue; width: 300px;padding: 30px">
-		아이디&nbsp;&nbsp; : <input type="text" name="id" placeholder="아이디" value="" onkeydown="input_text_keydown_function();"><br>
-		패쓰워드:            <input type="password" name="pass" placeholder="패쓰워드" onfocus="input_password_focus_function()"><br>
+	<form  onsubmit="return login_form_submit_validation_function();" action="login_action.jsp" method="post" name="loginForm" style="border: 1px solid blue; width: 300px;padding: 30px">
+		아이디&nbsp;&nbsp; : <input type="text" name="id" placeholder="아이디" value="" 
+			onkeydown="input_text_keydown_function();" 
+			onfocusout="input_id_check_focusout_function();"><br>
+		패쓰워드:            <input type="password" name="pass" placeholder="패쓰워드"  ><br>
 		<!-- 
 		<< submit버튼의 이벤트처리 >>
 			- submit(image)버튼클릭시에는 form객체에 onsubmit이벤트가발생한다.
@@ -38,10 +111,9 @@
 	</form>
 	<br/>
 	<br/>
-	<input type="button" value="일반버튼" onclick="alert('클릭');" ><br>
+	<input type="button" value="일반버튼" onclick="login_form_button_validation_function();" ><br>
 </body>
 </html>
-
 
 
 

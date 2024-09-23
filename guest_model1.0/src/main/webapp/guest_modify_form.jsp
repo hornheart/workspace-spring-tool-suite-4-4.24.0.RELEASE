@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+/*
+ GET방식이면 guest_main.jsp redirection
+  	0.요청객체encoding설정
+  	1.gust_no 파라메타받기
+  	2.GuestService객체생성
+  	3.GuestService객체 selectByNo(guest_no) 메쏘드호출
+  	4.Guest 데이타를 form의 input element의  value  속성에 출력
+ */
 
+
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>

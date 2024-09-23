@@ -5,8 +5,65 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>javascript core object[String]</h1>
+<h1>javascript core object[String,Array]</h1><hr>
+<div id="resultDiv">
+	성적보여주는 영역(div)
+</div>
+
 <script type="text/javascript">
+	let str1=new String("AbcdEfgh");
+	let str2="AbcdEfgh";
+	let str3="0123456789";
+	let str4="guard@naver.com";
+	
+	console.log(typeof str1);
+	console.log(typeof str2);
+	console.log(str1== str2);
+	console.log(str1=== str2);
+	console.log(str1.length);
+	console.log(str1.toUpperCase());
+	console.log(str1.toLowerCase());
+	console.log(str1.charAt(0));
+	console.log(str1.charAt(1));
+	console.log(str1.charAt(2));
+	
+	console.log('--------------------subString--------------------')
+	console.log(str3.substring(5));
+	console.log(str3.substring(5,6));
+	console.log(str3.substring(5,7));
+	
+	console.log('--------------------substr--------------------')
+	console.log(str3.substr(5));
+	console.log(str3.substr(5,1));
+	console.log(str3.substr(5,2));
+	
+	console.log('--------------------indexOf--------------------')
+	console.log("guard@naver.com".indexOf('@'));
+	console.log("guard@naver.com".indexOf('.'));
+
+	console.log('--------------------replace--------------------')
+	console.log("guard@naver.com".replace('@','골뱅이'));
+	console.log("guard@naver.com".replace('.','점'));
+		
+	/********Array********/
+	let nameArray=new Array("KIM", "LEE", "PARK", "CHOI", "SIM");
+	let korArray=[90,56,89,92,39];
+	let mathArray=[89,39,83,99,19];
+	let engArray=[78,92,83,77,91];
+	let totArray=[0,0,0,0,0];
+	let avgArray=[];
+	
+	for(let i=0;i<nameArray.length;i++){
+		totArray[i]=korArray[i]+engArray[i]+mathArray[i];
+		avgArray.push(totArray[i]/3);
+	}
+	
+	let html=`<ul>`;
+	for(let i=0;i<nameArray.length;i++){
+		html+=`<li>${nameArray[i]}|${korArray[i]}|${engArray[i]}|${mathArray[i]}|${totArray[i]}|${Math.round(avgArray[i])}</li>`;
+	}
+	html+=`</ul>`;
+	document.getElementById('resultDiv').innerHTML=html;
 </script>
 </body>
 </html>
