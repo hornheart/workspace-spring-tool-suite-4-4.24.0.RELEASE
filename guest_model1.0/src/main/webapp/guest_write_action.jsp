@@ -11,7 +11,6 @@
      Guest객체생성
   2.GuestService객체생성
   3.GuestService객체 insertGuest(Guest객체) 메쏘드호출
-  4.guest_list.jsp로 redirection
  */
  if (request.getMethod().equalsIgnoreCase("GET")) {
      // GET 방식일 때 address_main.jsp로 리다이렉션
@@ -19,7 +18,7 @@
      return; // 리다이렉션 후 더 이상 아래 코드를 실행하지 않도록 종료
  }
 
-try{
+
 	request.setCharacterEncoding("UTF-8");
 	String name=request.getParameter("guest_name");
 	String email=request.getParameter("guest_email");
@@ -39,10 +38,7 @@ try{
 	/*** 3.GuestService객체 insertGuest(Guest객체) 메쏘드호출 ***/
 	guestService.guestWrite(guest);
 //	int insertRowCount = guestService.guestWrite(guest);
-	response.sendRedirect("address_list.jsp");
-}catch(Exception e){
-	 e.printStackTrace();
-	 response.sendRedirect("address_main.jsp");
-}
-
+	response.sendRedirect("guest_list.jsp");
+//4.guest_list.jsp로 redirection
+response.encodeRedirectURL("guest_list.jsp");
 %>

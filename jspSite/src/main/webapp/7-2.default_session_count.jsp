@@ -14,23 +14,29 @@
          2.HttpSession객체사용
  -->
 <%
-	
-	
-	
-	
 
-	
 	/*
 	세션장바구니객체에 count라는 key로 Integer객체를 저장합니다.
 	세션장바구니객체는 저장데이타를 HashMap으로 관리합니다.
 	*/
+	int count=0;
+	Integer countInt=(Integer)session.getAttribute("count");
+	if(countInt==null){
+		count=0;
+	}else{
+		count=countInt.intValue();
+	}
+	count++;
+	session.setAttribute("count", new Integer(count));
+	
+	
 	
 	
 	System.out.println("-------------------------------------------------");
-	System.out.println("클라이언트IP                  --->");
-	System.out.println("세션객체참조변수[생성,바인딩] --->");
-	System.out.println("세션객체아이디                --->");
-	System.out.println("세션객체에저장된 카운트값     --->");
+	System.out.println("클라이언트IP                  --->"+request.getRemoteAddr());
+	System.out.println("세션객체참조변수[생성,바인딩] --->"+session);
+	System.out.println("세션객체아이디                --->"+session.getId());
+	System.out.println("세션객체에저장된 카운트값     --->"+session.getAttribute("count"));
 	System.out.println("-------------------------------------------------");
 	
 %>
@@ -43,10 +49,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>HttpSession객체를 사용한 클라이언트별 요청횟수 카운트</h1>
-	<h3>xxx	님	3 번째 요청입니다.
+	<h1>HttpSession객체를 사용한 클라이언트별 요청횟수 카운트</h1><hr>
+	<h3><%=session.getId()%>	님	<%=count %> 번째 요청입니다.
 	</h3>
-	<br>
 	<br>
 	<ol>
 		<li>session객체참조변수:</li>
@@ -58,7 +63,6 @@
 	</ol>
 </body>
 </html>
-
 
 
 

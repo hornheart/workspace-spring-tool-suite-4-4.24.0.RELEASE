@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>form 요소 연습</title>
+<link rel="stylesheet" type="text/css" href="css/member.css"/>
 </head>
 <body>
 	<br />

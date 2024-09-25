@@ -1,7 +1,7 @@
 <%@ page language="java"
          contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
-         session="false"
+         session="true"
          %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,12 +34,12 @@
 
 %>
 <ol>
-	<li>session객체참조변수:</li>
-	<li>session객체생성여부:</li>
-	<li>session객체세션아이디:</li>
-	<li>session객체생성시간:</li>
-	<li>session객체유효시간:</li>
-	<li>session객체마지막바인딩시간:</li>
+	<li>session객체참조변수:<%=session %></li>
+	<li>session객체생성여부:<%=session.isNew() %></li>
+	<li>session객체세션아이디:<%=session.getId() %></li>
+	<li>session객체생성시간:<%=session.getCreationTime() %></li>
+	<li>session객체유효시간:<%=session.getMaxInactiveInterval() %></li><!-- 1800초=30분 -->
+	<li>session객체마지막바인딩시간:<%=session.getLastAccessedTime() %></li>
 </ol>
 
 

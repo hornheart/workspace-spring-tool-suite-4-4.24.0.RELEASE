@@ -14,14 +14,21 @@
  	boolean isMember1 = id.equals("user1")&& pass.equals("1111");
  	boolean isMember2 = id.equals("user2")&& pass.equals("2222");
  	if(!(isMember1||isMember2)){
-		//로그인실패 		
- 		
+ 		//로그인실패 		
+ 		/***********case1***************
+ 		response.sendRedirect("7-2.default_session_login_form.jsp");
+ 		********************************/
+ 		/***********case2***************/
+ 		out.print("<script>");
+ 		out.print("	alert('로그인실패 다시로그인하세요');");
+ 		out.print("	location.href='7-2.default_session_login_form.jsp';");
+ 		out.print("</script>");
  		return;
  	}
  	/*
  	로그인성공시 세션객체에 loginId라는 키값으로 아이디값을 저장한다.
  	*/
- 	
+ 	session.setAttribute("loginId", id);
 %>
 <h1>로그인성공</h1><hr>
 <p><%=id %>님 어서오세요</p>

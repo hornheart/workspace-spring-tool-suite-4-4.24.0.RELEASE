@@ -22,6 +22,6 @@
 <li>content</li>
 </ol>
 
-
+<%@ include file="5-6.directive_included_file.jspf" %>
 </body>
 </html>
