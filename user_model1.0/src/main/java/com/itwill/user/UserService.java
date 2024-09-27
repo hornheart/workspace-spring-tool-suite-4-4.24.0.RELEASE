@@ -65,7 +65,7 @@ public class UserService {
 	 * 회원탈퇴
 	 */
 	public int remove(String userId)throws Exception{
-		return 0;
+		return userDao.delete(userId);
 	}
 	
 }

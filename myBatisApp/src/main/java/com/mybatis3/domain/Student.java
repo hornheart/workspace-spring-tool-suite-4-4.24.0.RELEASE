@@ -36,8 +36,8 @@ STUD_ID   NOT NULL NUMBER(11)
 
 */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @RequiredArgsConstructor
 public class Student {
 	

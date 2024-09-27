@@ -10,12 +10,29 @@
 			resultType="com.itwill.guest.Guest">
 		select * from guest where guest_no=#{guestNo}
 	</select>
-	<insert id="insertGuest">
-		
+	<insert id="insertGuest"
+			parameterType="com.itwill.guest.Guest">
+		insert into guest 
+		 (guest_no, guest_date, guest_name, guest_email, guest_homepage, guest_title, guest_content)
+		values(guest_guest_no_seq.nextval,
+		#{guestDate}, #{guestName},#{guestEmail},#{guestHomepage},#{guestTitle},#{guestContent})
 	</insert>
-	<delete id="deleteGuest" >
+	<delete id="deleteGuest" 
+			parameterType="int">
+		delete from guest where guest_no=#{guestNo}
 	</delete>
-	<update id="updateGuest" >
+	<update id="updateGuest" 
+			parameterType="com.itwill.guest.Guest">
+			<!-- <selectKey order="BEFORE" resultType="int" keyProperty="guestNo">
+				select guest_guest_no_seq.nextval from dual
+			</selectKey> -->
+	update guest set guest_name=#{guestName},
+	guest_date=sysdate,
+	guest_email=#{guestEmail},
+	guest_homepage=#{guestHomepage},
+	guest_title=#{guestTitle},
+	guest_content=#{guestContent} 
+	where guest_no=#{guestNo}
 	</update>
 
 </mapper>
