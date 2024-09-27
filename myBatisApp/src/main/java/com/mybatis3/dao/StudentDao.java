@@ -87,9 +87,13 @@ public class StudentDao {
 	 **************************************************/
 	/*
 	 * resultMap : studentWithAddressResultMap
+	 * resultMap : studentResultMap으로 변경
 	 */
 	public Student findStudentByIdWithAddress(Integer studId) {
-		Student student=null;
+		SqlSession sqlSession=
+				sqlSessionFactory.openSession(true);
+		Student student=sqlSession.
+				selectOne(NAMESPACE+"findStudentByIdWithAddress",studId);
 		return student;
 	}
 
@@ -100,8 +104,9 @@ public class StudentDao {
 	 * resultMap : studentWithCoursesResultMap
 	 */
 	public Student findStudentByIdWithCourses(Integer studId) {
-		Student student =null;
-		
+		SqlSession sqlSession=
+				sqlSessionFactory.openSession(true);
+		Student student =sqlSession.selectOne(NAMESPACE+"findStudentByIdWithCourses",studId);		
 		return student;
 	}
 	/**************************************************
@@ -125,14 +130,16 @@ public class StudentDao {
 	public int insertStudentBySequence(Student student) {
 		
 		SqlSession sqlSession=sqlSessionFactory.openSession(true);
-		int rowCount=sqlSession.insert(NAMESPACE+"insertStudentBySequence", student);
+		int rowCount=
+				sqlSession.insert(NAMESPACE+"insertStudentBySequence", student);
 		sqlSession.close();		
 		return rowCount;
 	}
 	public int insertStudentBySequenceReturnPrimaryKey(Student student) {
-		
-		int rowCount=0;
-		return 0;
+		SqlSession sqlSession=sqlSessionFactory.openSession(true);
+		int rowCount=
+				sqlSession.insert(NAMESPACE+"insertStudentBySequenceReturnPrimaryKey", student);
+		return student.getStudId();
 	}
 
 
@@ -144,9 +151,10 @@ public class StudentDao {
 	  parameterType: DTO,VO,Domain
 	 */
 	public int updateStudentById(Student updateStudent) {
-		
-		int rowCount=0;
-	
+		SqlSession sqlSession=sqlSessionFactory.openSession(true);
+		int rowCount=
+				sqlSession.update(NAMESPACE+"updateStudentById", updateStudent);
+		sqlSession.close();
 		return rowCount;
 	}
 
@@ -157,8 +165,11 @@ public class StudentDao {
 	 parameterType: java.lang.Integer,java.lang.String
 	 */
 	public int deleteStudentById(Integer studId) {
-		
-		return 0;
+		SqlSession sqlSession=sqlSessionFactory.openSession(true);
+		int deleteRowCount=
+			sqlSession.delete(NAMESPACE+"deleteStudentById",
+					studId);
+		return deleteRowCount;
 	}
 
 }

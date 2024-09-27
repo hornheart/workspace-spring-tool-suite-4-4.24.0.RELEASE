@@ -26,24 +26,43 @@ BIO              CLOB
 PIC              BLOB         
 ADDR_ID          NUMBER(11)   
 
+<course_enroll>  
+이름        널?       유형         
+--------- -------- ---------- 
+COURSE_ID NOT NULL NUMBER(11) 
+STUD_ID   NOT NULL NUMBER(11) 
+
+
+
 */
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@RequiredArgsConstructor
 public class Student {
 	
+	@NonNull
 	private Integer studId;//stud_Id로 하면 맴핑가능?
 	
+	@NonNull
 	private String name;
 	
+	@NonNull
 	private String email;
 	
+	@NonNull
 	private Date dob;
 	
+	@NonNull
 	private String phone;
+
+	private List<Course> courses;
+	
+	private Address address;
+
+	
+
+
 
 
 }

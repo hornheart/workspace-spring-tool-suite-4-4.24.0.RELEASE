@@ -3,9 +3,13 @@ package com.mybatis3.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address implements Serializable
 {
 	/*
@@ -24,7 +28,8 @@ public class Address implements Serializable
 	private String state;
 	private String zip;
 	private String country;
-
+	
+	private List<Student> students;
 	
 	
 	
