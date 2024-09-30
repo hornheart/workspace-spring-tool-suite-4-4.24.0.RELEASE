@@ -14,18 +14,32 @@ public class GuestDaoMain {
 		System.out.println("----------findByGuestNo----------");
 		System.out.println(guestDao.findByGuestNo(2));
 		System.out.println("----------delete-----------------");
-		System.out.println(guestDao.delete(5));
+		System.out.println(guestDao.delete(15));
 		System.out.println(guestDao.delete(1));
 		System.out.println("----------update-----------------");
-		System.out.println("updqte row count : "+ guestDao.update(new Guest(
-				4,"박지은",new Date(),"kim@itwill.com", "http://itwill.co.kr","ITWILL","ITWILL")));
+//		System.out.println("updqte row count : "+ guestDao.update(new Guest(
+//				22,"P.지은",new Date(),"kim@itwill.com", "http://itwill.co.kr","ITWILL","ITWILL")));
+		System.out.println(guestDao.update(Guest.builder()
+												.guestNo(26)
+												.guestName("지은")
+												.guestEmail("itwill@nac.com")
+												.guestHomepage("http://itwill.co.ke")
+												.guestTitle("itwill")
+												.guestContent("itwill")
+												.build()));
 		System.out.println("----------insert-----------------");
-		Guest insert= new Guest(
-				10,"강지은",new Date(),"kim@itwill.com", "http://itwill.co.kr","ITWILL","ITWILL");
-		System.out.println("insert row count : "+insert.getGuestNo());
-		int insertRowCount=
-				guestDao.insert(new Guest(
-						1,"강지은",new Date(),"kim@itwill.com", "http://itwill.co.kr","ITWILL","ITWILL"));
+
+//		int insertRowCount=
+//				guestDao.insert(new Guest(
+//						0,"지은",new Date(),"kim@itwill.com", "http://itwill.co.kr","ITWILL","ITWILL"));
+	
+		System.out.println(guestDao.insert(Guest.builder()
+												.guestName("이창섭")
+												.guestEmail("itwill@itwill.com")
+												.guestHomepage("http://itwill.co.ke")
+												.guestTitle("아무말대잔치")
+												.guestContent("비투비")
+												.build()));
 	}
 
 }

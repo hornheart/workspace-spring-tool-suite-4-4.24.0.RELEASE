@@ -32,19 +32,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class Guest {
-	@NonNull
-	private Integer guestNo;
-	@NonNull
+//	@NonNull
+//	private Integer guestNo;
+	private int guestNo;
+//	@NonNull
 	private String guestName;
-	@NonNull
+//	@NonNull
 	private Date guestDate;
-	@NonNull
+//	@NonNull
 	private String guestEmail;
-	@NonNull
+//	@NonNull
 	private String guestHomepage;
-	@NonNull
+//	@NonNull
 	private String guestTitle;
 //	@NonNull
 	private String guestContent;

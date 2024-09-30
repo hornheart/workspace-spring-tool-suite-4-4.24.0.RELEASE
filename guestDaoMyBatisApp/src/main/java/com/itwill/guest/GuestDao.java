@@ -24,7 +24,8 @@ public class GuestDao {
 		SqlSession sqlSession=sqlSessionFactory.openSession(true);
 		int insertRowCount=sqlSession.insert(NAMESPACE+"insertGuest",guest);
 		sqlSession.close();
-		return insertRowCount;
+//		return insertRowCount;
+		return guest.getGuestNo();
 	}
 
 

@@ -3,22 +3,35 @@
 <mapper namespace="com.itwill.guest.mapper.GuestMapper">
 	<select id="selectAll" 
 			resultType="com.itwill.guest.Guest">
-			select * from guest
+			<!-- parameterType="" 기술하지 않는다? -->
+		select * from guest
 	</select>
 	<select id="selectByNo" 
 			parameterType="int"
 			resultType="com.itwill.guest.Guest">
 		select * from guest where guest_no=#{guestNo}
 	</select>
-	<insert id="insertGuest"
+	<insert id="insertGuestOld"
 			parameterType="com.itwill.guest.Guest">
 		insert into guest 
-		 (guest_no, guest_date, guest_name, guest_email, guest_homepage, guest_title, guest_content)
 		values(guest_guest_no_seq.nextval,
-		#{guestDate}, #{guestName},#{guestEmail},#{guestHomepage},#{guestTitle},#{guestContent})
+<!--  	#{guestDate}, #{guestName},#{guestEmail},#{guestHomepage},#{guestTitle},#{guestContent})-->		
+		 #{guestName},sysdate,#{guestEmail},#{guestHomepage},#{guestTitle},#{guestContent})
+	</insert>
+	<insert id="insertGuest"
+			parameterType="com.itwill.guest.Guest">
+			<selectKey order="BEFORE" resultType="int" keyProperty="guestNo">
+				select guest_guest_no_seq.nextval from dual
+			</selectKey>
+		insert into guest 
+		 <!-- (guest_no, guest_date, guest_name, guest_email, guest_homepage, guest_title, guest_content) -->
+		values(
+		#{guestNo},
+	    #{guestName},sysdate,#{guestEmail},#{guestHomepage},#{guestTitle},#{guestContent}) 		
 	</insert>
 	<delete id="deleteGuest" 
 			parameterType="int">
+			<!-- resultType="" 기술하지 않는다! -->
 		delete from guest where guest_no=#{guestNo}
 	</delete>
 	<update id="updateGuest" 
@@ -27,11 +40,11 @@
 				select guest_guest_no_seq.nextval from dual
 			</selectKey> -->
 	update guest set guest_name=#{guestName},
-	guest_date=sysdate,
-	guest_email=#{guestEmail},
-	guest_homepage=#{guestHomepage},
-	guest_title=#{guestTitle},
-	guest_content=#{guestContent} 
+					 <!-- guest_date=sysdate -->
+					 guest_email=#{guestEmail},
+					 guest_homepage=#{guestHomepage},
+					 guest_title=#{guestTitle},
+					 guest_content=#{guestContent} 
 	where guest_no=#{guestNo}
 	</update>
 
