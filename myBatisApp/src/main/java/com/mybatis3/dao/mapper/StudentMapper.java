@@ -23,11 +23,14 @@ public interface StudentMapper {
 	/**************************************************
 	1. SELECT[결과타입이 DTO[DTO List] 객체인경우] 
 	**************************************************/
-	@ResultType(Student.class)
+//	@ResultType(Student.class)
 	@Select("select stud_id as studid ,name,email,dob,phone from students where stud_id=#{studId}")
 	public Student findStudentById(@Param("studId") Integer studId);
 	
-	@ResultType(Student.class)
+	@Select("select stud_id as studid ,name,email,dob,phone from students where name like '%'||#{name}||'%'")
+	public Student findStudentByNameLike(@Param("name") String name);
+	
+//	@ResultType(Student.class)
 	@Select("select stud_id as studid,name,email,dob from students")
 	public List<Student> findAllStudents();
 	

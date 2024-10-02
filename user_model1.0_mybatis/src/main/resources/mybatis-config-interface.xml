@@ -26,7 +26,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="com.itwill.user.mapper.UserMapper" />
+		<mapper class="com.itwill.user.mapper.UserMapper" />
 		
 	</mappers>
 </configuration>

@@ -8,8 +8,8 @@ public class UserService {
 	
 	private UserDao userDao;
 	public UserService() throws Exception{
-		//userDao=new UserDaoImplMyBatisInterface();
-		userDao=new UserDaoImplJDBC();
+		userDao=new UserDaoImplMyBatisInterface();
+//		userDao=new UserDaoImplJDBC();
 	}
 	/*
 	 * 회원가입

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.mybatis3.domain.Student;
+import com.mybatis3.domain.Tutor;
 
 public class MyBatisFlowMain {
 
@@ -44,6 +45,10 @@ public class MyBatisFlowMain {
 		System.out.println(student);
 		List<Student> studentList= sqlSession.selectList("com.mybatis3.dao.mapper.StudentBasicMapper.findAllStudents");
 		System.out.println(studentList);
+		
+		System.out.println("===============findTutorByIdWithCourses===============");
+		Tutor tutor = sqlSession.selectOne("com.mybatis3.dao.mapper.TutorMapper.findTutorByIdWithCourses",1);
+		System.out.println(tutor);
 		/*
 		 * 5. SqlSession close
 		 */

@@ -16,30 +16,35 @@ import com.itwill.guest.Guest;
 
 public interface GuestMapper {
 	
-@ResultType(Guest.class)	
 @Select	("select * from guest order by guest_date desc")
 public List<Guest> findByAll();
 	
-@ResultType(Guest.class)
 @Select("select * from guest where guest_no=#{guestNo}")
 public Guest findByGuestNo(Integer guestNo);
 
-@ResultType(Guest.class)
-@Select("delete from guest where guest_no=#{guestNo}")
+
+@Delete("delete from guest where guest_no=#{guestNo}")
 public int delete(Integer guestNo);
 
-@ResultType(Guest.class)
-@Select("update guest set guest_name=#{guestName},guest_email=#{guestEmail},\r\n"
+@Update("update guest set guest_name=#{guestName},guest_email=#{guestEmail},\r\n"
 		+ "							 guest_homepage=#{guestHomepage},guest_title=#{guestTitle},\r\n"
 		+ "							 guest_content=#{guestContent}\r\n"
 		+ "			where guest_no=#{guestNo}")
 public int update(Guest guest);
 
 
-@ResultType(Guest.class)
-@Select("insert into guest \r\n"
-		+ "			values( #{guestNo},#{guestName},\r\n"
-		+ "					sysdate,#{guestEmail},#{guestHomepage},\r\n"
-		+ "					#{guestTitle},#{guestContent})")
+/*
+ * @ResultType(Guest.class)
+ * 
+ * @Select("insert into guest \r\n" +
+ * "			values( #{guestNo},#{guestName},\r\n" +
+ * "					sysdate,#{guestEmail},#{guestHomepage},\r\n" +
+ * "					#{guestTitle},#{guestContent})")
+ */
+@SelectKey(before=true,
+		   resultType = Integer.class,
+		   statement = "Select guest_guest_no_seq.nextval from dual",
+		   keyProperty="guestNo")
+@Insert("insert into guest values( #{guestNo},#{guestName},	sysdate,#{guestEmail},#{guestHomepage},	#{guestTitle},#{guestContent})")
 public int insert(Guest guest);
 }

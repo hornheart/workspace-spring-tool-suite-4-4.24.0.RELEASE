@@ -24,7 +24,17 @@ public class GuestDaoImplMyBatisInterface implements GuestDao{
 	@Override
 	public int insert(Guest guest) throws Exception {
 		SqlSession sqlSession=sqlSessionFactory.openSession(true);
-		int guestMapper=sqlSession.getMapper(GuestMapper.class).insert(guest);
+		 /************mapper interface사용안할시*************
+		int insertRowCount=sqlSession.insert("com.itwill.guest.GuestMapper.insert", guest);
+		**mapper interface사용시*****************
+		GuestMapper guestMapper= 
+				sqlSession.getMapper(GuestMapper.class);
+		int insertRowCount=guestMapper.insert(guest);
+		sqlSession.close();
+		return insertRowCount;
+		****************************************************/
+		 
+		int guestMapper=sqlSession.getMapper(GuestMapper.class).insert(guest);//Mapper interface사용시
 		sqlSession.close();
 		return guestMapper;
 	}
@@ -32,9 +42,11 @@ public class GuestDaoImplMyBatisInterface implements GuestDao{
 	@Override
 	public int update(Guest guest) throws Exception {
 		SqlSession sqlSession=sqlSessionFactory.openSession(true);
-		int updateRowCount=sqlSession.getMapper(GuestMapper.class).update(guest);
+//		int updateRowCount=sqlSession.getMapper(GuestMapper.class).update(guest);
+		GuestMapper guestMapper=sqlSession.getMapper(GuestMapper.class);
+		int rowCount=guestMapper.update(guest);
 		sqlSession.close();
-		return updateRowCount;
+		return rowCount;
 	}
 
 	@Override

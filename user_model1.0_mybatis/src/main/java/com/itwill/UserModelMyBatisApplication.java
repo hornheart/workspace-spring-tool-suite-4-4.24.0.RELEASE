@@ -10,6 +10,8 @@ public class UserModelMyBatisApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserModelMyBatisApplication.class, args);
+	
+		
 	}
 
 }

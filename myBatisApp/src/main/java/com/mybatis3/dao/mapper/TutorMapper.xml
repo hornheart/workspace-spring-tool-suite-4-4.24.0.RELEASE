@@ -1,30 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis3.dao.mapper.TutorMapper">
-	<!-- Tutor resultMap-->
-	<resultMap id="tutorResultMap" type="com.mybatis3.domain.Tutor"  autoMapping="true">
-		<!-- course List -->
-		<result  column="TUTOR_NAME" property="name"/>
+	<!-- Tutor의 resultMap 정의 -->
+	<resultMap id="tutorResultMap" type="com.mybatis3.domain.Tutor" autoMapping="true">
+		<!-- Tutor의 이름을 매핑 -->
+		<result column="TUTOR_NAME" property="name"/>
+		
+		<!-- courses 컬렉션 매핑 -->
 		<collection property="courses" 
 					javaType="java.util.List"
-					ofType="com.mybatis3.domain.Course" 
+					ofType="com.mybatis3.domain.Course"
 					autoMapping="true">
-			<!-- <result column="COURSE_ID" property="courseId"/> -->
-			
+			<!-- 만약 Course 필드를 따로 매핑해야 하면 이곳에 result 추가 -->
+			<!-- 예시: <result column="COURSE_ID" property="courseId"/> -->
 		</collection>
 	</resultMap>
-	
-	<!-- 
-	/*****************************************
-	SELECT  TUTOR + COURSE JOIN [ 1 : N ]
-	*****************************************/
-	 -->
+
+	<!-- Tutor와 Courses를 조회하는 select 쿼리 -->
 	<select id="findTutorByIdWithCourses" parameterType="int" resultMap="tutorResultMap">
-	  SELECT t.tutor_id, t.name as tutor_name, email,course_id, c.name, description, start_date, end_date
+	  SELECT t.tutor_id, t.name as tutor_name, email, course_id, c.name, description, start_date, end_date
       FROM tutors t 
-      left outer join courses c 
-      on t.tutor_id=c.tutor_id
-      where t.tutor_id=#{tutorId} 
+      LEFT OUTER JOIN courses c 
+      ON t.tutor_id = c.tutor_id
+      WHERE t.tutor_id = #{tutorId}
 	</select>
-	
 </mapper>
