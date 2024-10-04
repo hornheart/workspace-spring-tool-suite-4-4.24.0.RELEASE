@@ -13,7 +13,7 @@ public class UserServiceTestMain {
 		System.out.println("2.로그인");
 		int result = userService.login("xxxx", "1111");
 		System.out.println("성공:"+result);
-		result = userService.login("yyyy", "1111");
+		result = userService.login("xxxx", "1111");
 		System.out.println("실패:"+result);
 		result = userService.login("xxxx", "2222");
 		System.out.println("실패:"+result);
