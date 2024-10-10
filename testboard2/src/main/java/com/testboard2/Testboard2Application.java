@@ -1,13 +1,13 @@
-package com.testboard;
+package com.testboard2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestboardApplication {
+public class Testboard2Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestboardApplication.class, args);
+		SpringApplication.run(Testboard2Application.class, args);
 	}
 
 }
