@@ -27,14 +27,25 @@
 	 */
 	int result=	new UserService().login(userId, password);
 	if(result==0){//0:아이디존재안함
-		String msg1=userId+" 는 존재하지 않는 아이디입니다.";//한글 존재로 반드시 URLEncoder
+		/*String msg1=userId+" 는 존재하지 않는 아이디입니다.";//한글 존재로 반드시 URLEncoder
 		String queryString = "msg1="+msg1+"&userId="+userId+"&password="+password;
-		queryString=URLEncoder.encode(queryString,"UTF-8");
+		queryString=URLEncoder.encode(queryString,"UTF-8");*/
 
 		//case1 script
 		//case2 redirect
-		response.sendRedirect("user_login_form.jsp?"+queryString);
+		//response.sendRedirect("user_login_form.jsp?"+queryString);
 		//case3 forward
+		/* request.setAttribute("fuserId", userId); 
+		request.setAttribute("fpassword", password);  */
+		
+		User fUser=new User(userId, password,"","");//=>>>>존재하지 않는 유저입니다
+		String msg1=userId+" 는 존재하지 않는 아이디입니다.";
+		
+		request.setAttribute("juser", fUser);
+		request.setAttribute("msg1", msg1);
+		
+		RequestDispatcher rd=request.getRequestDispatcher("user_login_form.jsp");
+		rd.forward(request, response);
 	}else if(result==1){//1.패스워드 불일치
 		String msg2=password+" 는 존재하지 않는 패스워드입니다.";
 		String queryString=URLEncoder.encode(msg2,"UTF-8");
