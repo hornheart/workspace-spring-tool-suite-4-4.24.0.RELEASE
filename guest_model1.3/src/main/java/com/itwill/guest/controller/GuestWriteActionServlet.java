@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/guest_write_action")
+//@WebServlet("/guest_write_action")
 public class GuestWriteActionServlet extends HttpServlet {
 	private GuestService guestService;
 	public GuestWriteActionServlet() throws Exception {

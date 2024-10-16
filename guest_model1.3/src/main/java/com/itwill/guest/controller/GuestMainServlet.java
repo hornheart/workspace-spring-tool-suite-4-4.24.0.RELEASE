@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import jakarta.*;
 
-@WebServlet("/guest_main")
+//@WebServlet("/guest_main")
 public class GuestMainServlet extends HttpServlet {
 
 	@Override
