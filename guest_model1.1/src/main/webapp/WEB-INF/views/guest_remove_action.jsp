@@ -11,16 +11,16 @@
   2.GuestService객체생성
   3.GuestService객체 deleteGuest(guest_no) 메쏘드호출
   4.guest_list.jsp로 redirection
+ */
  if(request.getMethod().equalsIgnoreCase("GET")){
-	 response.sendRedirect("guest_main");
+	 response.sendRedirect("guest_main.jsp");
 	 return;
  }
  request.setCharacterEncoding("UTF-8");
  String guest_noStr=request.getParameter("guest_no");
  GuestService guestService=new GuestService();
  int rowCount=guestService.guestDelete(Integer.parseInt(guest_noStr));
- response.sendRedirect("guest_list");
- */
+ response.sendRedirect("guest_list.jsp");
 
 
  %>

@@ -16,14 +16,14 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			<jsp:include page="include_common_top.jsp"/>
+			<jsp:include page="include_common_top.jsp"/>  
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<jsp:include page="include_common_left.jsp"/>
+			<jsp:include page="include_common_left.jsp"/>  
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -42,7 +42,7 @@
 											- 방명록 쓰기</b></td>
 								</tr>
 							</table> <!-- guest write Form  -->
-							<form name="f" >
+							<form name="f" method="post">
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
@@ -80,10 +80,9 @@
 							</form> <br />
 							<table width=590 border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td align=center>
-										<input type="button" value="방명록쓰기" onclick="guestCreate();"> &nbsp; 
-										<!-- <a href="guest_list.jsp">방명록목록</a> -->
-										<input type="button" value="방명록목록" onclick="guestList()"></td>
+									<td align=center><input type="button" value="방명록쓰기"
+										onClick="guestCreate();"> &nbsp; <input type="button"
+										value="방명록목록" onClick="guestList()"></td>
 								</tr>
 							</table>
 						</td>
@@ -96,7 +95,7 @@
 		<!-- footer start-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			<jsp:include page="include_common_bottom.jsp"/>
+			<jsp:include page="include_common_bottom.jsp"/>  
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>

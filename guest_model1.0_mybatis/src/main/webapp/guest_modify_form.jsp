@@ -1,7 +1,8 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.itwill.guest.GuestService"%>
+    
 <%
 /*
  GET방식이면 guest_main.jsp redirection
@@ -11,24 +12,37 @@
   	3.GuestService객체 selectByNo(guest_no) 메쏘드호출
   	4.Guest 데이타를 form의 input element의  value  속성에 출력
  */
- if(request.getMethod().equalsIgnoreCase("GET")){
+if(request.getMethod().equalsIgnoreCase("GET")){
 	 response.sendRedirect("guest_main.jsp");
 	 return;
  }
-request.setCharacterEncoding("UTF-8");
-String guest_noStr=request.getParameter("guest_no");
+request.setCharacterEncoding("UTF-8"); 
+String guestNo=request.getParameter("guest_no");
 GuestService guestService=new GuestService();
-Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
+Guest guest=guestService.guestDetail(Integer.parseInt(guestNo));
+
 %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>방명록 관리</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+
+
 <link rel="stylesheet"
 	href="css/styles.css">
 <link rel="stylesheet"
 	href="css/guest.css">
+
+
+
+
+
+
 <script	src="js/guest.js"></script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -38,14 +52,14 @@ Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			<jsp:include page="include_common_top.jsp"/>
+			<jsp:include page="include_common_top.jsp"/>  
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<jsp:include page="include_common_left.jsp"/>
+			<jsp:include page="include_common_left.jsp"/>  
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -68,13 +82,13 @@ Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
 					</tr>
 				</table> <!-- modify Form  -->
 				<form name="f" method="post">
-					<input type="hidden" name="guest_no" value="<%=guest.getGuestNo()%>" />
+					<input type="hidden" name="guest_no" value="25" />
 					<table border="0" cellpadding="0" cellspacing="1" width="590"
 						bgcolor="BBBBBB">
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
 							<td align="left" width=490 bgcolor="ffffff"
-								style="padding-left: 10px"><%=guest.getGuestNo()%></td>
+								style="padding-left: 10px"><%=guest.getGuestNo() %></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
@@ -95,20 +109,20 @@ Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
 							<td align="left" width=490 bgcolor="ffffff"
 								style="padding-left: 10px"><input type="text"
 								style="width: 240" name="guest_email"
-								value="<%=guest.getGuestEmail()%> "></td>
+								value="<%=guest.getGuestEmail()%>"></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
 							<td align="left" width=490 bgcolor="ffffff"
 								style="padding-left: 10px"><input type="text"
 								style="width: 240" name="guest_title"
-								value="<%=guest.getGuestTitle()%> "></td>
+								value="<%=guest.getGuestTitle()%>"></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">내용</td>
 							<td align="left" width=490 bgcolor="ffffff"
 								style="padding-left: 10px"><textarea wrap="soft"
-									style="width: 240px" rows="10" name="guest_content"><%=guest.getGuestContent()%></textarea>
+									style="width: 240px" rows="10" name="guest_content"><%=guest.getGuestContent() %></textarea>
 
 							</td>
 						</tr>
@@ -131,7 +145,7 @@ Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
 		<!-- footer start-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			<jsp:include page="include_common_bottom.jsp"/>
+			<jsp:include page="include_common_bottom.jsp"/>  
 			<!-- include_common_bottom.jsp end-->
 		</div>
 		<!-- footer end -->

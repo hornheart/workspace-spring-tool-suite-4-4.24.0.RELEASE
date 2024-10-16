@@ -12,8 +12,9 @@ GET방식이면 guest_main.jsp redirection
 	2.GuestService객체생성
 	3.GuestService객체 updateGuest(Guest객체) 메쏘드호출
 	4.guest_view.jsp로 redirection
+*/
 	if(request.getMethod().equalsIgnoreCase("GET")){
-		response.sendRedirect("guest_main");
+		response.sendRedirect("guest_main.jsp");
 		return;
 	}
 	String guest_no=request.getParameter("guest_no");
@@ -33,8 +34,7 @@ GET방식이면 guest_main.jsp redirection
 							.build()
 			);
 	
-	response.sendRedirect("guest_view?guest_no="+guest_no);
-*/
+	response.sendRedirect("guest_view.jsp?guest_no="+guest_no);
 %>
 
 

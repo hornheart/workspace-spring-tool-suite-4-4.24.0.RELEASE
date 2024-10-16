@@ -1,8 +1,8 @@
-<%@page import="com.itwill.guest.Guest"%>
 <%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.Guest" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
+<%
 /*
    GET방식이면 guest_main.jsp redirection
    
@@ -12,15 +12,14 @@
   3.GuestService객체 deleteGuest(guest_no) 메쏘드호출
   4.guest_list.jsp로 redirection
  */
+ 
  if(request.getMethod().equalsIgnoreCase("GET")){
 	 response.sendRedirect("guest_main.jsp");
 	 return;
  }
- request.setCharacterEncoding("UTF-8");
- String guest_noStr=request.getParameter("guest_no");
- GuestService guestService=new GuestService();
- int rowCount=guestService.guestDelete(Integer.parseInt(guest_noStr));
- response.sendRedirect("guest_list.jsp");
-
-
- %>
+request.setCharacterEncoding("UTF-8"); 
+String guestNo=request.getParameter("guest_no");
+GuestService guestService=new GuestService();
+int rowCount=guestService.guestDelete(Integer.parseInt(guestNo));
+response.sendRedirect("guest_list.jsp");
+%>

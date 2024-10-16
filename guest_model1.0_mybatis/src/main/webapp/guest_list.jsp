@@ -3,20 +3,20 @@
 <%@page import="com.itwill.guest.GuestService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%
- /*
-  * 0.요청객체encoding설정
-  * 1.파라메타받기
-  * 2.GuestService객체생성
-  * 3.GuestService객체 guestList() 메쏘드호출
-  * 4.List<Guest> 리스트 출력
-  */
-  request.setCharacterEncoding("UTF-8");
-  GuestService guestService=new GuestService();
-  List<Guest> guestList=guestService.guestList();
- 
- %>   
-    
+<%
+	 /*
+	  * 0.요청객체encoding설정
+	  * 1.파라메타받기
+	  * 2.GuestService객체생성
+	  * 3.GuestService객체 selectAll() 메쏘드호출
+	  * 4.ArrayList<Guest> 리스트 출력
+	  */
+	  request.setCharacterEncoding("UTF-8");
+	  GuestService guestService=new GuestService();
+	  List<Guest> guestList = 
+			  guestService.guestList();
+	  
+%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,17 +65,19 @@
 										<td width=50 align=center bgcolor="E6ECDE" height="22">번호</td>
 										<td width=300 align=center bgcolor="E6ECDE">제목</td>
 										<td width=120 align=center bgcolor="E6ECDE">이름</td>
-										<td width=120 align=center bgcolor="E6ECDE">날짜</td>
+										<td width=250 align=center bgcolor="E6ECDE">날짜</td>
 									</tr>
 									<%for(Guest guest:guestList){ %>
+									<!-- guest start -->
 									<tr>
 										<td width=50 align=center bgcolor="ffffff" height="20"><%=guest.getGuestNo()%></td>
 										<td width=300 bgcolor="ffffff" style="padding-left: 10"><a
-											href="guest_view.jsp?guest_no=<%=guest.getGuestNo()%>" class="user"><%=guest.getGuestTitle()%></a></td>
-										<td width=120 align=center bgcolor="ffffff"><%=guest.getGuestName()%></td>
-										<td width=120 align=center bgcolor="ffffff"><%=guest.getGuestDate().toLocaleString().substring(0,11)%></td>
+											href="guest_view.jsp?guest_no=<%=guest.getGuestNo() %>" class="user"><%=guest.getGuestTitle() %></a></td>
+										<td width=120 align=center bgcolor="ffffff"><%=guest.getGuestName() %></td>
+										<td width=250 align=center bgcolor="ffffff"><%=guest.getGuestDate().toLocaleString().substring(0,23) %></td>
 									</tr>
-									<%} %>
+									<!-- guest end -->
+									<%}%>
 									
 
 

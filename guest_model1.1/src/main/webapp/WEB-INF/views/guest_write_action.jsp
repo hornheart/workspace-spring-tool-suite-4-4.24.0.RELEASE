@@ -13,7 +13,7 @@
 	  3.GuestService객체 insertGuest(Guest객체) 메쏘드호출
 	  4.guest_list.jsp로 redirection
 	 */
-	/* if(request.getMethod().equalsIgnoreCase("GET")){
+	if(request.getMethod().equalsIgnoreCase("GET")){
 		response.sendRedirect("guest_main.jsp");
 		return;
 	}
@@ -32,7 +32,7 @@
 							.build()
 			);
 	
-	response.sendRedirect("guest_view?guest_no="+guest_no); */
+	response.sendRedirect("guest_view.jsp?guest_no="+guest_no);
 %>
 
 

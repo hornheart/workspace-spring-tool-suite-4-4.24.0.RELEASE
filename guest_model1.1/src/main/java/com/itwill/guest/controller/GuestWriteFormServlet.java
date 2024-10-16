@@ -15,18 +15,8 @@ public class GuestWriteFormServlet extends HttpServlet{
 		/*
 		 * forward시 상대경로는 어떤context root(/guest_model1.1) 이후 모든디렉토리가가능하다
 		 */
-		String forwardPath="forward:/WEB-INF/views/guest_write_form.jsp";
-		/*******forward or redirect************/
-		String[] pathArray=forwardPath.split(":");//split의 메소드는 JAVA_API servlet에서 거론했으나...;;
-		String forwardOrRedirct=pathArray[0];
-		String path=pathArray[1];
-		if(forwardOrRedirct.equals("forward")) {
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-			
-		}else {
-			response.sendRedirect(path);
-		}
-		/***************************************/
+		String forwardPath="/WEB-INF/views/guest_write_form.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(forwardPath);
+		rd.forward(request, response);
 	}
 }
