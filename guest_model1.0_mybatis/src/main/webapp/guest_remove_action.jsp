@@ -1,8 +1,8 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
+<%
 /*
    GET방식이면 guest_main.jsp redirection
    
@@ -18,9 +18,7 @@
  }
  request.setCharacterEncoding("UTF-8");
  String guest_noStr=request.getParameter("guest_no");
- GuestService guestService=new GuestService();
+ GuestServiceImpl guestService=new GuestServiceImpl();
  int rowCount=guestService.guestDelete(Integer.parseInt(guest_noStr));
  response.sendRedirect("guest_list.jsp");
-
-
- %>
+%>

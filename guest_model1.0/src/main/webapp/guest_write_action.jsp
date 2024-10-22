@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.itwill.guest.Guest" %>
-<%@page import="com.itwill.guest.GuestService" %>
+<%@page import="com.itwill.guest.GuestServiceImpl" %>
 <%
 /*
 	GET방식이면 guest_main.jsp redirection
@@ -25,16 +25,16 @@
 	String homepage=request.getParameter("guest_homepage");
 	String title=request.getParameter("guest_title");
 	String content=request.getParameter("guest_content");
-	GuestService guestService=new GuestService();
+	GuestServiceImpl guestService=new GuestServiceImpl();
 	Guest guest= Guest.builder()
-								
-								.guestName(name)
-								.guestEmail(email)
-								.guestHomepage(homepage)
-								.guestTitle(title)
-								.guestContent(content)
-								
-								.build();
+						
+						.guestName(name)
+						.guestEmail(email)
+						.guestHomepage(homepage)
+						.guestTitle(title)
+						.guestContent(content)
+						
+						.build();
 	/*** 3.GuestService객체 insertGuest(Guest객체) 메쏘드호출 ***/
 	guestService.guestWrite(guest);
 //	int insertRowCount = guestService.guestWrite(guest);

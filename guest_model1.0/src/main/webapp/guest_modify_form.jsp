@@ -1,7 +1,7 @@
 <%@page import="org.apache.catalina.connector.Response"%>
 <%@page import="java.util.List"%>
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -21,7 +21,7 @@ GET방식이면 guest_main.jsp redirection
 //	0.요청객체encoding설정
  request.setCharacterEncoding("UTF-8");  
 //2.GuestService객체생성
- GuestService guestService=new GuestService();
+ GuestServiceImpl guestService=new GuestServiceImpl();
 //gust_no 파라메타받기
  String noStr=request.getParameter("guest_no");
 //3.GuestService객체 selectByNo(guest_no) 메쏘드호출

@@ -1,10 +1,10 @@
 <%@page import="com.itwill.guest.Guest"%>
 <%@page import="java.util.List"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	GuestService guestService=new GuestService();
+GuestServiceImpl guestService=new GuestServiceImpl();
 	List<Guest> guestList=guestService.guestList();
 %>    
 <!DOCTYPE html>

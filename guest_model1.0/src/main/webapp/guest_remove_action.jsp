@@ -1,4 +1,4 @@
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@page import="com.itwill.guest.Guest" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -17,7 +17,7 @@ request.setCharacterEncoding("UTF-8");
 String guest_noStr=request.getParameter("guest_no");
 int guest_no = Integer.parseInt(guest_noStr);
 //2.GuestService객체생성
-GuestService guestService=new GuestService();
+GuestServiceImpl guestService=new GuestServiceImpl();
 //3.GuestService객체 deleteGuest(guest_no) 메쏘드호출
 guestService.guestDelete(guest_no);
 //4.guest_list.jsp로 redirection

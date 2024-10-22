@@ -1,5 +1,5 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -23,16 +23,16 @@ GET방식이면 guest_main.jsp redirection
 	String guest_homepage=request.getParameter("guest_homepage");
 	String guest_title=request.getParameter("guest_title");
 	String guest_content=request.getParameter("guest_content");
-	GuestService guestService=new GuestService();
+	GuestServiceImpl guestService=new GuestServiceImpl();
 	int rowCount=guestService.guestUpdate(Guest.builder()
-							.guestNo(Integer.parseInt(guest_no))
-							.guestName(guest_name)
-							.guestEmail(guest_email)
-							.guestHomepage(guest_homepage)
-							.guestTitle(guest_title)
-							.guestContent(guest_content)
-							.build()
-			);
+					.guestNo(Integer.parseInt(guest_no))
+					.guestName(guest_name)
+					.guestEmail(guest_email)
+					.guestHomepage(guest_homepage)
+					.guestTitle(guest_title)
+					.guestContent(guest_content)
+					.build()
+	);
 	
 	response.sendRedirect("guest_view.jsp?guest_no="+guest_no);
 %>

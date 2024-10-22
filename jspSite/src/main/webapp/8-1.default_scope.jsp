@@ -1,12 +1,8 @@
-
-<%--@page import="com.itwill.student.Student"--%>
-<%--@page import="com.itwill.student.Student"--%>
-
+<%@page import="com.itwill.student.Student"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
-<%--
-	
+
+<%	
 	Student pageSt=new Student();
 	Student requestSt=new Student();
 	Student sessionSt=new Student();
@@ -17,7 +13,13 @@
 	session.setAttribute("sessionSt", sessionSt); 				//session
 	application.setAttribute("applicationSt", applicationSt);	//application
 	
---%>
+	System.out.println("page:"+pageSt);
+	System.out.println("request:"+requestSt);
+	System.out.println("session:"+sessionSt);
+	System.out.println("application:"+applicationSt);
+	
+%>	
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,7 +44,6 @@ include
 <a href='8-3.default_scope_page_session_application1.jsp'>8-3.default_scope_page_session_application1.jsp</a><br/>
 </body>
 </html>
-
 
 
 

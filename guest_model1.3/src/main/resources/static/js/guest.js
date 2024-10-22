@@ -7,7 +7,7 @@ function guestCreateForm() {
 	document.f.action = 'guest_write_form.jsp';
 	document.f.submit();
 	*/
-	window.location.href='guest_write_form';
+	window.location.href='guest_write_form.do';
 }
 function guestModify() {
 	if (document.f.guest_name.value == "") {
@@ -38,23 +38,23 @@ function guestModify() {
 	}
 	
 	document.f.method='POST';
-	document.f.action = "guest_modify_action";
+	document.f.action = "guest_modify_action.do";
 	document.f.submit();
 }
 
 function guestList() {
-	window.location.href='guest_list';
+	window.location.href='guest_list.do';
 }
 
 function guestModifyForm() {
-	document.f.action = "guest_modify_form";
+	document.f.action = "guest_modify_form.do";
 	document.f.method='POST';
 	document.f.submit();
 }
 function guestRemove() {
 	if (window.confirm("정말 삭제하시겠습니까?")) {
 		document.f.method='POST';
-		document.f.action = "guest_remove_action";
+		document.f.action = "guest_remove_action.do";
 		document.f.submit();
 	}
 }
@@ -85,7 +85,7 @@ function guestCreate() {
 		document.f.guest_content.focus();
 		return;
 	}
-	document.f.action = "guest_write_action";
+	document.f.action = "guest_write_action.do";
 	document.f.method='POST';
 	document.f.submit();
 }

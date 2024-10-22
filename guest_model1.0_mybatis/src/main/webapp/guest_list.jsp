@@ -1,20 +1,19 @@
 <%@page import="com.itwill.guest.Guest"%>
 <%@page import="java.util.List"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
  /*
-  * 0.요청객체encoding설정
-  * 1.파라메타받기
-  * 2.GuestService객체생성
-  * 3.GuestService객체 guestList() 메쏘드호출
-  * 4.List<Guest> 리스트 출력
-  */
-  request.setCharacterEncoding("UTF-8");
-  GuestService guestService=new GuestService();
-  List<Guest> guestList=guestService.guestList();
- 
+   * 0.요청객체encoding설정
+   * 1.파라메타받기
+   * 2.GuestService객체생성
+   * 3.GuestService객체 guestList() 메쏘드호출
+   * 4.List<Guest> 리스트 출력
+   */
+   request.setCharacterEncoding("UTF-8");
+   GuestServiceImpl guestService=new GuestServiceImpl();
+   List<Guest> guestList=guestService.guestList();
  %>   
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

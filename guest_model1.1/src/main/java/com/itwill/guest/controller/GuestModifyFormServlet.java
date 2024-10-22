@@ -15,44 +15,39 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class GuestMainServlet
  */
-@WebServlet("/guest_modify_form")
+@WebServlet("/guest_modify_form.do")
 public class GuestModifyFormServlet extends HttpServlet {
 	private GuestService guestService;
-	public GuestModifyFormServlet() throws Exception {
-		guestService = new GuestService();
+	public GuestModifyFormServlet() throws Exception{
+		guestService=new GuestService();
 	}
+	
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String forwardPath="forward:/WEB-INF/views/guest_modify_form.jsp";
-		
 		/*
-		 GET방식이면 guest_main.jsp redirection
-		  	0.요청객체encoding설정
-		  	1.gust_no 파라메타받기
-		  	2.GuestService객체생성
-		  	3.GuestService객체 selectByNo(guest_no) 메쏘드호출
+		GET방식이면 guest_main.jsp redirection
+	  	0.요청객체encoding설정
+	  	1.gust_no 파라메타받기
+	  	2.GuestService객체생성
+	  	3.GuestService객체 selectByNo(guest_no) 메쏘드호출
+	  	4.GuestService객체 selectByNo(guest_no) 메쏘드호출반환데이를
+	  	  request객체에 추가
 		 */
-		
+		String forwardPath="";
 		try {
 			if(request.getMethod().equalsIgnoreCase("GET")){
-//				response.sendRedirect("guest_main");
-//				return;
 				forwardPath="redirect:guest_main";
-			} else {
-				
+			}else {
 				request.setCharacterEncoding("UTF-8");
 				String guest_noStr=request.getParameter("guest_no");
-//			GuestService guestService=new GuestService();
 				Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
 				request.setAttribute("guest", guest);
 				forwardPath="forward:/WEB-INF/views/guest_modify_form.jsp";
-				
 			}
-			
-		}catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
+			forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 		}
-		
 		
 		/**********forward or redirect**************************/
 		/*

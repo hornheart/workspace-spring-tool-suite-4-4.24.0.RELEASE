@@ -1,5 +1,5 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -16,9 +16,8 @@ if(guest_noStr==null || guest_noStr.equals("")){
 	response.sendRedirect("guest_main.jsp");
 	return;
 }
-GuestService guestService=new GuestService();
+GuestServiceImpl guestService=new GuestServiceImpl();
 Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
-
 %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

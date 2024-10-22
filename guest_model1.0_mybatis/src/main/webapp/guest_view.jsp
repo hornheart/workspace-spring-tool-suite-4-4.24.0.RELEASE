@@ -1,33 +1,33 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          errorPage="error_500.jsp" 
     pageEncoding="UTF-8"%>
  <%
  /*
-  * 0.요청객체encoding설정
-  * 1.gust_no 파라메타받기
-  * 2.GuestService객체생성
-  * 3.GuestService객체 selectByNo(guest_no) 메쏘드호출
-  * 4.Guest 출력
-  */
-  request.setCharacterEncoding("UTF-8");
-  String guest_noStr=request.getParameter("guest_no");
-  if(guest_noStr==null||guest_noStr.equals("")){
-	  response.sendRedirect("guest_list.jsp");
-	  return;
-  }
-  GuestService guestService=new GuestService();
-  Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
-  if(guest==null){
-	  out.println("<script>");
-	  out.println("alert('존재하지않는 게시물입니다.');");
-	  out.println("location.href='guest_list.jsp';");
-	  out.println("</script>");
-	  
-	  return;
-  }
-  %>   
+   * 0.요청객체encoding설정
+   * 1.gust_no 파라메타받기
+   * 2.GuestService객체생성
+   * 3.GuestService객체 selectByNo(guest_no) 메쏘드호출
+   * 4.Guest 출력
+   */
+   request.setCharacterEncoding("UTF-8");
+   String guest_noStr=request.getParameter("guest_no");
+   if(guest_noStr==null||guest_noStr.equals("")){
+ 	  response.sendRedirect("guest_list.jsp");
+ 	  return;
+   }
+   GuestServiceImpl guestService=new GuestServiceImpl();
+   Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
+   if(guest==null){
+ 	  out.println("<script>");
+ 	  out.println("alert('존재하지않는 게시물입니다.');");
+ 	  out.println("location.href='guest_list.jsp';");
+ 	  out.println("</script>");
+ 	  
+ 	  return;
+   }
+ %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>

@@ -12,40 +12,36 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-@WebServlet("/guest_list")
+@WebServlet("/guest_list.do")
 public class GuestListServlet extends HttpServlet{
-	
 	private GuestService guestService;
-	
-	public GuestListServlet() throws Exception {
+	public GuestListServlet() throws Exception{
 		guestService=new GuestService();
 	}
-	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
 		 * forward시 상대경로는 context root(/guest_model1.1) 이후 모든디렉토리가가능하다
-		 * /WEB-INF/views/guest_list.jsp
 		 */
 		String forwardPath="";
-		 /*0.요청객체encoding설정
+		/*
+		  * 0.요청객체encoding설정
 		  * 1.파라메타받기
 		  * 2.GuestService객체생성
-		  * 3.GuestService객체 guestList() 메쏘드호출*/
+		  * 3.GuestService객체 guestList() 메쏘드호출
+		 */
 		try {
-			 request.setCharacterEncoding("UTF-8");
-//			 System.out.println(this);
-//			 System.out.println(guestService);
-			 
-//	         GuestService guestService=new GuestService();
-			 List<Guest> guestList=guestService.guestList();
-			 request.setAttribute("guestList", guestList);
-			 forwardPath="forward:/WEB-INF/views/guest_list.jsp";
-		 
+			request.setCharacterEncoding("UTF-8");
+			List<Guest> guestList=guestService.guestList();
+			request.setAttribute("guestList", guestList);
+			forwardPath="forward:/WEB-INF/views/guest_list.jsp";
 		}catch (Exception e) {
 			e.printStackTrace();
 			forwardPath="forward:/WEB-INF/views/guest_error.jsp";
+			
 		}
+		
+		
 		/**********forward or redirect**************************/
 		/*
 		 forward    --> forward:/WEB-INF/views/guest_xxx.jsp

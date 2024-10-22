@@ -15,6 +15,8 @@
 	<li><%=pageContext.getSession()%></li>
 	<li><%=pageContext.getServletContext()%></li>
 	<li><%=pageContext.getServletConfig()%></li>
+	<li><%=pageContext.getPage()%></li>
+	<li><%=pageContext.getOut()%></li>
 </ol>
 </body>
 </html>

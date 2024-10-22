@@ -1,0 +1,9 @@
+<<요청 url(command)>>
+/guest_main.do				[GuestMainServlet		 ] 	---forward---> /WEB-INF/views/guest_main.jsp
+/guest_list.do				[GuestListServlet		 ] 	---forward---> /WEB-INF/views/guest_list.jsp
+/guest_view.do				[GuestViewServlet		 ] 	---forward---> /WEB-INF/views/guest_view.jsp
+/guest_write_form.do		[GuestWriteFormServlet	 ] 	---forward---> /WEB-INF/views/guest_write_form.jsp
+/guest_write_action.do		[GuestWriteActionServlet ] 	---forward---> /WEB-INF/views/guest_write_action.jsp
+/guest_modify_form.do		[GuestModifyFormServlet	 ] 	---forward---> /WEB-INF/views/guest_modify_form.jsp
+/guest_modify_action.do		[GuestModifyActionServlet] 	---forward---> /WEB-INF/views/guest_modify_action.jsp
+/guest_remove_action.do		[GuestRemoveActionServlet] 	---forward---> /WEB-INF/views/guest_remove_action.jsp
