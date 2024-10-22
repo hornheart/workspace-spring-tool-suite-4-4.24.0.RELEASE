@@ -47,13 +47,18 @@ public class UserModifyActionController implements Controller {
 				String password=request.getParameter("password");
 				String password2=request.getParameter("password2");
 				String email=request.getParameter("email");
-				UserService userService=new UserServiceImpl();
+				if (!password.equals(password2)) {
+				    request.setAttribute("error", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+				    return "forward:/WEB-INF/views/user_modify_form.jsp";
+				}
+//				UserService userService=new UserServiceImpl();
 				int rowCount=userService.update(User.builder()
-													.userId(name)	
+													.userId(sUserId)
+													.name(name)
 													.password(password)
 													.email(email)
 													.build());
-				forwardPath="redirect:user_view.do"+name;
+				forwardPath="redirect:user_view.do";
 			}
 			return "redirect:user_view.do";
 		} catch (Exception e) {
