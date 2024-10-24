@@ -1,11 +1,17 @@
 package com.itwill.guest.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.itwill.guest.Guest;
 import com.itwill.guest.GuestService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class GuestController {
@@ -31,12 +37,37 @@ public class GuestController {
 	 */
 	
 	@RequestMapping("/guest_list")
-	public String guest_list() {
-		return "forward:/WEB-INF/views/guest_list.jsp";
+	public String guest_list(HttpServletRequest request, HttpServletResponse response) {
+		String forwardPath="";
+		try {
+			List<Guest> guestList=guestService.guestList();
+			request.setAttribute("guestList", guestList);
+			forwardPath="forward:/WEB-INF/views/guest_view.jsp";
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
+		}
+		return forwardPath;
 	}
 	@RequestMapping("/guest_view")
-	public String guest_view() {
-		return "forward:/WEB-INF/views/guest_view.jsp";
+	public String guest_view(HttpServletRequest request, HttpServletResponse response) {
+		String forwardPath="";
+		try {
+			String guest_noStr=request.getParameter("guest_no");
+			if(guest_noStr==null||guest_noStr.equals("")) {
+				forwardPath="redirect:guest_list.jsp";
+			}else {
+				Guest guest=guestService.guestDetail(Integer.parseInt(guest_noStr));
+				request.setAttribute("guest", guest);
+				forwardPath="forward:/WEB-INF/views/guest_view.jsp";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			forwardPath="forward:/WEB-INF/views/guest_error.jsp";
+		}
+		return forwardPath;
 	}
 	@RequestMapping("/guest_write_form")
 	public String guest_write_form() {
