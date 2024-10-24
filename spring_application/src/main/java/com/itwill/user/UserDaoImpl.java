@@ -13,19 +13,19 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("#### UserDaoImpl() : 디폴트생성자 호출  ");
 	}
 	
-	@Override
+	//@Override
 	public User findUser(String userId) throws Exception {
 		System.out.println("#### UserDaoImpl : findUser() 호출  ");
 		return new User("guard1", "1111", "KIM", "guard1@gmail.com");
 	}
-	@Override
+	//@Override
 	public List<User> findUserList() throws Exception {
 		System.out.println("#### UserDaoImpl : findUserList 호출  ");
 		List<User> userList=new ArrayList<User>();
 		userList.add(new User("guard1", "1111", "KIM", "guard1@gmail.com"));
-		userList.add(new User("guard1", "1111", "KIM", "guard1@gmail.com"));
-		userList.add(new User("guard1", "1111", "KIM", "guard1@gmail.com"));
-		userList.add(new User("guard1", "1111", "KIM", "guard1@gmail.com"));
+		userList.add(new User("guard2", "1111", "LIM", "guard1@gmail.com"));
+		userList.add(new User("guard3", "1111", "PARK", "guard1@gmail.com"));
+		userList.add(new User("guard4", "1111", "AN", "guard1@gmail.com"));
 		return userList;
 	}
 	

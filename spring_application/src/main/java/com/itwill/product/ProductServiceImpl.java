@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 @Service("productService")
 @Scope("singleton")
 public class ProductServiceImpl implements ProductService {
+	
 	private ProductDao productDao;
+	
 	public ProductServiceImpl() {
 		System.out.println("2.#### ProductServiceImpl()생성자:"+this);
 	}

@@ -7,20 +7,29 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
-	//field injection
+	/*
+	 * field Injection 
+	 */
 	@Autowired
+	@Qualifier("userDao2")
 	private UserDao userDao;
 	
 	public UserServiceImpl() {
 		System.out.println("#### UserServiceImpl() : 디폴트생성자호출");
 
 	}
-	//@Autowired 생성자 injection
-	public UserServiceImpl(UserDao userDao) {
+	/*
+	 * constructor Injection
+	 */
+	//@Autowired		
+	public UserServiceImpl( UserDao userDao) {
 		System.out.println("#### UserServiceImpl("+userDao+") :생성자호출");
 		this.userDao=userDao;
 	}
-	//@Autowired setter injection
+	/*
+	 * setter injection
+	 */
+	//@Autowired
 	public void setUserDao(UserDao userDao) {
 		System.out.println("#### UserServiceImpl : setUserDao(UserDao userDao) : 메쏘드호출");
 		this.userDao = userDao;
