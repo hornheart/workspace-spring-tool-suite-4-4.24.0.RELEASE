@@ -50,17 +50,17 @@
 									bgcolor="BBBBBB">
 									<tr>
 										<td width=50 align=center bgcolor="E6ECDE" height="22">번호</td>
-										<td width=300 align=center bgcolor="E6ECDE">제목</td>
+										<td width=250 align=center bgcolor="E6ECDE">제목</td>
 										<td width=120 align=center bgcolor="E6ECDE">이름</td>
-										<td width=120 align=center bgcolor="E6ECDE">날짜</td>
+										<td width=250 align=center bgcolor="E6ECDE">날짜</td>
 									</tr>
 									<c:forEach items="${guestList}" var="guest">
 										<tr>
 											<td width=50 align=center bgcolor="ffffff" height="20">${guest.guestNo}</td>
-											<td width=300 bgcolor="ffffff" style="padding-left: 10"><a
+											<td width=250 bgcolor="ffffff" style="padding-left: 10"><a
 												href="guest_view?guest_no=${guest.guestNo}" class="user">${guest.guestTitle}</a></td>
 											<td width=120 align=center bgcolor="ffffff">${guest.guestName}</td>
-											<td width=120 align=center bgcolor="ffffff">${guest.guestDate.toLocaleString().substring(0,11)}</td>
+											<td width=250 align=center bgcolor="ffffff">${guest.guestDate.toLocaleString().substring(0,23)}</td>
 										</tr>
 									</c:forEach>
 

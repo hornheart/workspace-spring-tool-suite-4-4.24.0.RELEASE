@@ -39,6 +39,7 @@ public class Guest {
 	private String guestHomepage;
 	private String guestTitle;
 	private String guestContent;
+	
 	@Override
 	public String toString() {
 		return "Guest [guestNo=" + guestNo + ", guestName=" + guestName + ", guestDate=" + guestDate + ", guestEmail="

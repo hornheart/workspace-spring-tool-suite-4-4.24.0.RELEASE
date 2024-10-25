@@ -68,7 +68,7 @@
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">날짜</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px">${guest.guestDate.toLocaleString().substring(0,11)}</td>
+											style="padding-left: 10px">${guest.guestDate.toLocaleString().substring(0,24)}</td>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
 										<td width=490 bgcolor="ffffff" align="left"
