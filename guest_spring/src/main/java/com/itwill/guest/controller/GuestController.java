@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.guest.Guest;
-import com.itwill.guest.GuestService;
+import com.itwill.guest.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class GuestController {
 	@Autowired
-	private GuestService guestService;
+	private UserService guestService;
 	public GuestController() {
 		System.out.println("### GuestController()생성자");
 	}

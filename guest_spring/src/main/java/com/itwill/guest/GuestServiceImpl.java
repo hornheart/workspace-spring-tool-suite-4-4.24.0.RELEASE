@@ -11,22 +11,18 @@ import org.springframework.stereotype.Service;
  * - GuestDao객체를 이용해서 데이타베이스에 접근하는클래스
  */
 @Service
-public class GuestService{
-		public static final int GUEST_SEARCH_BY_ALL=0;
-		public static final int GUEST_SEARCH_BY_NAME=1;
-		public static final int GUEST_SEARCH_BY_TITLE=2;
-		public static final int GUEST_SEARCH_BY_CONTENT=3;
-	
+public class GuestServiceImpl implements UserService{
 		@Autowired
 		private GuestDao guestDao;
 		
-		public GuestService() throws Exception{
+		public GuestServiceImpl() throws Exception{
 			System.out.println("### GuestService()생성자");
 		}
 		
 		/*
 		 * 방명록쓰기
 		 */
+		@Override
 		public int guestWrite(Guest guest) 
 				throws Exception{
 			/*
@@ -37,12 +33,14 @@ public class GuestService{
 		/*
 		 * 방명록번호로 1개보기
 		 */
+		@Override
 		public Guest guestDetail(int guest_no) throws Exception{
 			return guestDao.findByGuestNo(guest_no);
 		}
 		/*
 		 * 방명록번호로삭제
 		 */
+		@Override
 		public int guestDelete(int guest_no) 
 				throws Exception{
 			return guestDao.delete(guest_no);
@@ -50,6 +48,7 @@ public class GuestService{
 		/*
 		 * 방명록 리스트보기
 		 */
+		@Override
 		public List<Guest> guestList()throws Exception {
 			return guestDao.findByAll();
 		}
@@ -87,6 +86,7 @@ public class GuestService{
 		/*
 		 * 방명록수정
 		 */
+		@Override
 		public int guestUpdate(Guest guest) throws Exception{
 			return guestDao.update(guest);
 		}
