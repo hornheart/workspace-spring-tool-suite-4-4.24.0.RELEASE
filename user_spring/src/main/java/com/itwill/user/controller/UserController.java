@@ -30,9 +30,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UserController {
 	private UserService userService;
-	@RequestMapping()
+	@GetMapping("/user_main")
 	public String user_main() {
-		return "";
+		return "user_main";
 	}
 	public String user_write_form() {
 		return "";
