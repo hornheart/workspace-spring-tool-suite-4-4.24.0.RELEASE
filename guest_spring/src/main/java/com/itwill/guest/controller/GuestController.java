@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.guest.Guest;
@@ -37,11 +39,12 @@ public class GuestController {
 	 */
 	
 	@RequestMapping("/guest_list")
-	public String guest_list(HttpServletRequest request, HttpServletResponse response) {
+	public String guest_list(HttpServletRequest request, HttpServletResponse response, Model model) {
 		String forwardPath="";
 		try {
 			List<Guest> guestList=guestService.guestList();
-			request.setAttribute("guestList", guestList);
+			//request.setAttribute("guestList", guestList);
+			model.addAttribute("guestList", guestList);
 			forwardPath="forward:/WEB-INF/views/guest_list.jsp";
 		} catch (Exception e) {
 			// TODO: handle exception
