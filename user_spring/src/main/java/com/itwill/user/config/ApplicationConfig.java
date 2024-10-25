@@ -1,5 +1,6 @@
 package com.itwill.user.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 
-//@Configuration
+@Configuration
+@MapperScan("com.itwill.user.mapper")  // Mapper 파일이 위치한 패키지 경로
 //@PropertySource("jdbc.properties")
 public class ApplicationConfig {
 	/*
