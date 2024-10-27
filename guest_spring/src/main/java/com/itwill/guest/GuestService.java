@@ -2,7 +2,7 @@ package com.itwill.guest;
 
 import java.util.List;
 
-public interface UserService {
+public interface GuestService {
 
 	int GUEST_SEARCH_BY_ALL = 0;
 	int GUEST_SEARCH_BY_NAME = 1;

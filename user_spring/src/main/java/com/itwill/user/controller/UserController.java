@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,7 +36,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/user_write_action")
-	public String user_write_action(@RequestParam("userid") String userId,
+	public String user_write_action(@RequestParam("userId") String userId,
 									@RequestParam("password") String password,
 									@RequestParam("name") String name,
 									@RequestParam("email") String email,
@@ -94,34 +96,78 @@ public class UserController {
 		}
 		return "";
 	}
-	
+	/*
+	@GetMapping("/user_view")
+	public String user_view(@RequestParam(value = "userId", required = false) String userId,
+	                        HttpServletRequest request,
+	                        Model model) {
+	    HttpSession session = request.getSession();
+	    String sUserId = (String) session.getAttribute("sUserId");
+
+	    // 로그인되지 않은 경우
+	    if (sUserId == null) {
+	        return "redirect:user_login_form.do";
+	    }
+
+	    // userId가 없을 경우 user_main으로 이동
+	    if (userId == null) {
+	        return "user_main";
+	    }
+
+	    // userId가 있을 경우 user_view로 이동
+	    try {
+	        User loginUser = userService.findUser(userId);
+	        model.addAttribute("loginUser", loginUser);
+	        return "user_view";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "user_error";
+	    }
+	}
+
 	@GetMapping(value = "/user_view",params = "!userId")
-	public String user_view() /*throws Exception*/{
-		/*******login check******/
-		
-		return "user_view";
+	public String user_view() {
+		return "user_main";
 	}
 	@GetMapping(value = "/user_view",params = "userId")
-	public String user_view(@RequestParam("userId") String userId,
-									Model model) /*throws Exception*/{
+	public String user_view(@RequestParam("userId") String userId,HttpServletRequest request,
+									Model model) {
+		HttpSession session=request.getSession();
+		String sUserId=(String)session.getAttribute("sUserId");
+		if(sUserId==null) {
+			return "redirect:user_login_form.do";
+		}
 		try {
-			User user=userService.findUser(userId);
-			if (userId==null) {
-				return "user_login_form";
-			}
-			model.addAttribute("user",user);
+			User loginUser=userService.findUser(userId);
+			model.addAttribute("loginUser",loginUser);
 			return "user_view";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "user_view";
+			return "user_error";
 		}
+	}*/
+	@GetMapping("/user_view")
+	public String user_view(HttpServletRequest request, HttpServletResponse response, Model model) {
+	    HttpSession session = request.getSession();
+	    String sUserId = (String) session.getAttribute("sUserId");
+	    if (sUserId == null) {
+	        return "redirect:user_login_form";
+	    }
+	    try {
+	        User loginUser = userService.findUser(sUserId);
+	        model.addAttribute("loginUser", loginUser);
+	        return "user_main";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "forward:user_error";
+	    }
 	}
+
 	
 	@PostMapping("/user_modify_form")
 	public String user_modify_form(HttpServletRequest request,
 			@RequestParam("userId") String userId,
 											Model model) /*throws Exception*/{
-		/*******login check******/
 		HttpSession session=request.getSession();
 		String sUserId=(String)session.getAttribute("sUserId");
 		if (sUserId==null) {
@@ -136,64 +182,25 @@ public class UserController {
 			return "user_error";
 		}
 	}
-	/*
-	@PostMapping("/user_modify_action")
-	public String user_modify_action(@RequestParam("name") String userId, 
-									 @RequestParam("password") String password,		
-									 @RequestParam("password2") String password2,		
-									 @RequestParam("email") String email,
-									 @RequestParam("name") String name,
-									 RedirectAttributes redirectAttributes) {
-		*******login check
-		User user=userService.update(User.builder()
-				  						 .userId(userId)
-			  						 	 .name(name)
-			  						 	 .password(password)
-			  						 	 .email(email)
-			  						 	 .build());
-		try {
-			redirectAttributes.addAttribute("userId",userId);
-			return "redirect:user_view";
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return "user_error";
-		}
-		return "user_modify_action";
-	}******/
-	
 
 	@PostMapping("/user_remove_action")
 	public String user_remove_action(@RequestParam("userId") String userId)/*throws Exception*/ {
-		/*******login check
-		if (userId==null) {
+		/**/return null;
+	}
+	@GetMapping("/user_logout_action")
+	public String user_logout_action(HttpServletRequest request
+									/* @RequestParam("userId") String userId,
+									 @RequestParam("password") String password*/) {
+		HttpSession session = request.getSession();
+		String sUserId=(String)session.getAttribute("sUserId");
+		if(sUserId==null) {
 			return "redirect:user_login_form";
 		}
-		try {
-			userService.remove(userId);
-			return "redirect:user_main";
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return "user_error";
-		}******/return null;
+		
+		session.invalidate();
+		return "redirect:user_main";
 	}
 	
-	/*
-	@PostMapping("/user_logout_action")
-	public String user_logout_action(@RequestParam("userId") String userId
-									 @RequestParam("password") String password) {
-		*******login check*****
-		try {
-			if (userId==null) {
-				return "user_login_form";
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	
-		return "";
-	}*/
 	@GetMapping(value = {"/user_write_action","/user_modify_form","/user_modify_action","/user_remove_action"})
 	public String user_get() {
 		return "redirect:user_main";

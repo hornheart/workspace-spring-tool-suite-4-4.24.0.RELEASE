@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * - GuestDao객체를 이용해서 데이타베이스에 접근하는클래스
  */
 @Service
-public class GuestServiceImpl implements UserService{
+public class GuestServiceImpl implements GuestService{
 		@Autowired
 		private GuestDao guestDao;
 		

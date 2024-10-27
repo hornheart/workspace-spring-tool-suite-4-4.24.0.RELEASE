@@ -10,7 +10,7 @@
 <link rel=stylesheet href="css/user.css" type="text/css">
 <script type="text/javascript">
 	function userCreateForm() {
-		location.href = "user_write_form.do";
+		location.href = "user_write_form";
 	}
 
 	function login() {
@@ -25,7 +25,7 @@
 			return;
 		}
 
-		document.f.action = "user_login_action.do";
+		document.f.action = "user_login_action";
 		document.f.method='POST';
 		document.f.submit();
 	}
