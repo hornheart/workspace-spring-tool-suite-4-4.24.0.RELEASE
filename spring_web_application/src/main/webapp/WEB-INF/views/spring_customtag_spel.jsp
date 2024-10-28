@@ -28,10 +28,27 @@
 </head>
 <body >
 <h1>Spring CustomTag ,SPEL</h1><hr/>
+
 <p>
+ 
+	<pre>
 	- Spring CustomTag : Spring에서 정의한태그<br>
+	
 	- SPEL(Spring Expression Language)
-	   --> Spring CustomTag(eval) 의 속성(expression)안에서 사용가능한 표현언어(식)
+	   --> 런타임에서 객체에 대한 쿼리와 조작(querying and manipulating)을 지원하는 강력한 표현 언어이다.
+	         - SpEL 표현식은 # 기호로 시작하며 중괄호로 묶어서 표현한다. 
+	             >> &sharp;{표현식}
+			 - 속성 값을 참조할 때는 $ 기호와 중괄호로 묶어서 표현한다. ${property.name}
+			     >> &sharp;{${guest.guest_no} + 2}
+			 - 스프링 빈으로 생성된 객체의 List, Map 프로퍼티에 대해서도 표현식을 통해 참조가 가능하다.
+			      >> @Value("&sharp;{elBean.memberList[0]}")
+			         String member1;  
+			 - 스프링 빈 객체를 참조할 수 있다.
+			 	  >> @Value("&sharp;{elBean.member1}") 
+					 String member1
+					 
+	   		 - Spring CustomTag(eval) 의 속성(expression)안에서 사용가능하다.
+	  </pre> 		 
 </p>
 <ul>
 	<li>문자열리터럴(EL):${'KIM'.replace('K','N')}</li>

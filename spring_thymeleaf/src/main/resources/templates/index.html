@@ -4,49 +4,30 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-<h1 th:text="'Hello Thymeleaf!!![developer]'">Hello Thymeleaf!!![publisher]</h1><hr>
-<div>[[${sUserId}]]님안녕하세요</div>
-<div>[[${user}]]님안녕하세요</div>
-<!-- <br><hr>
-<div/>
-				<h4>문자대체 : | </h4>	
-					<li th:each="g:${guestList}" th:text="|${g.guest_no},${g.guest_content},${g.guest_name}|">1.</li>
-				</ul> 
-				-->
+<body >
+<h1 th:text="'Hello <u>Thymeleaf!!!</u>[developer]'" >Hello Thymeleaf!!![publisher]</h1><hr>
+<h1 th:utext="'Hello <u>Thymeleaf!!!</u>[developer]'" >Hello Thymeleaf!!![publisher]</h1><hr>
+<div>[[${sUserId}]] 님안녕하세요</div>
 <hr>
-<h1 ></h1><hr>
-<div></div>
+
 <div>
 	<a href='#' th:if="${sUserId!=null}" >로그아웃</a>
 	<a href='#' th:if="${sUserId==null}">로그인</a>
 </div>
 <br>
-	<th:block th:if="${sUserId!=null}" >
+	<th:block th:if="${sUserId!=null}">
 		<a href="">로그아웃</a><br>
 		<a href="">정보보기</a><br>
 		<a href="">정보수정</a><br>
 	</th:block>
-	<th:block th:unless="${sUserId==null}" ><!-- else문이나 위와 같은 사항으로 2번 출력됨 -->
-		<a href="">로그아웃</a><br>
-		<a href="">정보보기</a><br>
-		<a href="">정보수정</a><br>
+<br>
+	<th:block th:unless="${sUserId!=null}">
+		<a href="">로그인</a><br>
+		<a href="">회원가입</a><br>
+		<a href="">나가기</a><br>
 	</th:block>
-
-<br><hr><!-- 안나옴!!!!! -->
-	<th:block th:if=${sUserId==null}>
-		<a href="">로그인</a><br>
-		<a href="">회원가입</a><br>
-		<a href="">나가기</a><br>
-	</th:block><hr>
-	<th:block th:unless=${sUserId!=null}>
-		<a href="">로그인</a><br>
-		<a href="">회원가입</a><br>
-		<a href="">나가기</a><br>
-	</th:block><hr>
-
-<div th:switch="${role}">
-  <p th:case="'admin'">User is an administrator</p>
+<div th:switch="${role}" >
+  <p th:case="'admin'" >User is an administrator</p>
   <p th:case="'manager'">User is a manager</p>
 </div>
 

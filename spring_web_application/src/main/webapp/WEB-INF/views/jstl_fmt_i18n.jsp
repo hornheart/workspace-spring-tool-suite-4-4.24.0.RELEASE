@@ -8,7 +8,7 @@
 
 %>
 <%-- 1.Locale객체설정(JSTL)--%>  
-<fmt:setLocale value="${pageContext.request.locale.language}"/>
+<fmt:setLocale value="${pageContext.request.locale}"/>
 <%-- 2.ResourceBundle 의 properties파일지정(JSTL) 페이지전역  --%>
 <fmt:setBundle  basename="messages/messages"/>    
 <!DOCTYPE html>
@@ -37,8 +37,13 @@
 			<fmt:param value="${pass}"/>
 			<fmt:param value="${name}"/>
 		</fmt:message>
-		
 	</li>
+	<li>
+		<fmt:message key="404.error">
+			<fmt:param value="${'xxx' }"></fmt:param>
+		</fmt:message>
+	</li>
+
 </ol>
 
 </body>
