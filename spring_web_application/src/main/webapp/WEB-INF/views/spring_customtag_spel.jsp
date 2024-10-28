@@ -39,7 +39,7 @@
 	         - SpEL 표현식은 # 기호로 시작하며 중괄호로 묶어서 표현한다. 
 	             >> &sharp;{표현식}
 			 - 속성 값을 참조할 때는 $ 기호와 중괄호로 묶어서 표현한다. ${property.name}
-			     >> &sharp;{${guest.guest_no} + 2}
+			     >> &sharp;{&dollar;{guest.guest_no} + 2}
 			 - 스프링 빈으로 생성된 객체의 List, Map 프로퍼티에 대해서도 표현식을 통해 참조가 가능하다.
 			      >> @Value("&sharp;{elBean.memberList[0]}")
 			         String member1;  
@@ -57,8 +57,12 @@
 	<li>숫자리터럴(SPEL):<s:eval expression="12345+347834687"/></li>
 	<li>논리리터럴(EL):${true}</li>
 	<li>논리리터럴(SPEL):<s:eval expression="true"/></li>
+	<br>
 	<li>변수1(EL String Wrapper):${price0},${name0},${price1},${name1},${married1}</li>
+	<hr>
 	<li>변수2(EL Bean):${guest.guest_name},${guest.guest_email}</li>
+	<br>
+	<br>
 	<li>
 		변수1(SPEL String Wrapper):
 			<s:eval expression="price2"/>,

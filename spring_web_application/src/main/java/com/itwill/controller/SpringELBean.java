@@ -1,12 +1,17 @@
 package com.itwill.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("elBean")
 public class SpringELBean {
+	@Value("#{'김수로'}")
 	private String member1;
+	@Value("#{'김미숙'}")
 	private String member2;
+	@Value("#{'김미자'}")
 	private String member3;
+	@Value("#{'김양숙'}")
 	private String member4;
 	public SpringELBean() {
 		member1="이효리";
