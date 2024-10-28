@@ -2,8 +2,10 @@ package com.itwill.user.mapper;
 
 import java.util.List;
 
-import com.itwill.user.User;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.itwill.user.User;
+@Mapper
 public interface UserMapper {
 	
 	int insert(User user) ;

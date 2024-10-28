@@ -1,10 +1,10 @@
 package com.itwill.user;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /*
  *  사용자관리를 위하여 필요한 도메인클래스(VO,DTO)
@@ -15,7 +15,7 @@ import lombok.ToString;
 //@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
+@Builder
 public class User {
 	/*
 	 * =================================== 
@@ -47,7 +47,6 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", password=" + password + ", name=" + name + ", email=" + email + "]\n";
 	}
-
 }
 
 

@@ -15,38 +15,41 @@ public class UserDaoImplMyBatis implements UserDao {
 
 	@Autowired
 	private UserMapper userMapper;
+	/*
 	private final SqlSessionFactory sqlSessionFactory;
 
 	@Autowired
     public UserDaoImplMyBatis(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
-    }
+    }*/
 
 	@Override
 	public int update(User user) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : update() 호출  ");
 		
-		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            return userMapper.update(user);
-        }
+//		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
+//            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//        }
+		int rowCount=userMapper.update(user);
+		return rowCount;
 	}
 
 	@Override
 	public User findUser(String userId) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : findUser() 호출  ");
 		
-		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            return userMapper.findUser(userId);
-        }
+//		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
+//            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//        }
+		User user=userMapper.findUser(userId);
+		return user;
 	}
 
 	@Override
 	public List<User> findUserList() throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : findUserList 호출  ");
-		
-		return userMapper.findUserList();
+		List<User> userList=userMapper.findUserList();
+		return userList;
 	}
 
 	@Override
@@ -59,15 +62,15 @@ public class UserDaoImplMyBatis implements UserDao {
 	@Override
 	public int delete(String userId) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : delete() 호출  ");
-		
-		return userMapper.delete(userId);
+		int rowCount=userMapper.delete(userId);
+		return rowCount;
 	}
 
 	@Override
 	public int countByUserId(String userId) throws Exception {
 		System.out.println("#### UserDaoImplMyBatis : countByUserId 호출  ");
-		
-		return userMapper.delete(userId);
+		int rowCount=userMapper.countByUserId(userId);
+		return rowCount;
 	}
 
 }

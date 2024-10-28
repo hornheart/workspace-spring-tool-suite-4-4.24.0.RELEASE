@@ -9,15 +9,17 @@ public class SpringELBean {
 	private String member1;
 	@Value("#{'김미숙'}")
 	private String member2;
-	@Value("#{'김미자'}")
+	@Value("#{'김우숙'}")
 	private String member3;
 	@Value("#{'김양숙'}")
 	private String member4;
 	public SpringELBean() {
+		/*
 		member1="이효리";
 		member2="김완선";
 		member3="강수지";
 		member4="신명숙";
+		*/
 	}
 	
 	public String printMembers() {

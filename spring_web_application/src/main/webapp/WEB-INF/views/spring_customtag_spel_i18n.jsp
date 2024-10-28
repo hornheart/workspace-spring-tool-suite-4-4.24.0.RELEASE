@@ -16,16 +16,19 @@
 <xmp>
 	1. ApplicationConfig.java 에 MessageSource빈설정
 	
-	 	@Bean("messageSource")
+	@Configuration
+	public class ApplicationConfig {
+		@Bean("messageSource")
 		public MessageSource messageSource() {
 			ResourceBundleMessageSource resourceBundleMessageSource=
 					new ResourceBundleMessageSource();
 			resourceBundleMessageSource.setBasenames("messages/messages","messages/user");
 			return resourceBundleMessageSource;
+	    }
 	}
 </xmp>
 <ol>
-	<li><s:message code="page.title"/> </li>
+	<li><s:message code="page.title"  text="페이지타이틀기본값"/> </li>
 	<li><s:message code="button.login"/></li>
 	<!-- 
 		<< user_ko.properties>>
