@@ -147,7 +147,7 @@ public class UserController {
 		}
 	}*/
 	@GetMapping("/user_view")
-	public String user_view(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String user_view(HttpServletRequest request, Model model) {
 	    HttpSession session = request.getSession();
 	    String sUserId = (String) session.getAttribute("sUserId");
 	    if (sUserId == null) {

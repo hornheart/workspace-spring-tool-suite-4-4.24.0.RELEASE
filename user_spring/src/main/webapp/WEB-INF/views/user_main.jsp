@@ -18,14 +18,14 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			<jsp:include page="include_common_top.jsp" />
+			<jsp:include page="include_common_top.jsp" flush="true" />
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<jsp:include page="include_common_left.jsp" />
+			<jsp:include page="include_common_left.jsp" flush="true"/>
 
 			<!-- include_common_left.jsp end-->
 		</div>
@@ -55,7 +55,7 @@
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			<jsp:include page="include_common_bottom.jsp" />
+			<jsp:include page="include_common_bottom.jsp" flush="true"/>
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>
