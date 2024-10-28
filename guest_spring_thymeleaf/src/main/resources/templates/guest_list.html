@@ -50,7 +50,7 @@
 									<tr th:each="guest:${guestList}" th:object="${guest}">
 										<td width=50 align=center bgcolor="ffffff" height="20" th:text="${guest.guestNo}">223</td>
 										<td width=300 bgcolor="ffffff" style="padding-left: 10">
-											<a href="guest_view?guest_no=223" class="user" th:text="*{guestTitle}">오늘도 한대 맞았다</a>
+											<a th:href = "@{guest_view(guest_no=${guest.guestNo})}" class="user" th:text="*{guestTitle}">오늘도 한대 맞았다</a>
 										</td>
 										<td width=120 align=center bgcolor="ffffff" th:text="*{guestName}">어퍼컷!!!!!</td>
 										<td width=120 align=center bgcolor="ffffff" 

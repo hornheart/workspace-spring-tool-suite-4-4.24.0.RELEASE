@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>방명록 관리</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,13 +14,13 @@
 	<!-- container start-->
 	<div id="container">
 		<!-- header start -->
-		<div id="header">
+		<div id="header" th:insert="~{include_common::top}">
 			<!-- include_common_top.html start-->
 			<!-- include_common_top.html end  -->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
-		<div id="navigation">
+		<div id="navigation" th:insert="~{include_common::left}">
 			<!-- include_common_left.html start-->
 			<!-- include_common_left.html end  -->
 		</div>
@@ -49,31 +49,32 @@
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px">159</td>
+											style="padding-left: 10px" th:text="${guest.guestNo}">159</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px">ㄴㅇ</td>
+											style="padding-left: 10px" th:text="*{guest.guestName}">ㄴㅇ</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">날짜</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px">2023-09-08</td>
+											style="padding-left: 10px"
+											th:text="${#calendars.format(guest.guestDate,'yyyy-MM-dd')}">2023-09-08</td>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px">ㅁㄴㄴㅇㅁㄴㅇ</td>
+											style="padding-left: 10px" th:text="*{guest.guestHomepage}">ㅁㄴㄴㅇㅁㄴㅇ</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px">수정</td>
+											style="padding-left: 10px" th:text="*{guest.guestTitle}">수정</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="110">내용</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px">ㄴㅇㅁㄴㅇㅁㄴㅇ</td>
+											style="padding-left: 10px" th:text="*{guest.guestContent}">ㄴㅇㅁㄴㅇㅁㄴㅇ</td>
 									</tr>
 								</table>
 							</form> <br />
@@ -94,7 +95,7 @@
 		</div>
 		<!-- wrapper content end-->
 		<!-- footer start-->
-		<div id="footer">
+		<div id="footer" th:insert="~{include_common::bottom}">
 			<!-- include_common_bottom.html start-->
 			<!-- include_common_bottom.html end  -->
 		</div>
