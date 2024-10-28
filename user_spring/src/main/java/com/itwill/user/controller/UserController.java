@@ -96,56 +96,7 @@ public class UserController {
 		}
 		return "";
 	}
-	/*
-	@GetMapping("/user_view")
-	public String user_view(@RequestParam(value = "userId", required = false) String userId,
-	                        HttpServletRequest request,
-	                        Model model) {
-	    HttpSession session = request.getSession();
-	    String sUserId = (String) session.getAttribute("sUserId");
-
-	    // 로그인되지 않은 경우
-	    if (sUserId == null) {
-	        return "redirect:user_login_form.do";
-	    }
-
-	    // userId가 없을 경우 user_main으로 이동
-	    if (userId == null) {
-	        return "user_main";
-	    }
-
-	    // userId가 있을 경우 user_view로 이동
-	    try {
-	        User loginUser = userService.findUser(userId);
-	        model.addAttribute("loginUser", loginUser);
-	        return "user_view";
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "user_error";
-	    }
-	}
-
-	@GetMapping(value = "/user_view",params = "!userId")
-	public String user_view() {
-		return "user_main";
-	}
-	@GetMapping(value = "/user_view",params = "userId")
-	public String user_view(@RequestParam("userId") String userId,HttpServletRequest request,
-									Model model) {
-		HttpSession session=request.getSession();
-		String sUserId=(String)session.getAttribute("sUserId");
-		if(sUserId==null) {
-			return "redirect:user_login_form.do";
-		}
-		try {
-			User loginUser=userService.findUser(userId);
-			model.addAttribute("loginUser",loginUser);
-			return "user_view";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "user_error";
-		}
-	}*/
+	
 	@GetMapping("/user_view")
 	public String user_view(HttpServletRequest request, Model model) {
 	    HttpSession session = request.getSession();
@@ -156,13 +107,12 @@ public class UserController {
 	    try {
 	        User loginUser = userService.findUser(sUserId);
 	        model.addAttribute("loginUser", loginUser);
-	        return "user_main";
+	        return "user_view";
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return "forward:user_error";
 	    }
 	}
-
 	
 	@PostMapping("/user_modify_form")
 	public String user_modify_form(HttpServletRequest request,
