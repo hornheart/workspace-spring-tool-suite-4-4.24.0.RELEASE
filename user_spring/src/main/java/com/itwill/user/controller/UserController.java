@@ -17,6 +17,7 @@ import com.itwill.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
 
 @Controller
 public class UserController {
@@ -152,15 +153,14 @@ public class UserController {
 	        return "redirect:user_login_form";
 	    }
 	    try {
-	        User user = userService.findUser(sUserId);
-	        model.addAttribute("user", user);
+	        User loginUser = userService.findUser(sUserId);
+	        model.addAttribute("loginUser", loginUser);  // "loginUser"로 객체 전달
 	        return "user_modify_form";
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return "user_error";
 	    }
 	}
-
 	
 	@PostMapping("/user_modify_action")
 	public String user_modify_action(@RequestParam("userId") String userId,
@@ -171,35 +171,60 @@ public class UserController {
 	                                 RedirectAttributes redirectAttributes,
 	                                 HttpServletRequest request,
 	                                 Model model) {
-	    // 0. 로그인 여부 체크
-	    String sUserId = (String) request.getSession().getAttribute("sUserId");
-	    if (sUserId == null) {
-	        // 로그인하지 않았을 경우, main 리다이렉트
-	        return "redirect:/user_main";
-	    } else if (!password.equals(password2)) {
-	        model.addAttribute("error", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-	        return "forward:/user_modify_form";
-	    }
+		// 0. 로그인 여부 체크
+        String sUserId = (String) request.getSession().getAttribute("sUserId");
+        if (sUserId == null) {
+            return "redirect:user_main";
+        } else if (!password.equals(password2)) {
+            // Redirect with flash attribute
+            redirectAttributes.addFlashAttribute("error", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            return "redirect:user_modify_form";
+        }
+
 	    try {
-	        User user = User.builder()
-	                        .userId(sUserId)
-	                        .password(password)
-	                        .name(name)
-	                        .email(email)
-	                        .build();
+	    	if(request.getMethod().equalsIgnoreCase("GET")) {
+	    		return "redirect:user_main";
+	    	}
+	        int rowCount = userService.update(User.builder()
+                    			      .userId(sUserId)
+                    			      .password(password)
+                    			      .name(name)
+                    			      .email(email)
+                    			      .build());
 	        
 	        // 세션에 임시 메시지를 추가하여 리다이렉트 후 사용 가능하도록 설정
 	        redirectAttributes.addFlashAttribute("error", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-	        return "redirect:/user_view";
+	        return "redirect:user_view";
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return "user_error";
 	    }
 	}
 
-	@PostMapping("/user_remove_action")
-	public String user_remove_action(@RequestParam("userId") String userId)/*throws Exception*/ {
-		/**/return null;
+	@PostMapping("/user_remove_action")//삭제
+	public String user_remove_action(@RequestParam(value= "userId", required = false) String userId,
+												HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		// 0. 로그인 여부 체크
+        String sUserId = (String) request.getSession().getAttribute("sUserId");
+        if (sUserId == null) {
+            return "redirect:user_login_form";
+        }
+        if(request.getMethod().equalsIgnoreCase("GET")) {
+    		return "redirect:user_main";
+    	}
+        try {
+			int rowCount = userService.remove(sUserId);
+			if(rowCount>0) {
+				session.invalidate(); // 성공적으로 삭제된 경우 세션 무효화
+				return "redirect:user_main";
+			}else {
+				return "user_error"; // 삭제가 실패한 경우 오류 페이지로 이동
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "user_error"; // 예외 발생 시 오류 페이지로 이동
+		}
 	}
 	@GetMapping("/user_logout_action")
 	public String user_logout_action(HttpServletRequest request
@@ -214,10 +239,17 @@ public class UserController {
 		session.invalidate();
 		return "redirect:user_main";
 	}
-	
+	/*
 	@GetMapping(value = {"/user_write_action","/user_modify_form","/user_modify_action","/user_remove_action"})
 	public String user_get() {
 		return "redirect:user_main";
+	}*/
+	// 중복된 URL 매핑을 제거
+	// 예를 들어, 불필요한 URL 매핑을 제거하거나 실제로 사용할 URL만 추가하세요.
+	@GetMapping("/user_remove_action")
+	public String user_remove_redirect() {
+	    return "redirect:user_main";
 	}
+
 	
 }

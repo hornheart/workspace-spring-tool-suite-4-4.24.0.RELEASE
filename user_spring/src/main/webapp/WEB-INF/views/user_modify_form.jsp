@@ -84,7 +84,7 @@
 											- 내정보수정</b></td>
 								</tr>
 							</table> <!-- update Form  -->
-							<form name="f" method="post">
+							<form name="f" method="post" action="user_modify_action">
 
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
@@ -92,7 +92,10 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
-											align="left">${loginUser.userId}</td>
+											align="left">${loginUser.userId}
+											<input type="hidden" name="userId" value="${loginUser.userId}"> 
+											<!-- userId를 hidden input으로 추가 -->
+										</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
