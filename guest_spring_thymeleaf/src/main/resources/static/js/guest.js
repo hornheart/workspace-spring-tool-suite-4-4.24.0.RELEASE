@@ -9,7 +9,7 @@ function guestCreateForm() {
 	*/
 	window.location.href='guest_write_form';
 }
-function guestModify() {
+function guestModifyAction() {
 	if (document.f.guest_name.value == "") {
 		alert("이름을 입력하십시요.");
 		document.f.guest_name.focus();

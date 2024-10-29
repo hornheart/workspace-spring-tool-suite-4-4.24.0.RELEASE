@@ -11,5 +11,9 @@ import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 @Target(ElementType.METHOD)
 public @interface MyAnnotation {
 	
-	String value() default "http://www.naver.com" ; 
+	String value() default "http://www.naver.com";
+	String name() default "" ; 
+	int age() default 30 ; 
+	String[] basePackages() default {} ;
+	boolean required() default false;
 }

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.itwill.user.controller.AuthLoginAnnotationInterceptor;
 
-//@Configuration
+@Configuration
 public class WebConfig implements WebMvcConfigurer{
 	/********************WebMvcConfigurer재정의*********************/
 	@Override
@@ -38,6 +38,7 @@ public class WebConfig implements WebMvcConfigurer{
 		.excludePathPatterns("/user_write_form")
 		.excludePathPatterns("/user_write_action");
 		*/
+		/*******AuthLoginAnnotationInterceptor*************************/
 		AuthLoginAnnotationInterceptor authLoginAnnotationInterceptor=
 				new AuthLoginAnnotationInterceptor();
 		registry.addInterceptor(authLoginAnnotationInterceptor)
@@ -45,7 +46,7 @@ public class WebConfig implements WebMvcConfigurer{
 		.excludePathPatterns("/css/**")
 		.excludePathPatterns("/js/**")
 		.excludePathPatterns("/image/**");
-		
+		/************************************************************/
 	}
 	/*************************************************************/
 	

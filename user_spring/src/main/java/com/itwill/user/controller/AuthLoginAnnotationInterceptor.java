@@ -67,16 +67,27 @@ public class AuthLoginAnnotationInterceptor implements HandlerInterceptor {
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		
 		/***************************
-		 3.HandlerMethod객체 로부터 @LoginCheck 어노테이션 객체얻기
+		 3.HandlerMethod객체 로부터 @MyAnnotation 어노테이션 객체얻기
 		***************************/
 		MyAnnotation myAnnotation =  handlerMethod.getMethodAnnotation(MyAnnotation.class);
 		if(myAnnotation!=null) {
 			String url=myAnnotation.value();
+			int age=myAnnotation.age();
+			String[] basePackages=myAnnotation.basePackages();
+			String name=myAnnotation.name();
+			boolean required=myAnnotation.required();
+			System.out.println(url);
+			System.out.println(age);
+			System.out.println(basePackages);
+			System.out.println(name);
+			System.out.println(required);
 			response.sendRedirect(url);
 			return false;
 		}
 		
-		
+		/***************************
+		 3.HandlerMethod객체 로부터 @LoginCheck 어노테이션 객체얻기
+		***************************/
 		LoginCheck loginCheck = handlerMethod.getMethodAnnotation(LoginCheck.class);
 		
 		/***************************

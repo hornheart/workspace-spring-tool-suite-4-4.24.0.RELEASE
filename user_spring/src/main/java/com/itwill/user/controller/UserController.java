@@ -3,253 +3,171 @@ package com.itwill.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.user.User;
 import com.itwill.user.UserService;
+import com.itwill.user.exception.ExistedUserException;
+import com.itwill.user.exception.PasswordMismatchException;
+import com.itwill.user.exception.UserNotFoundException;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 
+/*
+  /user_main 
+  /user_write_form 
+  /user_write_action 
+  /user_login_form
+  /user_login_action 
+  /user_logout_action 
+  /user_view 
+  /user_modify_form
+  /user_modify_action 
+  /user_remove_action
+ */
 @Controller
 public class UserController {
 	@Autowired
 	private UserService userService;
-	public UserController() {
-		System.out.println("###생성자출력###");
-	}
 	
+	/*
+	@MyAnnotation(	value = "http://www.daum.net",
+					age = 34,
+					name = "KIM",
+					required = true,
+					basePackages = {"com.itwill","com.itwall"} )
+	*/
 	@GetMapping("/user_main")
 	public String user_main() {
 		return "user_main";
 	}
-	
+
 	@GetMapping("/user_write_form")
 	public String user_write_form() {
 		return "user_write_form";
 	}
-	
+
+	@PostMapping("/user_write_action")
+	public String user_write_action(@ModelAttribute User user, RedirectAttributes redirectAttributes)	throws	Exception {
+		try {
+			userService.create(user);
+			return "redirect:user_login_form";
+		} catch (ExistedUserException e) {
+			redirectAttributes.addFlashAttribute("msg", e.getMessage());
+			redirectAttributes.addFlashAttribute("fuser", user);
+			return "redirect:user_write_form";
+		}
+
+	}
+
 	@GetMapping("/user_login_form")
 	public String user_login_form() {
 		return "user_login_form";
 	}
 
-	@PostMapping("/user_write_action")
-	public String user_write_action(@RequestParam("userId") String userId,
-									@RequestParam("password") String password,
-									@RequestParam("name") String name,
-									@RequestParam("email") String email,
-					RedirectAttributes redirectAttributes){
-		User user=new User(userId,password,name,email);
-		System.out.println(user);
-		String forwardPath="";
-		try {
-			int result=userService.create(user);
-			if(result ==-1){
-				String msg=userId+" 는 이미존재하는 아이디입니다.";
-				redirectAttributes.addAttribute("msg", msg);
-				redirectAttributes.addAttribute("fuser", user);
-				return "redirect:user_view";
-			}else if(result ==1){
-				
-				forwardPath="redirect:user_login_form";
-				return forwardPath;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "user_error";
-		}
-		
-		return "";
-	}
-	/*@GetMapping()
-	public String user_write_action(@ModelAttribute User user, Model model) throws Exception {
-		int result=userService.create(user);
-		if(result==-1) {
-			String msg=user.getUserId()+" 는 이미존재하는 아이디입니다.";
-			model.addAttribute("msg", msg);
-			model.addAttribute("fuser", user);
-			return "user_write_form";
-		}
-		return "redirect:user_login_form";
-	}*/
-
 	@PostMapping("/user_login_action")
-	public String user_login_action(HttpServletRequest request, HttpServletResponse response, 
-																Model model)  /*throws Exception*/{
+	public String user_login_action(@ModelAttribute("fuser") User user, HttpSession session,
+			RedirectAttributes redirectAttributes) throws Exception {
+		/*
+		<< public String user_login_action(@ModelAttribute("fuser") User user,... ) >> 
+		   
+		   1. 	User user=new User();
+		   
+		   2. 	String userId = request.getParameter("userId");
+			  	String password = request.getParameter("password");
+		   
+		   3. 	user.setUserId(userId);
+		      	user.setPassword(password);
+		      
+		   4-1. [@ModelAttribute User user ]
+		        request.setAttribute("user",user);  
+		          
+		   4-2. [@ModelAttribute("fuser") User user ]
+		        request.setAttribute("fuser",user);    
+		 */
 		try {
-			String userId= request.getParameter("userId");
-			String password= request.getParameter("password");
-			int result=userService.login(userId, password);
-			if (result==0) {
-				String msg1=userId+" 는 존재하지 않는 아이디입니다.";
-				model.addAttribute("msg1",msg1);
-				model.addAttribute("fuser",new User(userId,password,"",""));
-				return "user_login_form";
-			} else if (result==1) {
-				String msg2="패스워드가 일치하지 않습니다.";
-				model.addAttribute("msg2",msg2);
-				model.addAttribute("fuser",new User(userId,password,"",""));
-				return "user_login_form";
-			} else if(result==2){
-				HttpSession session=request.getSession();
-				session.setAttribute("sUserId", userId);
-				return "redirect:user_main";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			userService.login(user.getUserId(), user.getPassword());
+			session.setAttribute("sUserId", user.getUserId());
+			return "redirect:user_main";
+		} catch (UserNotFoundException e) {
+			redirectAttributes.addFlashAttribute("msg1", e.getMessage());
+			redirectAttributes.addFlashAttribute("fuser", user);
+			return "redirect:user_login_form";
+		} catch (PasswordMismatchException e) {
+			redirectAttributes.addFlashAttribute("msg2", e.getMessage());
+			redirectAttributes.addFlashAttribute("fuser", user);
+			return "redirect:user_login_form";
 		}
-		return "";
 	}
-	
+	@LoginCheck
 	@GetMapping("/user_view")
-	public String user_view(HttpServletRequest request, Model model) {
-	    HttpSession session = request.getSession();
-	    String sUserId = (String) session.getAttribute("sUserId");
-	    if (sUserId == null) {
-	        return "redirect:user_login_form";
-	    }
-	    try {
-	        User loginUser = userService.findUser(sUserId);
-	        model.addAttribute("loginUser", loginUser);
-	        return "user_view";
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "forward:user_error";
-	    }
+	public String user_view(HttpSession session, Model model) throws Exception {
+		/******* login check ******/
+		/**************************/
+		String sUserId = (String) session.getAttribute("sUserId");
+		User loginUser = userService.findUser(sUserId);
+		model.addAttribute("loginUser", loginUser);
+		return "user_view";
 	}
-	/*
-	@PostMapping("/user_modify_form")
-	public String user_modify_form(HttpServletRequest request,
-			@RequestParam("userId") String userId,
-											Model model) {
-		HttpSession session=request.getSession();
-		String sUserId=(String)session.getAttribute("sUserId");
-		if (sUserId==null) {
-			return "redirect:user_login_form";
-		}
-		try {
-			User user=userService.findUser(sUserId);
-			model.addAttribute("user",user);
-			return "redirect:user_modify_form";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "user_error";
-		}
-	}*/
+	@LoginCheck
 	@GetMapping("/user_modify_form")
-	public String user_modify_form(HttpServletRequest request, Model model) {
-	    HttpSession session = request.getSession();
-	    String sUserId = (String) session.getAttribute("sUserId");
-	    if (sUserId == null) {
-	        return "redirect:user_login_form";
-	    }
-	    try {
-	        User loginUser = userService.findUser(sUserId);
-	        model.addAttribute("loginUser", loginUser);  // "loginUser"로 객체 전달
-	        return "user_modify_form";
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "user_error";
-	    }
+	public String user_modify_form(HttpSession session, Model model) throws Exception {
+		/******* login check ******/
+		/*********************/
+		String sUserId = (String) session.getAttribute("sUserId");
+		User loginUser = userService.findUser(sUserId);
+		model.addAttribute("loginUser", loginUser);
+		/*********************/
+		return "user_modify_form";
 	}
-	
+	@LoginCheck
 	@PostMapping("/user_modify_action")
-	public String user_modify_action(@RequestParam("userId") String userId,
-	                                 @RequestParam("password") String password,
-	                                 @RequestParam("name") String name,
-	                                 @RequestParam("email") String email,
-	                                 @RequestParam("password2") String password2,
-	                                 RedirectAttributes redirectAttributes,
-	                                 HttpServletRequest request,
-	                                 Model model) {
-		// 0. 로그인 여부 체크
-        String sUserId = (String) request.getSession().getAttribute("sUserId");
-        if (sUserId == null) {
-            return "redirect:user_main";
-        } else if (!password.equals(password2)) {
-            // Redirect with flash attribute
-            redirectAttributes.addFlashAttribute("error", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-            return "redirect:user_modify_form";
-        }
-
-	    try {
-	    	if(request.getMethod().equalsIgnoreCase("GET")) {
-	    		return "redirect:user_main";
-	    	}
-	        int rowCount = userService.update(User.builder()
-                    			      .userId(sUserId)
-                    			      .password(password)
-                    			      .name(name)
-                    			      .email(email)
-                    			      .build());
-	        
-	        // 세션에 임시 메시지를 추가하여 리다이렉트 후 사용 가능하도록 설정
-	        redirectAttributes.addFlashAttribute("error", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-	        return "redirect:user_view";
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "user_error";
-	    }
+	public String user_modify_action(@ModelAttribute User user, HttpSession session) throws Exception {
+		/******* login check ******/
+		/*********************/
+		String sUserId = (String) session.getAttribute("sUserId");
+		user.setUserId(sUserId);
+		userService.update(user);
+		return "redirect:user_view";
 	}
-
-	@PostMapping("/user_remove_action")//삭제
-	public String user_remove_action(@RequestParam(value= "userId", required = false) String userId,
-												HttpServletRequest request) {
-		HttpSession session=request.getSession();
-		// 0. 로그인 여부 체크
-        String sUserId = (String) request.getSession().getAttribute("sUserId");
-        if (sUserId == null) {
-            return "redirect:user_login_form";
-        }
-        if(request.getMethod().equalsIgnoreCase("GET")) {
-    		return "redirect:user_main";
-    	}
-        try {
-			int rowCount = userService.remove(sUserId);
-			if(rowCount>0) {
-				session.invalidate(); // 성공적으로 삭제된 경우 세션 무효화
-				return "redirect:user_main";
-			}else {
-				return "user_error"; // 삭제가 실패한 경우 오류 페이지로 이동
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "user_error"; // 예외 발생 시 오류 페이지로 이동
-		}
-	}
-	@GetMapping("/user_logout_action")
-	public String user_logout_action(HttpServletRequest request
-									/* @RequestParam("userId") String userId,
-									 @RequestParam("password") String password*/) {
-		HttpSession session = request.getSession();
-		String sUserId=(String)session.getAttribute("sUserId");
-		if(sUserId==null) {
-			return "redirect:user_login_form";
-		}
-		
+	@LoginCheck
+	@PostMapping("/user_remove_action")
+	public String user_remove_action(HttpSession session) throws Exception {
+		/******* login check ******/
+		/**************************/
+		String sUserId = (String) session.getAttribute("sUserId");
+		userService.remove(sUserId);
 		session.invalidate();
 		return "redirect:user_main";
 	}
-	/*
-	@GetMapping(value = {"/user_write_action","/user_modify_form","/user_modify_action","/user_remove_action"})
-	public String user_get() {
+	@LoginCheck
+	@GetMapping("/user_logout_action")
+	public String user_logout_action(HttpSession session) {
+		/******* login check ******/
+		/**************************/
+		session.invalidate();
 		return "redirect:user_main";
-	}*/
-	// 중복된 URL 매핑을 제거
-	// 예를 들어, 불필요한 URL 매핑을 제거하거나 실제로 사용할 URL만 추가하세요.
-	@GetMapping("/user_remove_action")
-	public String user_remove_redirect() {
-	    return "redirect:user_main";
 	}
 
-	
+	/*
+	@ExceptionHandler(ExistedUserException.class)
+	public String existed_user_exception_handler(ExistedUserException e,RedirectAttributes redirectAttributes) {
+		System.out.println(redirectAttributes);
+		
+		redirectAttributes.addFlashAttribute("msg",e.getMessage());
+		redirectAttributes.addFlashAttribute("fuser",e.getFuser());
+		return "redirect:user_write_form";
+	}
+	*/
+	@ExceptionHandler(Exception.class)
+	public String user_exception_handler(Exception e) {
+		e.printStackTrace();
+		return "user_error";
+	}
+
 }

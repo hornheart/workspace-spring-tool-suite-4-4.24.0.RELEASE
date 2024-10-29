@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>방명록 관리</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,13 +15,13 @@
 		<!-- header start -->
 		<div id="header" th:insert="~{include_common::top}">
 			<!-- include_common_top.html start-->
-			<!-- include_common_top.html end  -->
+			<!-- include_common_top.html end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation" th:insert="~{include_common::left}">
 			<!-- include_common_left.html start-->
-			<!-- include_common_left.html end  -->
+			<!-- include_common_left.html end-->
 		</div>
 		<!-- navigation end-->
 		<!-- wrapper content start -->
@@ -38,45 +37,45 @@
 											- 방명록 수정</b></td>
 								</tr>
 							</table> <!-- modify Form  -->
-							<form name="f" method="post">
-								<input type="hidden" name="guest_no" value="159" />
+							<form name="f" method="post" th:object="${guest}" >
+								<input type="hidden" name="guest_no" value="159" th:value="*{guestNo}"/>
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
 										<td align="left" width=490 bgcolor="ffffff"
-											style="padding-left: 10px" th:text="${guestNo}">159</td>
+											style="padding-left: 10px" th:text="*{guestNo}">159</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td align="left" width=490 bgcolor="ffffff"
-											style="padding-left: 10px" th:text="*{guestName}"><input type="text"
-											style="width: 150" name="guest_name" value="ㄴㅇ"></td>
+											style="padding-left: 10px"><input type="text"
+											style="width: 150" name="guest_name" value="김경호" th:value="*{guestName}"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
 										<td align="left" width=490 bgcolor="ffffff"
-											style="padding-left: 10px" th="*{guestHomepage}"><input type="text"
-											style="width: 150" name="guest_homepage" value="ㅁㄴㄴㅇㅁㄴㅇ"></td>
+											style="padding-left: 10px"><input type="text"
+											style="width: 150" name="guest_homepage" value="http://www.naver.com" th:value="*{guestHomepage}"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일</td>
 										<td align="left" width=490 bgcolor="ffffff"
-											style="padding-left: 10px" th:text="*{guestEmail}"><input type="text"
-											style="width: 240" name="guest_email" value="ㅁㄴㅇㅁ"></td>
+											style="padding-left: 10px"><input type="text"
+											style="width: 240" name="guest_email" value="guard@gmail.com" th:value="*{guestEmail}"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
 										<td align="left" width=490 bgcolor="ffffff"
-											style="padding-left: 10px" th:text="*{guestTitle}"><input type="text"
-											style="width: 240" name="guest_title" value="수정"></td>
+											style="padding-left: 10px"><input type="text"
+											style="width: 240" name="guest_title" value="제목" th:value="*{guestTitle}"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">내용</td>
 										<td align="left" width=490 bgcolor="ffffff"
-											style="padding-left: 10px" th:text="*{guestContent}"><textarea wrap="soft"
+											style="padding-left: 10px"><textarea wrap="soft"
 												style="width: 240px" rows="10" name="guest_content"
-												id="guest_content">ㄴㅇㅁㄴㅇㅁㄴㅇ</textarea></td>
+												id="guest_content" th:text="*{guestContent}">내용</textarea></td>
 									</tr>
 								</table>
 							</form>
@@ -97,7 +96,7 @@
 		<!-- footer start-->
 		<div id="footer" th:insert="~{include_common::bottom}">
 			<!-- include_common_bottom.html start-->
-			<!-- include_common_bottom.html end  -->
+			<!-- include_common_bottom.html end-->
 		</div>
 		<!-- footer end -->
 	</div>
