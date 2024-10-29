@@ -13,13 +13,13 @@
 	<!-- container start-->
 	<div id="container">
 		<!-- header start -->
-		<div id="header">
+		<div id="header" th:insert="~{include_common::top}">
 			<!-- include_common_top.html start-->
 			<!-- include_common_top.html end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
-		<div id="navigation">
+		<div id="navigation" th:insert="~{include_common::left}">
 			<!-- include_common_left.html start-->
 			<!-- include_common_left.html end-->
 		</div>
@@ -39,7 +39,7 @@
 			<!-- content end -->
 		</div>
 		<!--wrapper end-->
-		<div id="footer">
+		<div id="footer" th:insert="~{include_common::bottom}">
 			<!-- include_common_bottom.html start-->
 			<!-- include_common_bottom.html end-->
 		</div>

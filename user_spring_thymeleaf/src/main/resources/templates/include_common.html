@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- top start -->
+	<h1 th:fragment="top">
+		<a href="">USER SPRING THYMELEAF</a>
+	</h1>
+	<!-- top end -->
+	
+	<!-- left start -->
+	<div th:fragment="left"  th:remove="tag" >
+		<p>
+	<strong>메뉴</strong>
+		</p>
+		<ul>
+			<li><a href="user_login_form">로그인</a></li>
+			<li><a href="user_write_form">회원가입</a></li>
+		</ul>
+		
+		<ul th:each="user:${userList}" th:object="${user}">
+			<li><a href='@{user_view(userid=${user.userId})' th:text="*{userId}">guard님</a></li>
+			<li><a href='user_view'>내정보</a></li>
+			<li><a href="user_logout_action">로그아웃</a></li>
+		</ul>
+	</div>
+	<!-- left end -->
+	
+	<!-- bottom start -->
+	<p th:fragment="bottom" align="center">editor (&copy;) By JEE.       All rights reserved.</p>
+	<!-- bottom end -->
+
+</body>
+</html>

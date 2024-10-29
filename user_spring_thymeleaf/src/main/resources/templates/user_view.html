@@ -52,23 +52,23 @@
 											- 사용자 정보보기</b></td>
 								</tr>
 							</table> <!-- view Form  -->
-							<form name="f" method="post">
-								<input type="hidden" name="userId" value="guard" />
+							<form name="f" method="post" th:object="${user}">
+								<input type="hidden" name="userId" value="guard" th:value="*{userId}"/>
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
 											아이디</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">guard</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10" th:text="*{userId}">guard</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">김가드</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10"  th:text="*{Name}">김가드</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
 											주소</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">guard@naver.com</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10" th:text="*{Homepage}">guard@naver.com</td>
 									</tr>
 								</table>
 							</form> <br />
