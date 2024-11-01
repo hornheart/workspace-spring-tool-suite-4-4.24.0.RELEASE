@@ -32,6 +32,8 @@ public interface GuestService {
 	/*
 	 * 방명록 이름으로검색해서 리스트보기
 	 */
+	
+	
 	/*
 	public List<Guest> findByGuestName(String guest_name) throws Exception{
 		return guestDao.findByGuestName(guest_name);
