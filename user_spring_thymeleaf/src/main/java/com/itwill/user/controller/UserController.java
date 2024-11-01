@@ -17,6 +17,7 @@ import com.itwill.user.exception.PasswordMismatchException;
 import com.itwill.user.exception.UserNotFoundException;
 
 import jakarta.servlet.http.HttpSession;
+import oracle.jdbc.proxy.annotation.Post;
 
 /*
   /user_main 
@@ -111,7 +112,7 @@ public class UserController {
 		return "user_view";
 	}
 
-	@GetMapping("/user_modify_form")
+	@PostMapping("/user_modify_form")
 	public String user_modify_form(HttpSession session, Model model) throws Exception {
 		/******* login check ******/
 		String sUserId = (String) session.getAttribute("sUserId");

@@ -18,13 +18,13 @@
 	<!-- container start-->
 	<div id="container">
 		<!-- header start -->
-		<div id="header">
+		<div id="header" th:insert="~{include_common::top}">
 			<!-- include_common_top.html start-->
 			<!-- include_common_top.html end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
-		<div id="navigation">
+		<div id="navigation" th:insert="~{include_common::left}">
 			<!-- include_common_left.html start-->
 			<!-- include_common_left.html end-->
 		</div>
@@ -47,41 +47,41 @@
 											- 사용자수정</b></td>
 								</tr>
 							</table> <!-- update Form  -->
-							<form name="f" method="post">
+							<form name="f" method="post" th:object="${loginUser}">
 								<input type="hidden" name="userId" value="guard" />
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
+										<td width=100 align=center bgcolor="E6ECDE" height="22" >사용자
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
-											align="left">guard</td>
+											align="left" th:text="*{userId}">guard</td>
 									</tr>
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
+										<td width=100 align=center bgcolor="E6ECDE" height="22" >비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password" value="1111"></td>
+											name="password" value="1111" th:value="*{password}"></td>
 									</tr>
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호
+										<td width=100 align=center bgcolor="E6ECDE" height="22" >비밀번호
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password2" value="1111"></td>
+											name="password2" value="1111" th:value="*{password}"></td>
 									</tr>
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
+										<td width=100 align=center bgcolor="E6ECDE" height="22" >이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="name" value="김가드"></td>
+											name="name" value="김가드" th:value="*{name}"></td>
 									</tr>
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
+										<td width=100 align=center bgcolor="E6ECDE" height="22" >이메일
 											주소</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="email" value="guard@naver.com"></td>
+											name="email" value="guard@naver.com" th:value="*{email}"></td>
 									</tr>
 								</table>
 							</form> <br>
@@ -101,7 +101,7 @@
 			<!-- content end -->
 		</div>
 		<!--wrapper end-->
-		<div id="footer">
+		<div id="footer" th:insert="~{include_common::bottom}">
 			<!-- include_common_bottom.html start-->
 			<!-- include_common_bottom.html end-->
 		</div>

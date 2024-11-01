@@ -12,19 +12,20 @@
 	<!-- top end -->
 	
 	<!-- left start -->
-	<div th:fragment="left"  th:remove="tag" >
-		<p>
-	<strong>메뉴</strong>
-		</p>
-		<ul>
+	<div th:fragment="left" th:remove="tag">
+		<p><strong>메뉴</strong></p>
+
+		<!-- 로그인하지 않은 경우 -->
+		<ul th:if="${session.sUserId == null}">
 			<li><a href="user_login_form">로그인</a></li>
 			<li><a href="user_write_form">회원가입</a></li>
 		</ul>
-		
-		<ul th:each="user:${userList}" th:object="${user}">
-			<li><a href='@{user_view(userid=${user.userId})' th:text="*{userId}">guard님</a></li>
-			<li><a href='user_view'>내정보</a></li>
-			<li><a href="user_logout_action">로그아웃</a></li>
+
+		<!-- 로그인한 경우 -->
+		<ul th:if="${session.sUserId != null}">
+			<li><a href="" th:text="${session.sUserId} + '님'">guard님</a></li>
+			<li><a href="user_view" >내정보</a></li>
+			<li><a href="user_logout_action" >로그아웃</a></li>
 		</ul>
 	</div>
 	<!-- left end -->
