@@ -45,7 +45,7 @@ public class UserController {
 	public String user_write_form() {
 		return "user_write_form";
 	}
-
+	
 	@PostMapping("/user_write_action")
 	public String user_write_action(@ModelAttribute User user, RedirectAttributes redirectAttributes)	throws	Exception {
 		try {
