@@ -1,18 +1,23 @@
 package com.itwill.ajax.controller;
 
 import java.util.ArrayList;
+//컨트롤러에서 설정
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.ajax.domain.News;
+@CrossOrigin(origins = {"http://127.0.0.1:5500","http://192.168.15.31:5500","http://localhost:5500"}) 
+//@CrossOrigin(origins ="*") 
 @Controller
 public class JavaScriptAjaxRestController {
 	/*
@@ -26,6 +31,7 @@ public class JavaScriptAjaxRestController {
 	@ResponseBody
 	@GetMapping(value="/01.ajaxRequestGET/{id}",produces = "application/json;charset=UTF-8")
 	public Map<String,Object> ajaxRequestGET(@PathVariable("id") String id)throws Exception{
+		System.out.println(">> ajaxRequestGET->"+id);
 		int status=0;
 		String msg="";
 		List data=new ArrayList<>();
@@ -44,8 +50,112 @@ public class JavaScriptAjaxRestController {
 		resultMap.put("data",data);
 		return resultMap;
 	}
+	/*
+	<< 서버에서응답하는 데이타[JSON] >>
+	{
+		"status": 1,
+		"msg": "사용가능",
+		"data": [ ]
+	}
+	*/
+	@ResponseBody
+	@PostMapping(value="/02.ajaxRequestPOST",produces = "application/json;charset=UTF-8")
+	public Map<String,Object> ajaxRequestPOST(
+				@RequestParam("id") String id)throws Exception{
+		System.out.println(">> ajaxRequestGET->"+id);
+		int status=0;
+		String msg="";
+		List data=new ArrayList<>();
+		
+		if(id.startsWith("guard")) {
+			status=1;
+			msg="사용가능";
+		}else {
+			status=2;
+			msg="사용불가능";
+		}
+		
+		Map resultMap=new HashMap<>();
+		resultMap.put("status",status);
+		resultMap.put("msg",msg);
+		resultMap.put("data",data);
+		return resultMap;
+	}
+
+	/*
+	<< 서버에서응답하는 데이타[TEXT] >>
+	 2024. 11. 4. 오전 11:03:18
+	*/
+	@ResponseBody
+	@GetMapping(value = "/03.server_clock",produces = "text/plain;charset=UTF-8")
+	public String server_clock() {
+		return new Date().toLocaleString();
+	}
 	
+	/*
+	<< 서버에서응답하는 데이타[JSON] >>
+	{
+		"status": 1,
+		"msg": "성공",
+		"data": [
+					{
+						"title":"뉴스1",
+						"company":"한국일보",
+						"date":"2023-11-15"
+					 },
+					 {
+						"title":"뉴스2",
+						"company":"대한일보",
+						"date":"2023-11-15"
+					 }
+					 
+				 ]
+	}
+	*/
+	@ResponseBody
+	@GetMapping(value = "04.newsTitlesJSON",produces = "application/json;charset=UTF-8")
+	public Map newstitlesJSON() {
+		int status=0;
+		String msg="";
+		List data=new ArrayList<>();
+		
+		status=1;
+		msg="성공";
+		data=this.getNewsList();
+		
+		
+		Map resultMap=new HashMap<>();
+		resultMap.put("status",status);
+		resultMap.put("msg",msg);
+		resultMap.put("data",data);
+		return resultMap;
+	}
 	
+
+	/*
+	{
+	"status":3,
+	"msg":"",
+	"data":["자바","자라","자바라"]
+	}
+    */
+	@ResponseBody
+	@GetMapping(value = "/suggest",produces = "application/json;charset=UTF-8")
+	public Map suggest(@RequestParam(value = "keyword",defaultValue = "")String keyword) {
+		int status=0;
+		String msg="";
+		List data=new ArrayList<>();
+		
+	    data = this.search(keyword);
+	    status=data.size();
+		
+		
+		Map resultMap=new HashMap<>();
+		resultMap.put("status",status);
+		resultMap.put("msg",msg);
+		resultMap.put("data",data);
+		return resultMap;
+	}
 	
 	
 	
