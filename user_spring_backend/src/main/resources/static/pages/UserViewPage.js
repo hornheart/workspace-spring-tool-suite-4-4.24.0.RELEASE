@@ -1,9 +1,14 @@
+import * as userApi from '../api/userApi.js';
 
-
-export const UserViewPage = async () => {
- /****************회원탈퇴함수*************/	
-  
-  /*************************************/		
+export const UserViewPage = async (userId) => {
+  /****************회원탈퇴함수*************/	
+  const userDeleteAction=async(userId)=>{
+	const responseJsonObject=await userApi.userDeleteAction(userId);
+	location.href='index.html';
+  }	
+  /****************************************/
+  const responseJsonObject = await userApi.userView(userId);		
+  const user=responseJsonObject.data;
   
   const template = `
   <table border="0" cellpadding="0" cellspacing="0">
@@ -29,18 +34,18 @@ export const UserViewPage = async () => {
 								<td width="100" align="center" bgcolor="E6ECDE" height="22">사용자
 									아이디</td>
 								<td width="490" bgcolor="ffffff" style="padding-left: 10">
-									guard1</td>
+									${user.userId}</td>
 							</tr>
 							<tr>
 								<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
 								<td width="490" bgcolor="ffffff" style="padding-left: 10">
-									김경호1</td>
+									${user.name}</td>
 							</tr>
 							<tr>
 								<td width="100" align="center" bgcolor="E6ECDE" height="22">이메일
 									주소</td>
 								<td width="490" bgcolor="ffffff" style="padding-left: 10">
-									guard1@korea.com</td>
+									${user.email}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -48,9 +53,12 @@ export const UserViewPage = async () => {
 				<table border="0" cellpadding="0" cellspacing="1">
 					<tbody>
 						<tr>
-							<td align="center"><input id="btn_user_modify_form" type="button" value="수정폼" > &nbsp; 
-							<input type="button" id="btn_user_modify_form" 
-								value="탈퇴" id="btn_user_delete_action" > &nbsp;</td>
+							<td align="center">
+							<input id="btn_user_modify_form" 
+									type="button" value="수정폼"  
+									data-navigate='#/user_modify_form/${userId}'> &nbsp; 
+									
+							<input type="button" value="탈퇴" id="btn_user_delete_action" > &nbsp;</td>
 						</tr>
 					</tbody>
 				</table>
@@ -58,5 +66,8 @@ export const UserViewPage = async () => {
 		</tr>
 	</tbody>
 </table>`;
- 
-};
+ document.querySelector('#content').innerHTML=template;
+ document.querySelector('#btn_user_delete_action').onclick=function(){
+	userDeleteAction(userId);
+ }
+}

@@ -2,6 +2,8 @@ import { UserLeftMenuPage } from "./pages/UserLeftMenuPage.js";
 import { UserLoginFormPage } from "./pages/UserLoginFormPage.js";
 import { UserMainPage } from "./pages/UserMainPage.js";
 import { UserWriteFormPage } from "./pages/UserWriteFormPage.js";
+import { UserViewPage } from "./pages/UserViewPage.js";
+import { UserModifyFormPage } from "./pages/UserModifyFormPage.js";
 
 function App() {
   window.addEventListener("hashchange", function () {
@@ -35,7 +37,15 @@ function App() {
     } else if (hash == "#/user_login_form") {
       UserLoginFormPage();
     } else if (hash.startsWith("#/user_view")) {
+	  /*
+		#/user_view/guard1
+	  */	
+	  UserViewPage(hash.substring(hash.lastIndexOf('/')+1));	
     } else if (hash.startsWith("#/user_modify_form")) {
+	  /*
+	  #/user_modify_form/guard1
+	  */
+	  UserModifyFormPage(hash.substring(hash.lastIndexOf('/')+1));		
     }
   };
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- top start -->
+	<h1 th:fragment="top">
+		<a href="">USER SPRING THYMELEAF</a>
+	</h1>
+	<!-- top end -->
+	
+	<!-- left start -->
+	<div th:fragment="left" th:remove="tag">
+		<p><strong>메뉴</strong></p>
+
+		<!-- 로그인하지 않은 경우 -->
+		<ul th:if="${session.sUserId == null}">
+			<li><a href="user_login_form">로그인</a></li>
+			<li><a href="user_write_form">회원가입</a></li>
+		</ul>
+
+		<!-- 로그인한 경우 -->
+		<ul th:if="${session.sUserId != null}">
+			<li><a href="" th:text="${session.sUserId} + '님'">guard님</a></li>
+			<li><a href="user_view" >내정보</a></li>
+			<li><a href="user_logout_action" >로그아웃</a></li>
+		</ul>
+	</div>
+	<!-- left end -->
+	
+	<!-- bottom start -->
+	<p th:fragment="bottom" align="center">EDITOR (&copy;) BY JEE_          ALL RIGHTS RESERVED</p>
+	<!-- bottom end -->
+
+</body>
+</html>

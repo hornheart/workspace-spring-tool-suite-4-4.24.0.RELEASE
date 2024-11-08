@@ -1,6 +1,7 @@
 package com.itwill.user.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -8,6 +9,14 @@ import com.itwill.user.controller.AuthLoginAnnotationInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+		 	.allowedOrigins("http://127.0.0.1:5500","http://192.168.15.19:5500","http://localhost:5500")
+		 	.allowedMethods("GET", "POST", "PUT","DELETE")
+		 	.allowedHeaders("*")
+		 	.maxAge(3600);
+	}
 	/********************WebMvcConfigurer재정의*********************
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
