@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 /*
 
@@ -33,7 +31,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.models.PathItem.HttpMethod;
 
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
+@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 @RestController
 public class GuestRestController {
 	@Autowired
@@ -46,7 +44,6 @@ public class GuestRestController {
 		*****************************
 		*****************************
 		resultMap.put("status", status);
-		
 		resultMap.put("msg", msg);
 		resultMap.put("data", data);
 		return resultMap;
@@ -89,7 +86,7 @@ public class GuestRestController {
 		resultMap.put("data", data);
 		return resultMap;
 	}
-	
+	@Operation(summary ="방명록 쓰기")
 	@PostMapping(value = "/guests",produces = "application/json;charset=UTF-8")
 	public Map guest_write_action(@RequestBody Guest guest) {
 		System.out.println(">>guest:"+guest);
@@ -104,7 +101,7 @@ public class GuestRestController {
 			status=1;
 			msg="성공";
 			data.add(newGuest);
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			status=2;
 			msg="방명록쓰기실패";
@@ -116,12 +113,10 @@ public class GuestRestController {
 		return resultMap;
 		
 	}
-	
-	@Operation(summary = "방명록수정", description = "전송되는 아이디에 해당하는 게시물 수정")
-	@PutMapping(value = "/guests/{guest_no}",produces ="application/json;charset=UTF-8" )
-	public Map guest_update_action
-					(@PathVariable("guest_no")int guest_no,@RequestBody Guest guest){
-		
+	@Operation(summary = "방명록수정",description = "전송되는아이디에해당하는게시물수정")
+	@PutMapping(value = "/guests/{guest_no}",produces = "application/json;charset=UTF-8")
+	public Map guest_update_action(@PathVariable("guest_no") int guest_no,
+									@RequestBody Guest guest) {
 		Map resultMap=new HashMap<>();
 		int status=1;
 		String msg="";
@@ -132,7 +127,7 @@ public class GuestRestController {
 			guestService.guestUpdate(guest);
 			status=1;
 			msg="수정성공";
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			status=2;
 			msg="수정실패";
@@ -142,12 +137,17 @@ public class GuestRestController {
 		resultMap.put("msg", msg);
 		resultMap.put("data", data);
 		return resultMap;
+		
+	
 	}
 	
 	
-	@DeleteMapping(value = "/guests/{guest_no}", produces = "application/json;charset=UTF-8")
-	@Operation(summary = "방명록삭제")
-	public Map guest_remove_action(@PathVariable("guest_no")int guest_no)throws Exception{
+  
+	
+	
+	@Operation(summary ="방명록 삭제")
+	@DeleteMapping(value = "/guests/{guest_no}",produces = "application/json;charset=UTF-8")
+	public Map guest_remove_action(@PathVariable("guest_no") int guest_no)throws Exception{
 		Map resultMap=new HashMap<>();
 		int status=1;
 		String msg="";
@@ -157,7 +157,7 @@ public class GuestRestController {
 			guestService.guestDelete(guest_no);
 			status=1;
 			msg="";
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			status=2;
 			msg="방명록삭제실패";
@@ -168,7 +168,9 @@ public class GuestRestController {
 		resultMap.put("data", data);
 		return resultMap;
 	}
+	
 }
+
 
 
 
