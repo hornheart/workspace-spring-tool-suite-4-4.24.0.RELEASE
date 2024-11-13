@@ -47,7 +47,7 @@ public class Address {
 	private String country;
 	
 	
-	@OneToMany(mappedBy = "address",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "address",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@Builder.Default
 	private List<Student> students=new ArrayList<>();
 	

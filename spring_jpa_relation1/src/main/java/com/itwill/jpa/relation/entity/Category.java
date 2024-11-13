@@ -3,6 +3,8 @@ package com.itwill.jpa.relation.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@DynamicUpdate
 @Entity
 public class Category{
 	@Id
@@ -36,7 +38,8 @@ public class Category{
 	  OWNER TABLE(x)
 	*/
 	@Builder.Default
-	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(	mappedBy = "category",
+				cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY)
 	private List<Product> products=new ArrayList<Product>();
 	
 }

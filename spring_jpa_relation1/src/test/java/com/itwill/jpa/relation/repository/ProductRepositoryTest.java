@@ -40,7 +40,7 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 		productRepository.save(product);
 
 	}
-	@Disabled
+	//@Disabled
 	@DisplayName("2.제품+제품상세 읽기")
 	@Test
 	@Transactional

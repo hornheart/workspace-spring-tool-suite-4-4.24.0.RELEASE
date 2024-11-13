@@ -75,14 +75,31 @@ class ProviderRepositoryTest extends SpringJpaRelationApplicationTests {
 		System.out.println(">>> provider: "+provider);
 		System.out.println(">>> provider.getProducts(): "+provider.getProducts());
 	}
+	
 	@DisplayName("4.공급자+제품들삭제")
 	@Test
 	@Transactional
 	@Rollback(false)
 	void providerWithProductsDelete() {
+		System.out.println("----부모엔티티삭제시자식엔티티도같이삭제[CascadeType.REMOVE]------");
 		Provider provider =providerRepository.findById(1L).get();
 		System.out.println(provider);
 		System.out.println(provider.getProducts());
 		providerRepository.delete(provider);
 	}
+	@DisplayName("5.공급자삭제 제품FK null")
+	@Test
+	@Transactional
+	@Rollback(false)
+	void providerDelete() {
+		System.out.println("----부모엔티티삭제시자식엔티티도같이안삭제[CascadeType.REMOVE]------");
+		Provider provider =providerRepository.findById(1L).get();
+		for (Product p : provider.getProducts()) {
+			p.setProvider(null);
+		}
+		providerRepository.delete(provider);
+	}
 }
+
+
+

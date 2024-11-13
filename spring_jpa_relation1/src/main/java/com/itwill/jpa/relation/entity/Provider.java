@@ -3,7 +3,9 @@ package com.itwill.jpa.relation.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +31,7 @@ public class Provider {
 	  1(PROVIDER):N(PRODUCT)
 	  OWNER TABLE(x)
 	*/
-	@OneToMany(mappedBy = "provider")
+	@OneToMany(mappedBy = "provider",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
 	private List<Product> products=new ArrayList<>();
 }

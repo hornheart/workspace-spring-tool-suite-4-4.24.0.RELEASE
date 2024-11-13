@@ -18,6 +18,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
@@ -57,10 +59,18 @@ public class Course  {
 	private LocalDateTime endDate=LocalDateTime.now().minusDays(30);
 	
 	
-	
+	@ToString.Exclude
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "tutor_id")
 	private Tutor tutor;
+	
+	@ToString.Exclude
+	@Builder.Default
+	@OneToMany(mappedBy = "course")
+	private List<CourseEnrollment> courseEnrollments=
+			new ArrayList<>();
+	
+	
 	
 	
 	

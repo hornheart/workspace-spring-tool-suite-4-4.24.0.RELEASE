@@ -24,12 +24,14 @@ class AddressRepositoryTest extends SpringJpaApplicationTests{
 	@Autowired
 	StudentRepository studentRepository;
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void savAddressWithStudents() {
 		
-		
+		Address address9=addressRepository.findById(9L).get();
+		System.out.println(">>> "+address9);
+		System.out.println(">>> "+address9.getStudents());
 	}
 	@Test
 	@Disabled

@@ -1,5 +1,7 @@
 package com.itwill.jpa.relation.entity;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +21,7 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicUpdate
 @Entity
 public class Product {
 	@Id
@@ -46,10 +49,10 @@ public class Product {
 	private Provider provider;
 	
 	
-	
 	/***PRODUCT:PRODUCT_DETAIL*****
 	  1(PRODUCT):1(PRODUCT_DETAIL)
 	*/
 	@OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
+	@JoinColumn(nullable = false)
 	private ProductDetail productDetail;
 }

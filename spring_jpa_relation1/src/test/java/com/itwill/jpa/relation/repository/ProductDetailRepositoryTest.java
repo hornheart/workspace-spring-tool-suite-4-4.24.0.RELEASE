@@ -15,14 +15,12 @@ class ProductDetailRepositoryTest extends SpringJpaRelationApplicationTests{
 	
 	@Autowired
 	ProductDetailRepository productDetailRepository;
-	
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
 	void productDetailWithProductSave() {
-		Product product=Product.builder().name("JPA").price(2000).stock(50).build();
-		ProductDetail productDetail=ProductDetail.builder().description("JPA아주좋은책이여요").build();
+		Product product=Product.builder().name("JDBC").price(2000).stock(50).build();
+		ProductDetail productDetail=ProductDetail.builder().description("JDBC아주좋은책이여요").build();
 		/*
 		 연관관계설정(OWNER)
 		 ProductDetail에 Product set
@@ -33,11 +31,12 @@ class ProductDetailRepositoryTest extends SpringJpaRelationApplicationTests{
 	}
 	@Test
 	@Transactional
+	@Rollback(false)
 	void productDetailWithProductRead() {
 		ProductDetail findProductDetail= productDetailRepository.findById(1L).get();
 		System.out.println(">> findProductDetail:"+findProductDetail);
-		//Product findProduct=findProductDetail.getProduct();
-		//System.out.println(">> findProduct:"+findProduct);
+		Product findProduct=findProductDetail.getProduct();
+		System.out.println(">> findProduct:"+findProduct);
 	}
 	
 }

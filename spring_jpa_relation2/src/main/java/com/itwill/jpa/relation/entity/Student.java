@@ -54,13 +54,22 @@ public class Student {
 	private String phone;
 	private LocalDateTime dob;
 	
-	
+	@ToString.Exclude
+//	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="addr_id")
 	private Address address;
 	
 	
+//	@ManyToMany(mappedBy = "students")
+//	@JoinTable(name = "COURSE_ENROLLMENT")
+//	private List<Course> courses;
 	
+	@ToString.Exclude
+	@Builder.Default
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+	private List<CourseEnrollment> courseEnrollments
+		=new ArrayList<>();
 
 
 

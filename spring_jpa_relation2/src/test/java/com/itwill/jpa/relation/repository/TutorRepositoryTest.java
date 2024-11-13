@@ -1,7 +1,9 @@
 package com.itwill.jpa.relation.repository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.SpringJpaApplicationTests;
 import com.itwill.jpa.relation.entity.Address;
+import com.itwill.jpa.relation.entity.Course;
 import com.itwill.jpa.relation.entity.Student;
 import com.itwill.jpa.relation.entity.Tutor;
 
@@ -60,5 +63,18 @@ class TutorRepositoryTest extends SpringJpaApplicationTests{
 	@Rollback(false)
 	void selectTutorWithAddress() {
 	
+	}
+
+	@Test
+//	@Disabled
+	@Transactional
+	@Rollback(false)
+	void selectTutorWithCourses() {
+		Tutor tutor1=tutorRepository.findById(1L).get();
+		List<Course> courses=tutor1.getCourses();
+		for (Course course : courses) {
+			System.out.println(course);
+		}
+		
 	}
 }

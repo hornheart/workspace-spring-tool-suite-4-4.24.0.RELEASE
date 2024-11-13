@@ -37,11 +37,16 @@ public class Tutor{
 	@JoinColumn(name="addr_id")
 	private Address address;
 	
-	
-	@OneToMany(mappedBy = "tutor",cascade = CascadeType.ALL)
+	/*
+	<< fetchType >>
+	  - 특별한이유가없다면 지연 로딩(LAZY)을사용합니다.
+	@ManyToOne, @OneToOne 어노테이션들은 기본이 즉시 로딩(EAGER) 이다.
+	@OneToMany 기본이 지연 로딩(LAZY)이다.
+	@OneToOne 에서는 OWNER테이블이아닌경우 지연로딩설정이안됨
+	*/
+//	@OneToMany(mappedBy = "tutor",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "tutor",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@Builder.Default
 	private List<Course> courses=new ArrayList<>();
-	
-	
 	
 }

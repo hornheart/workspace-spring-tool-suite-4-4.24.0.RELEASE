@@ -32,7 +32,7 @@ class CourseEnrollmentRepositoryTest extends SpringJpaApplicationTests{
 	@Test
 	@Disabled
 	@Transactional
-	@Rollback(false)
+//	@Rollback(false)
 	void saveCourseEnrollmentWithStudentAndCourse1() {
 		
 	
@@ -47,11 +47,28 @@ class CourseEnrollmentRepositoryTest extends SpringJpaApplicationTests{
 			
 	}
 	@Test
-	@Disabled
+//	@Disabled
 	@Transactional
 	@Rollback(false)
+//	@Rollback(true)
 	void selectCourseEnrollmentWithStudentAndCourse() {
+	
+		/*Student student1=studentRepository.findById(1L).get();
+		Course course1=courseRepository.findById(1L).get();
 		
+		CourseEnrollment courseEnrollment1
+			=CourseEnrollment.builder()
+							 .student(student1)
+							 .course(course1)
+							 .build();
+		courseEnrollmentRepository.save(courseEnrollment1);*/
+		Student student1=studentRepository.findById(1L).get();
+		Course course1=courseRepository.findById(3L).get();
+		CourseEnrollment courseEnrollment1=CourseEnrollment.builder()
+											.student(student1)
+											.course(course1)
+											.build();
+		courseEnrollmentRepository.save(courseEnrollment1);
 	}
 }
 
