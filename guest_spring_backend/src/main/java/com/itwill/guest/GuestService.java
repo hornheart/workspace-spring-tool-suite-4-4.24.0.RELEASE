@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import com.itwill.guest.repository.GuestRepository;
 /*
  * - 방명록(guest) 관리 비즈니스로직(업무)를 수행하는 클래스
  * - GUI객체(스윙,서블릿,JSP)에서 직접접근(메쏘드호출)하는클래스
@@ -18,8 +20,7 @@ public class GuestService{
 		public static final int GUEST_SEARCH_BY_CONTENT=3;
 	
 		@Autowired
-		@Qualifier("guestDaoImplMyBatis")
-		private GuestDao guestDao;
+		private GuestRepository guestRepository;
 		public GuestService() throws Exception{
 			System.out.println("### GuestService()생성자");
 		}
@@ -31,28 +32,29 @@ public class GuestService{
 				throws Exception{
 			/*
 			<< GuestDao객체사용>>
-			*/
-			return guestDao.insert(guest);
+			return guestRepository.save(guest);
+			 */
+			return 0;
 		}
 		/*
 		 * 방명록번호로 1개보기
-		 */
 		public Guest guestDetail(int guest_no) throws Exception{
 			return guestDao.findByGuestNo(guest_no);
 		}
+		 */
 		/*
 		 * 방명록번호로삭제
-		 */
 		public int guestDelete(int guest_no) 
 				throws Exception{
 			return guestDao.delete(guest_no);
 		}
+		 */
 		/*
 		 * 방명록 리스트보기
-		 */
 		public List<Guest> guestList()throws Exception {
 			return guestDao.findByAll();
 		}
+		 */
 		/*
 		 * 방명록 이름으로검색해서 리스트보기
 		 */
@@ -86,10 +88,10 @@ public class GuestService{
 		*/
 		/*
 		 * 방명록수정
-		 */
 		public int guestUpdate(Guest guest) throws Exception{
 			return guestDao.update(guest);
 		}
+		 */
 		
 		
 		

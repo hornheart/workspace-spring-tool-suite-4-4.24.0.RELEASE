@@ -55,7 +55,7 @@ public class GuestRestController {
 		int status=1;
 		String msg="";
 		List data = new ArrayList();
-		/*****************************/
+		/*****************************
 		data=guestService.guestList();
 		/*****************************/
 		resultMap.put("status", status);
@@ -72,7 +72,7 @@ public class GuestRestController {
 		int status=1;
 		String msg="";
 		List data = new ArrayList();
-		/*****************************/
+		/*****************************
 		Guest guest=guestService.guestDetail(guest_no);
 		if(guest!=null) {
 			data.add(guest);
@@ -80,7 +80,7 @@ public class GuestRestController {
 			status=2;
 			msg="게시물이존재하지않습니다.";
 		}
-		/*****************************/
+		*****************************/
 		resultMap.put("status", status);
 		resultMap.put("msg", msg);
 		resultMap.put("data", data);
@@ -94,7 +94,7 @@ public class GuestRestController {
 		int status=1;
 		String msg="";
 		List data = new ArrayList();
-		/*****************************/
+		/*****************************
 		try {
 			int insert_guest_no=guestService.guestWrite(guest);
 			Guest newGuest=guestService.guestDetail(insert_guest_no);
@@ -121,7 +121,7 @@ public class GuestRestController {
 		int status=1;
 		String msg="";
 		List data = new ArrayList();
-		/*****************************/
+		/*****************************
 		try {
 			guest.setGuestNo(guest_no);
 			guestService.guestUpdate(guest);
@@ -152,7 +152,7 @@ public class GuestRestController {
 		int status=1;
 		String msg="";
 		List data = new ArrayList();
-		/*****************************/
+		/*****************************
 		try {
 			guestService.guestDelete(guest_no);
 			status=1;
