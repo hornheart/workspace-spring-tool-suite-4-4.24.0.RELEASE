@@ -1,6 +1,11 @@
 import { hello1 } from "./hello1.js";
 import { hello2 } from "./hello2.js";
 import { sum } from "./sum.js";
+import $ from 'jquery';
+import _ from 'lodash';
+import '../css/style.css';
+import '../image/background.jpg';
+import '../image/logo.png';
 function component() {
     const element = document.createElement('div');
     element.innerHTML += hello1();
@@ -13,7 +18,12 @@ function component() {
     });
     html+='</ul>';
     $(element).append(html);
-    return element;
+
+   element.classList.add("class3");
+   //원래 있던 div 에 이미지를 추가합니다.
+
+  
+   return element;
   }
   
   document.body.appendChild(component());
