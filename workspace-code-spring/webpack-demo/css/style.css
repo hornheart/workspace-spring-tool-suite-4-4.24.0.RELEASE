@@ -1,0 +1,14 @@
+
+body.class1{
+    background-color: aliceblue;
+    background-image:url('../image/background.jpg');
+    background-repeat:repeat-x;
+}
+h1.class2{
+    color:blue
+}
+.class3{
+    font-size:15pt;
+    font-style: italic;
+    font-weight: 900;
+}
