@@ -1,9 +1,42 @@
 import "../css/styles.css";
 import "../css/guest.css";
-
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import * as guestApi from "../api/guestApi";
 function GuestModifyForm() {
+  console.log('>>>> update GuestModifyForm')
+  const initGuest = {
+    guestNo: 0,
+    guestName: "",
+    guestEmail: "",
+    guestHomepage: "",
+    guestTitle: "",
+    guestDate: "",
+    guestContent: "",
+  };
+  const [guest, setGuest] = useState(initGuest);
+  const { guest_no } = useParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    (async () => {
+      const responseJsonObject = await guestApi.viewGuest(guest_no);
+      
+      setGuest(responseJsonObject.data[0]);
+    })();
+  }, [guest_no]);
+  const onChangeGuestForm=(e)=>{
+    setGuest({
+      ...guest,
+      [e.target.name]:e.target.value
+    });
+  } 
 
-  
+  const guestModifyAction = async (e) => {
+    const responseJsonObject = await guestApi.modifyGuest(guest);
+    console.log(responseJsonObject);
+    navigate(`/guest_view/${responseJsonObject.data[0].guestNo}`);
+  };
+
   return (
     <table border="0" cellpadding="0" cellspacing="0">
       <tbody>
@@ -25,11 +58,7 @@ function GuestModifyForm() {
               </tbody>
             </table>
             <form name="f" method="post">
-              <input
-                type="hidden"
-                name="guestNo"
-             
-              />
+              <input type="hidden" name="guestNo" />
               <table
                 border="0"
                 cellpadding="0"
@@ -48,7 +77,7 @@ function GuestModifyForm() {
                       bgcolor="ffffff"
                       style={{ paddingLeft: "10px" }}
                     >
-                      1
+                      {guest.guestNo}
                     </td>
                   </tr>
                   <tr>
@@ -65,8 +94,8 @@ function GuestModifyForm() {
                         type="text"
                         style={{ width: "150px" }}
                         name="guestName"
-                        value="김경호"
-                     
+                        value={guest.guestName}
+                        onChange={onChangeGuestForm}
                       />
                     </td>
                   </tr>
@@ -84,7 +113,8 @@ function GuestModifyForm() {
                         type="text"
                         style={{ width: "150px" }}
                         name="guestHomepage"
-                        value="www.google.com"
+                        value={guest.guestHomepage}
+                        onChange={onChangeGuestForm}
                       />
                     </td>
                   </tr>
@@ -98,12 +128,13 @@ function GuestModifyForm() {
                       bgcolor="ffffff"
                       style={{ paddingLeft: "10px" }}
                     >
-                    <input
+                      <input
                         type="text"
                         style={{ width: "240px" }}
                         name="guestEmail"
-                        value="guard@gmail.com"
-                    />
+                        value={guest.guestEmail}
+                        onChange={onChangeGuestForm}
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -120,8 +151,8 @@ function GuestModifyForm() {
                         type="text"
                         style={{ width: "240px" }}
                         name="guestTitle"
-                        value="오늘은 어린이날"
-                       
+                        value={guest.guestTitle}
+                        onChange={onChangeGuestForm}
                       />
                     </td>
                   </tr>
@@ -140,8 +171,10 @@ function GuestModifyForm() {
                         style={{ width: "240px" }}
                         rows="10"
                         name="guestContent"
+                        value={guest.guestContent}
+                        onChange={onChangeGuestForm}
                       >
-                       우리들세상
+                        우리들세상
                       </textarea>
                     </td>
                   </tr>
@@ -157,6 +190,7 @@ function GuestModifyForm() {
                       type="button"
                       value="수정"
                       id="btn_guest_modify_action"
+                      onClick={guestModifyAction}
                     />{" "}
                     &nbsp;{" "}
                     <input id="btn_guest_list" type="button" value="목록" />

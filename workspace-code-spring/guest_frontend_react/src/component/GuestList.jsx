@@ -12,7 +12,7 @@ function GuestList() {
       console.log(responseJsonObject);
       setGuests(responseJsonObject.data);
     })();
-  }, []);
+  }, [guests]);
 
   return (
     <table border="0" cellPadding="0" cellSpacing="0">

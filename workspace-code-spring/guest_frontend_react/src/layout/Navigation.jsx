@@ -23,7 +23,7 @@ export default function Navigation() {
           </a>
         </li>
         <li>
-          <a href="http://localhost/swagger-ui/index.html">Swagger</a>
+          <a href="http://localhost:8080/swagger-ui/index.html">Swagger</a>
         </li>
       </ul>
     </div>

@@ -19,8 +19,21 @@ function GuestView() {
   useEffect(function(){
       (async ()=>{
         const responseJsonObject = await guestApi.viewGuest(guest_no);
-        console.log(responseJsonObject.data[0]);
-        setGuest(responseJsonObject.data[0]);
+        /*
+        {
+          "msg": "게시물이존재하지않습니다.",
+          "data": [],
+          "status": 2
+        }
+        */
+        if(responseJsonObject.status===1){
+          console.log(responseJsonObject.data[0]);
+          setGuest(responseJsonObject.data[0]);
+        }else{
+          alert('게시물이존재하지않습니다.');
+          navigate('/guest_list');
+        }
+        
       })();  
  },[guest_no]);
 
