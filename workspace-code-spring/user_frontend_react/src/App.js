@@ -8,6 +8,7 @@ import { UserMainPage } from "./page/UserMainPage";
 import { UserLoginFormPage } from "./page/UserLoginFormPage";
 import { UserWriteFormPage } from "./page/UserWriteFormPage";
 import { UserNonPage } from "./page/UserNonePage";
+import { UserViewPage } from "./page/UserViewPage";
 import React, { useEffect, useState } from "react";
 import * as userApi from "./api/userApi";
 import * as responseStatusCode from "./api/responseStatusCode";
@@ -52,8 +53,9 @@ function App() {
               {/*UserContent.js start*/}
               <Route path="/" exact element={<UserMainPage />} />
               <Route path="/user_main" element={<UserMainPage />} />
-              <Route path="/user_login_form" element={<UserLoginFormPage />} />
-              <Route path="/user_write_form" element={<UserWriteFormPage />} />
+              <Route path="/user_login_form" element={(!loginStatus.isLogin)?<UserLoginFormPage />:<UserMainPage/>} />
+              <Route path="/user_write_form" element={(!loginStatus.isLogin)?<UserWriteFormPage />:<UserMainPage/>} />
+              <Route path="/user_view/:userId" element={(loginStatus.isLogin)?<UserViewPage />:<UserMainPage/>} />
               <Route path="*" element={<UserNonPage />} />
               {/*UserContent.js end */}
             </Routes>

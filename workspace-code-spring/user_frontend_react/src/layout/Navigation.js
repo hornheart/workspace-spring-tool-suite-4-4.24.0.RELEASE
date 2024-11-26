@@ -1,12 +1,22 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as userApi from "../api/userApi";
 /**********App.js에서 export한 UserContext import ********/
 import {UserContext} from '../App';
-import { userLogoutAction } from "../api/userApi";
+
 export default function Navigation() {
- const {loginStatus}=useContext(UserContext);
+ const navigate=useNavigate();
+ const {loginStatus,setLoginStatus}=useContext(UserContext);
  console.log(loginStatus);
- 
+ const userLogoutAction=async()=>{
+  await userApi.userLogoutAction();
+  setLoginStatus({
+    isLogin:false,
+    loginUser:{}
+  });
+  navigate('/user_main');
+  //window.location.href='/user_main'
+ }
   return (
     <div id="navigation">
       <p>

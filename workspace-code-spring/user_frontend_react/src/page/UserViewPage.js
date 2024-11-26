@@ -1,5 +1,38 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import * as userApi from '../api/userApi';
+import * as resonseStausCode from "../api/responseStatusCode";
+import * as responseMessage from "../api/responseMessage";
 
-export const UserViewPage = () => {
+export const UserViewPage = ({userLogoutAction}) => {
+  const navigate=useNavigate();
+  const {userId}=useParams();
+  const [user,setUser]=useState({
+    userId:'',
+    password:'',
+    name:'',
+    email:''
+  });
+  useEffect(()=>{
+  let userViewPromise=userApi.userView(userId)
+   userViewPromise.then(function(responseJsonObject){
+      console.log(responseJsonObject);
+      if(responseJsonObject.status===resonseStausCode.READ_USER){
+        setUser(responseJsonObject.data);
+      }else if(responseJsonObject.status===resonseStausCode.UNAUTHORIZED_USER){
+        alert(responseMessage.UNAUTHORIZED_USER);
+        navigate(`/user_main`);
+      }
+   }).catch(function(e){
+      alert('view error!!');
+   });
+  },[]);
+  const userDeleteAction=()=>{
+    userApi.userDeleteAction(userId).then(function(responseJsonObject){
+      userLogoutAction();
+    })
+  };
+
  return (
     <table border="0" cellPadding="0" cellSpacing="0">
       <tbody>
@@ -37,7 +70,7 @@ export const UserViewPage = () => {
                       사용자 아이디
                     </td>
                     <td width="490" bgcolor="ffffff" style={{paddingLeft: '10px'}}>
-                     guard1
+                     {user.userId}
                     </td>
                   </tr>
                   <tr>
@@ -45,7 +78,7 @@ export const UserViewPage = () => {
                       이름
                     </td>
                     <td width="490" bgcolor="ffffff" style={{paddingLeft: '10px'}}>
-                    김경호1
+                    {user.name}
                     </td>
                   </tr>
                   <tr>
@@ -53,7 +86,7 @@ export const UserViewPage = () => {
                       이메일 주소
                     </td>
                     <td width="490" bgcolor="ffffff" style={{paddinLeft:'10px'}}>
-                    guard1@gmail.com
+                    {user.email}
                     </td>
                   </tr>
                 </tbody>
@@ -75,6 +108,7 @@ export const UserViewPage = () => {
                       type="button"
                       value="탈퇴"
                       id="btn_user_delete_action"
+                      onClick={userDeleteAction}
                     />
                     &nbsp;
                   </td>

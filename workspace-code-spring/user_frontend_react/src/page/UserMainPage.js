@@ -1,6 +1,8 @@
+import enter from '../image/enter.png';
 export const UserMainPage = () => {
   return (
-    <img src="image/enter.png"
+    <img 
+      srcSet={enter}
       alt="메인이미지"
       width="540"
       height="350px"

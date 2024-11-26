@@ -7,7 +7,7 @@ import * as responseStatusCode from "../api/responseStatusCode";
 import * as responseMessage from "../api/responseMessage";
 
 export const UserLoginFormPage = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   /**** Context객체사용****/
   const { setLoginStatus } = useContext(UserContext);
   const loginFormRef = useRef();
@@ -41,17 +41,24 @@ export const UserLoginFormPage = () => {
     }
     const responseJsonObject = await userApi.userLoginAction(user);
     console.log(responseJsonObject);
-    switch(responseJsonObject.status){
+    switch (responseJsonObject.status) {
       case responseStatusCode.LOGIN_SUCCESS:
         setLoginStatus({
-          isLogin:true,
-          loginUser:responseJsonObject.data
+          isLogin: true,
+          loginUser: responseJsonObject.data,
         });
-        navigate('/user_main');
+        navigate("/user_main");
+        break;
+      case responseStatusCode.LOGIN_FAIL_NOT_FOUND_USER:
+        setMessage({id:responseMessage.LOGIN_FAIL_NOT_FOUND_USER});
+        break;  
+      case responseStatusCode.LOGIN_FAIL_PASSWORD_MISMATCH_USER:
+        setMessage({id:responseMessage.LOGIN_FAIL_PASSWORD_MISMATCH_USER});
+        break;  
+
+      default:
+        break;
     }
-    
-   
-        
   };
 
   return (
