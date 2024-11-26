@@ -1,7 +1,7 @@
 import "../css/styles.css";
 import "../css/guest.css";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as guestApi from "../api/guestApi";
 function GuestModifyForm() {
   console.log('>>>> update GuestModifyForm')
@@ -20,7 +20,6 @@ function GuestModifyForm() {
   useEffect(() => {
     (async () => {
       const responseJsonObject = await guestApi.viewGuest(guest_no);
-      
       setGuest(responseJsonObject.data[0]);
     })();
   }, [guest_no]);
@@ -35,6 +34,7 @@ function GuestModifyForm() {
     const responseJsonObject = await guestApi.modifyGuest(guest);
     console.log(responseJsonObject);
     navigate(`/guest_view/${responseJsonObject.data[0].guestNo}`);
+    //navigate(`/guest_view/${guest_no}`);
   };
 
   return (
@@ -193,7 +193,9 @@ function GuestModifyForm() {
                       onClick={guestModifyAction}
                     />{" "}
                     &nbsp;{" "}
+                    <Link to={'/guest_list'}>
                     <input id="btn_guest_list" type="button" value="목록" />
+                    </Link>
                   </td>
                 </tr>
               </tbody>

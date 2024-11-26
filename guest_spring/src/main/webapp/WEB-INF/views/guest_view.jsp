@@ -1,5 +1,5 @@
-<%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestServiceImpl"%>
+<%@page import="com.itwill.guest.Hornist"%>
+<%@page import="com.itwill.guest.HornistServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          errorPage="guest_error.jsp" 
     pageEncoding="UTF-8"%>
