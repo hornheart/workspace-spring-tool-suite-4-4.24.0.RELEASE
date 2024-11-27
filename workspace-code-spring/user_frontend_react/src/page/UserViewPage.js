@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as userApi from '../api/userApi';
 import * as resonseStausCode from "../api/responseStatusCode";
 import * as responseMessage from "../api/responseMessage";
@@ -97,12 +97,13 @@ export const UserViewPage = ({userLogoutAction}) => {
               <tbody>
                 <tr>
                   <td align="center">
-                   
+                  <Link to={`/user_modify_form/${user.userId}`}>
                     <input
                       id="btn_user_modify_form"
                       type="button"
                       value="수정폼"
                     />
+                  </Link>
                     &nbsp;
                     <input
                       type="button"

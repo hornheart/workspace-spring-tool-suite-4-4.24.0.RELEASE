@@ -1,4 +1,4 @@
-package com.itwill.guest.mapper;
+package com.itwill.hornist.mapper;
 
 import java.util.List;
 

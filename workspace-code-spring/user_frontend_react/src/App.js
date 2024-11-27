@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./css/styles.css";
 import "./css/user.css";
 import Footer from "./layout/Footer";
@@ -12,11 +12,23 @@ import { UserViewPage } from "./page/UserViewPage";
 import React, { useEffect, useState } from "react";
 import * as userApi from "./api/userApi";
 import * as responseStatusCode from "./api/responseStatusCode";
+import { UserModifyFormPage } from "./page/UserModifyFormPage";
 
 /*******초기값이{} 인Context객체생성후 App.js에서 export *****/
 export const UserContext = React.createContext({});
 
 function App() {
+  const navigate=useNavigate();
+  
+  const userLogoutAction=async()=>{
+    await userApi.userLogoutAction();
+    setLoginStatus({
+      isLogin:false,
+      loginUser:{}
+   });
+   navigate('/user_main');
+   //window.location.href='/user_main'
+  }
   const [loginStatus, setLoginStatus] = useState({
     isLogin: false,
     loginUser: {},
@@ -44,7 +56,7 @@ function App() {
         {/*Header.js end*/}
 
         {/*Navigation.js start*/}
-        <Navigation />
+        <Navigation userLogoutAction={userLogoutAction} />
         {/*Navigation.js end*/}
 
         <div id="wrapper">
@@ -55,7 +67,11 @@ function App() {
               <Route path="/user_main" element={<UserMainPage />} />
               <Route path="/user_login_form" element={(!loginStatus.isLogin)?<UserLoginFormPage />:<UserMainPage/>} />
               <Route path="/user_write_form" element={(!loginStatus.isLogin)?<UserWriteFormPage />:<UserMainPage/>} />
-              <Route path="/user_view/:userId" element={(loginStatus.isLogin)?<UserViewPage />:<UserMainPage/>} />
+              <Route path="/user_view/:userId" 
+                  element={(loginStatus.isLogin)?
+                    <UserViewPage userLogoutAction={userLogoutAction} />:<UserMainPage/>} 
+              />
+              <Route path="/user_modify_form/:userId" element={(loginStatus.isLogin)?<UserModifyFormPage/>:<UserMainPage/>}/>
               <Route path="*" element={<UserNonPage />} />
               {/*UserContent.js end */}
             </Routes>

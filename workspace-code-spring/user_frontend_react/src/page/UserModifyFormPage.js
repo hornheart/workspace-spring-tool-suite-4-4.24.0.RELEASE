@@ -1,8 +1,53 @@
-
+/****App.js에서 export한 UserContext import */
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../App";
+import { useNavigate, useParams } from "react-router-dom";
+import * as userApi from "../api/userApi";
+import * as responseStatusCode from "../api/responseStatusCode";
+import * as responseMessage from "../api/responseMessage";
 export const UserModifyFormPage = () => {
- 
-  
-
+  const navigate=useNavigate();
+  /***Context객체****/
+  const { loginStatus } = useContext(UserContext);
+  const { userId } = useParams();
+  const [user, setUser] = useState({
+    userId: "",
+    password: "",
+    password2: "",
+    name: "",
+    email: "",
+  });
+  useEffect(() => {
+    userApi.userView(loginStatus.loginUser.userId).then(
+      (responseJsonObject) => {
+        setUser({
+          ...responseJsonObject.data,
+          password2: responseJsonObject.data.password,
+        });
+      },
+      (error) => {
+        alert(error);
+      }
+    );
+  }, []);
+  const onChangeUserModifyForm = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const userModifyAction = () => {
+    userApi.userModifyAction(user).then((responseJsonObject) => {
+      switch (responseJsonObject.status) {
+        case responseStatusCode.UPDATE_USER:
+          navigate(`/user_view/${responseJsonObject.data.userId}`);
+          break;
+        default:
+          alert('fail update user');
+          break;
+      }
+    });
+  };
   return (
     <table width="0" border="0" cellPadding="0" cellSpacing="0">
       <tbody>
@@ -25,7 +70,7 @@ export const UserModifyFormPage = () => {
               </tbody>
             </table>
             {/* <!-- write Form  --> */}
-            <form name="f" method="post" >
+            <form name="f" method="post">
               <table
                 border="0"
                 cellPadding="0"
@@ -44,7 +89,7 @@ export const UserModifyFormPage = () => {
                       style={{ paddingLeft: "10px" }}
                       align="left"
                     >
-                     guard1
+                      {user.userId}
                     </td>
                   </tr>
                   <tr>
@@ -61,8 +106,8 @@ export const UserModifyFormPage = () => {
                         type="password"
                         style={{ width: "150px" }}
                         name="password"
-                        value={'1111'}
-                       
+                        value={user.password}
+                        onChange={onChangeUserModifyForm}
                       />
                     </td>
                   </tr>
@@ -80,7 +125,8 @@ export const UserModifyFormPage = () => {
                         type="password"
                         style={{ width: "150px" }}
                         name="password2"
-                        value={'1111'}
+                        value={user.password2}
+                        onChange={onChangeUserModifyForm}
                       />
                     </td>
                   </tr>
@@ -98,7 +144,8 @@ export const UserModifyFormPage = () => {
                         type="text"
                         style={{ width: "150px" }}
                         name="name"
-                        value={'김경호1'}
+                        value={user.name}
+                        onChange={onChangeUserModifyForm}
                       />
                     </td>
                   </tr>
@@ -116,7 +163,8 @@ export const UserModifyFormPage = () => {
                         type="text"
                         style={{ width: "150px" }}
                         name="email"
-                        value={'guard1@gmail.com'}
+                        value={user.email}
+                        onChange={onChangeUserModifyForm}
                       />
                     </td>
                   </tr>
@@ -132,7 +180,7 @@ export const UserModifyFormPage = () => {
                     <input
                       type="button"
                       value="수정"
-                     
+                      onClick={userModifyAction}
                     />
                     &nbsp;
                   </td>

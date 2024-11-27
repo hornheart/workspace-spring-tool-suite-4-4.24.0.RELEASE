@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.itwill.guest.mapper.HornistMapper;
+import com.itwill.hornist.mapper.HornistMapper;
 
 @Repository
 public class HornistDaoImplMyBatis implements HornistDao {
