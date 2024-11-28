@@ -50,15 +50,16 @@ public class NaverController {
 	public String naver_login_action(@RequestParam Map<String, String> resValue, HttpServletRequest request,
 			HttpServletResponse response) {
 		// code 를 받아오면 code 를 사용하여 access_token를 발급받는다.
-		System.out.println(resValue);
+		System.out.println(">>>> 1."+resValue);
 		final NaverLoginVo naverLoginVo = service.requestNaverLoginAcceccToken(resValue, "authorization_code");
 		// access_token를 사용하여 사용자의 고유 id값을 가져온다.
+		System.out.println(">>>> 2."+naverLoginVo);
 		final NaverLoginProfile naverLoginProfile = service.requestNaverLoginProfile(naverLoginVo);
 		/*
 		 * 이미가입한사용자라면 로그인진행
 		 * 미가입사용자라면 회원가입진행
 		 */
-		System.out.println(naverLoginProfile);
+		System.out.println(">>>> 3."+naverLoginProfile);
 		HttpSession session = request.getSession();
 		session.invalidate();
 		// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
