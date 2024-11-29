@@ -72,29 +72,30 @@ which needs the specification of a domain object and the permissions defined on 
 
 		<div class="links">
 
-			<div class="link" >
+			 <div class="link" sec:authorize='!authenticated'>
 				<a href="/login-form"> 로그인 </a>
 			</div>
 
-			<div class="link" >
+			<div class="link" sec:authorize="hasAuthority('ROLE_USER')">
 				<a href="/user-page"> 유저 페이지 </a>
 			</div>
-			<div class="link" >
+			<div class="link" sec:authorize="hasAuthority('ROLE_ADMIN')">
 				<a href="/admin-page"> 관리자 페이지 </a>
 			</div>
-			<div class="link">
+			
+			<div class="link" sec:authorize='isAuthenticated()'>
 				<form th:action="@{/logout}" method="post">
 					<button class="btn btn-info" type="submit">로그아웃</button>
 				</form>
 			</div>
-			<div class="link" >
-		
-				principal: <span sec:authentication="principal">User 객체</span><br>
-				Logged user:<span sec:authentication="name">Bob</span><br>
+			
+			<div class="link" sec:authorize='isAuthenticated()'>
+				Logged user:<span th:text="${#authentication.name}">경호</span><br>
+				Logged user:<span sec:authentication="name">경호</span><br>
 				principal.username:<span sec:authentication="principal.username">principal.username</span><br>
 				principal.password:<span sec:authentication="principal.password">principal.password</span><br>
 				Roles: <span sec:authentication="principal.authorities">[ROLE_USER,ROLE_ADMIN]</span><br>
-			</div>
+			</div> 
 
 		</div>
 		<script th:src="@{/js/bootstrap.js}" />

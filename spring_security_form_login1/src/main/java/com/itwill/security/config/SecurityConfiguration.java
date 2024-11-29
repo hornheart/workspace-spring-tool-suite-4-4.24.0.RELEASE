@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,41 +25,42 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		
+		
+		/*		httpSecurity.authorizeHttpRequests( (auth) -> auth.requestMatchers("/index","/","/authentication","/securityContext")
+														  .permitAll()
+													      .anyRequest().authenticated());*/
+	
 		/*
-		httpSecurity.authorizeHttpRequests(new Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>() {
+		httpSecurity.authorizeHttpRequests(	new Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>() {
 			
 			@Override
-			public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry t) {
-				t.anyRequest().authenticated();
+			public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry auth) {
+				   auth.requestMatchers("/index","/","/authentication","/securityContext")
+				  .permitAll()
+			      .anyRequest().authenticated();
 				
 			}
-		} );
-		*/
-		httpSecurity.authorizeHttpRequests((t) -> {
-			t.requestMatchers("/", "/index", "/login-form", "/authentication", "/login-error").permitAll();
-			t.anyRequest().authenticated();
-			// t.anyRequest().permitAll();
+		});*/
+		httpSecurity.authorizeHttpRequests((auth)->{
+			  auth.requestMatchers("/index","/","/authentication","/securityContext")
+			  .permitAll()
+		      .anyRequest().authenticated();
 		});
-		/*
-		 * spring security form login을사용
-		 */
-		httpSecurity.formLogin((t) -> {
-			Customizer.withDefaults();
+		httpSecurity.sessionManagement((session)->{
+			session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		});
-		httpSecurity.formLogin((t) -> {
-			t.loginPage("/login-form")
-				.loginProcessingUrl("/login")
-				.defaultSuccessUrl("/", true)
-				.failureUrl("/login-error");
-		});
-		httpSecurity.logout((t) -> {
-			t.logoutUrl("/logout");
-			t.logoutSuccessUrl("/");
-		});
-		httpSecurity.exceptionHandling((t) -> {
-			t.accessDeniedPage("/access-denied");
-		});
-
+		
+		httpSecurity.formLogin((form)->form.loginPage("/login-form")
+								.loginProcessingUrl("/login")
+								.defaultSuccessUrl("/", true)
+								.failureUrl("/login-form")
+								.usernameParameter("username")
+								.passwordParameter("password")
+								.permitAll());
+		httpSecurity.logout((logout)->logout.logoutUrl("/logout")
+								.logoutSuccessUrl("/"));
+		httpSecurity.exceptionHandling((exception)-> exception.accessDeniedPage("/access-denied"));
 		return httpSecurity.build();
 	}
 
@@ -88,5 +91,5 @@ public class SecurityConfiguration {
 			t.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 		};
 	}
-
+	
 }
