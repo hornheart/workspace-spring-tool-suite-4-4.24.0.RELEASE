@@ -60,17 +60,18 @@ public class SecurityConfiguration {
 			// REST API는 csrf 보안이 필요 없으므로 비활성화
 			csrfConfig.disable();
 		});
-		httpSecurity.sessionManagement((sessionManagementConfig) -> {
+		/*httpSecurity.sessionManagement((sessionManagementConfig) -> {
 			// JWT Token 인증방식으로 세션은 필요 없으므로 비활성화
 			sessionManagementConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		});
+		});*/
 		httpSecurity.authorizeHttpRequests((authorizeHttpRequestsConfig) -> {
 			//swagger설정
 			authorizeHttpRequestsConfig.requestMatchers(SwaggerPatterns).permitAll();
 			// 가입 및 로그인 주소는 허용
 			authorizeHttpRequestsConfig.requestMatchers("/user/join",
 														"/user/login",
-														"/user/exception").permitAll();
+														"/user/exception",
+														"/user/securityContext").permitAll();
 			// product로 시작하는 Get 요청은 허용
 			authorizeHttpRequestsConfig.requestMatchers(HttpMethod.GET, "/product/**").permitAll();
 			authorizeHttpRequestsConfig.requestMatchers("**exception**").permitAll();

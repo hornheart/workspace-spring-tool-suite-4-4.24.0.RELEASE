@@ -64,7 +64,7 @@ public class UserController {
 		throw new RuntimeException("접근이 금지되었습니다.");
 	}
 	@ResponseBody
-	@GetMapping(value = "/securityConetxt")
+	@GetMapping(value = "/securityContext")
 	public SecurityContext securityConetxt()  {
 		return SecurityContextHolder.getContext();
 	}
