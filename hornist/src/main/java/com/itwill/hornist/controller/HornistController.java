@@ -28,6 +28,19 @@ public class HornistController {
 		List<Hornist> hornistList= hornistService.hornist_list();
 		request.setAttribute("hornistList", hornistList);
 		return "hornist_list";
+		/*@GetMapping("/hornist_list") // "/hornist_list" 요청이 들어오면 이 메소드가 실행됨
+public String hornist_list(HttpServletRequest request, Model model) throws Exception {
+    // hornistService를 통해 모든 Hornist 객체를 리스트로 가져옴
+    List<Hornist> hornistList = hornistService.hornist_list();
+
+    // 모델에 "hornistList"라는 이름으로 가져온 리스트를 추가
+    model.addAttribute("hornistList", hornistList);
+
+    // 정상적으로 처리되면 "hornist_list.jsp"로 포워딩
+    return "forward:/WEB-INF/views/hornist_list.jsp";
+}
+
+		 * */
 	}
 	/*
 	<<요청 url(command)>>
