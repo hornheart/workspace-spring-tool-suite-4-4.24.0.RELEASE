@@ -50,10 +50,10 @@
 									bgcolor="BBBBBB">
 									<tr>
 										<td width=50 align=center bgcolor="E6ECDE" height="22">번호</td>
+										<td width=250 align=center bgcolor="E6ECDE">날씨</td>
+										<td width=120 align=center bgcolor="E6ECDE">날짜</td>
 										<td width=250 align=center bgcolor="E6ECDE">제목</td>
-										<td width=120 align=center bgcolor="E6ECDE">이름</td>
-										<td width=250 align=center bgcolor="E6ECDE">날짜</td>
-										<td width=250 align=center bgcolor="E6ECDE">날짜</td>
+										<td width=250 align=center bgcolor="E6ECDE">내용</td>
 									</tr>
 									<c:forEach items="${hornistList }" var="hornist">
 									<tr>
@@ -61,7 +61,7 @@
 										<td width=250 bgcolor="ffffff" style="padding-left: 10"><a
 											href="guest_view?guest_no=17" class="user">${hornist.weather}</a></td>
 										<td width=120 align=center bgcolor="ffffff">${hornist.regDate.toString().substring(0,10)}</td>
-										<td width=250 align=center bgcolor="ffffff">${hornist.contents}</td>
+										<td width=250 align=center bgcolor="ffffff">${hornist.title}</td>
 										<td width=250 align=center bgcolor="ffffff">${hornist.contents}</td>
 									</tr>
 									</c:forEach>

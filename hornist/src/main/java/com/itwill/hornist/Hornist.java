@@ -38,15 +38,12 @@ public class Hornist {
 	private int no;
 	private String weather;
 	private Date regDate;
-	private String contents;
 	private String title;
+	private String contents;
 	@Override
 	public String toString() {
-		return "Hornist [no=" + no + ", weather=" + weather + ", regDate=" + regDate + ", contents=" + contents
-				+ ", title=" + title + "]";
+		return "Hornist [no=" + no + ", weather=" + weather + ", regDate=" + regDate + ", title=" + title
+				+ ", contents=" + contents + "]";
 	}
-	
-	
-	
 	
 }
