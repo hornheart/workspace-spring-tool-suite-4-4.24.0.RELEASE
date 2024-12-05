@@ -54,7 +54,12 @@ public String hornist_list(HttpServletRequest request, Model model) throws Excep
 	/guest_remove_action --redirect--> guest_list
 	 */
 	
-	
+	@RequestMapping("/hornist_view")
+	public String hornist_view(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		String forwardPath="";
+		
+		return null;
+	}
 	
 	
 	
