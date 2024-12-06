@@ -10,8 +10,8 @@ public interface HornistDao {
 
 	int delete(int guestNo) throws Exception;
 
-	Hornist findByGuestNo(int guestNo) throws Exception;
 	*/
 	List<Hornist> findByAll() throws Exception;
 
+	Hornist findByGuestNo(int no) throws Exception;
 }

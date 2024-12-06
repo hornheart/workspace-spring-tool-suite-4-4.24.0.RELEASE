@@ -34,21 +34,24 @@ public class CustomSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-  public static final String productImagePattern = "/api/products/view/**";
-  public static final String contextPattern = "/api/member/context";
-  public static final String apiMemberPattern = "/api/member/**";
 
   
-  public static final String[] SwaggerPatterns = {
+  public static final String[] swaggerPatterns = {
       "/swagger-resources/**",
       "/swagger-ui/**",
       "/v3/api-docs/**",
       "/v3/api-docs",
       "/swagger-ui.html",
-      productImagePattern,
-      contextPattern,
-      apiMemberPattern
+    
   };
+  public static final String[] mallApiPatterns = {
+     "/api/products/view/**",
+     "/api/member/context",
+     "/api/member/**"
+  };
+
+
+
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -71,14 +74,17 @@ public class CustomSecurityConfig {
       config.successHandler(new APILoginSuccessHandler());
       config.failureHandler(new APILoginFailHandler());
     });
+
     http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class); // JWT체크
     http.exceptionHandling(config -> {
       config.accessDeniedHandler(new CustomAccessDeniedHandler());
     });
    
     http.authorizeHttpRequests((authorizeHttpRequestsConfig) -> {
-      // swagger설정
-      authorizeHttpRequestsConfig.requestMatchers(SwaggerPatterns).permitAll().anyRequest().authenticated();
+      authorizeHttpRequestsConfig.requestMatchers(swaggerPatterns).permitAll()
+                                 .requestMatchers(mallApiPatterns).permitAll()
+                                 .anyRequest().authenticated();
+     
     });
     return http.build();
   }
@@ -95,7 +101,6 @@ public class CustomSecurityConfig {
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
-
     return source;
   }
 

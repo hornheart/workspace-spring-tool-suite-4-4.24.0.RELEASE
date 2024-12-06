@@ -29,7 +29,6 @@ public class JWTCheckFilter extends OncePerRequestFilter {
     if (request.getMethod().equals("OPTIONS")) {
       return true;
     }
-
     String path = request.getRequestURI();
 
     log.info("check uri.............." + path);
@@ -37,23 +36,15 @@ public class JWTCheckFilter extends OncePerRequestFilter {
     if (path.startsWith("/swagger") ||path.startsWith("/v3/api-docs")) {
       return true;
     }
- 
- 
-
-    // /context 경로의 호출은 체크하지 않음
-    if (path.startsWith("/api/member/")) {
-      return true;
-    }
+    
     // api/member/ 경로의 호출은 체크하지 않음
     if (path.startsWith("/api/member/")) {
       return true;
     }
-
     // 이미지 조회 경로는 체크하지 않는다면
     if (path.startsWith("/api/products/view/")) {
       return true;
     }
-
     return false;
   }
 

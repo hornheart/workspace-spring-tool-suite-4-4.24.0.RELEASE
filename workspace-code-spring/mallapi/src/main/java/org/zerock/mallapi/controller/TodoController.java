@@ -27,14 +27,11 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequestMapping("/api/todo")
 
+@SecurityRequirement(name = "BearerAuth")
 public class TodoController {
-
-
-
   private final TodoService service;
 
-  @Operation(summary = "상세보기", description = "user 권한사용자")
-  @SecurityRequirement(name = "BearerAuth")
+  
   @GetMapping("/{tno}")
   public TodoDTO get(@PathVariable(name = "tno") Long tno) {
 

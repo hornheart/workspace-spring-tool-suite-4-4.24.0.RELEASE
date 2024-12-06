@@ -16,6 +16,9 @@ public class HornistServiceImpl implements HornistService{
 		return hornistDao.findByAll();
 	}
 	
-//	@Override
-//	public 
+	@Override
+	public Hornist hornistDetail(int no) throws Exception{
+		return hornistDao.findByGuestNo(no);//번호로 1개보기
+	}
+	 
 }

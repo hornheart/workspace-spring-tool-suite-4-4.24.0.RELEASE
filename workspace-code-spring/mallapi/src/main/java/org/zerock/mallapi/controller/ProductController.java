@@ -21,6 +21,7 @@ import org.zerock.mallapi.dto.ProductDTO;
 import org.zerock.mallapi.service.ProductService;
 import org.zerock.mallapi.util.CustomFileUtil;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -28,6 +29,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 @Log4j2
 @RequestMapping("/api/products")
+@SecurityRequirement(name = "BearerAuth")
 public class ProductController {
 
   private final ProductService productService; //ProductServcie 주입 

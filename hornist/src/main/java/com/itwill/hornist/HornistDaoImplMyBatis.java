@@ -16,6 +16,12 @@ public class HornistDaoImplMyBatis implements HornistDao {
 	public List<Hornist> findByAll() throws Exception {
 		return hornistMapper.findByAll();
 	}
+
+	@Override
+	public Hornist findByGuestNo(int no) throws Exception {
+		return  hornistMapper.findByHornistNo(no);
+	}
+	
 	/*
 	@Override
 	public int insert(Hornist guest) throws Exception {
@@ -34,10 +40,6 @@ public class HornistDaoImplMyBatis implements HornistDao {
 		return guestMapper.delete(guestNo);
 	}
 
-	@Override
-	public Hornist findByGuestNo(int guestNo) throws Exception {
-		return guestMapper.findByGuestNo(guestNo);
-	}
 
 	
 	*/
