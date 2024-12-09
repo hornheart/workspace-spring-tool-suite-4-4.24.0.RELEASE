@@ -33,7 +33,12 @@ public interface HornistMapper {
 	@Select("select * from hornist")
 	List<Hornist> findByAll() throws Exception;
 	
-	//@ResultType(Hornist.class)
 	@Select("select * from hornist 	WHERE no=#{no}")
 	Hornist findByHornistNo(int no) throws Exception;
+	
+	@Select("select * from hornist 	WHERE weather=#{weather}")
+	Hornist findByHornistWeather(String weather) throws Exception;
+	
+	
+	
 }

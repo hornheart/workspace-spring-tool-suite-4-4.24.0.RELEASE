@@ -13,5 +13,8 @@ public interface HornistDao {
 	*/
 	List<Hornist> findByAll() throws Exception;
 
-	Hornist findByGuestNo(int no) throws Exception;
+	Hornist findByHornistNo(int no) throws Exception;
+	
+	Hornist findByHornistWeather(String weather) throws Exception;
+	
 }

@@ -18,8 +18,13 @@ public class HornistDaoImplMyBatis implements HornistDao {
 	}
 
 	@Override
-	public Hornist findByGuestNo(int no) throws Exception {
+	public Hornist findByHornistNo(int no) throws Exception {
 		return  hornistMapper.findByHornistNo(no);
+	}
+	
+	@Override
+	public Hornist findByHornistWeather(String weather) throws Exception {
+		return  hornistMapper.findByHornistWeather(weather);
 	}
 	
 	/*

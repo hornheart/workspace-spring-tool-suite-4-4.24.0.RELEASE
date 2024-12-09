@@ -11,9 +11,26 @@ import com.itwill.hornist.HornistDao;
 class HornistDaoImplMyBatisTest extends HornistSpringApplicationTests {
 	@Autowired
 	HornistDao hornistDao;
+	
 	@Test
 	void hornist_list() throws Exception{
-		System.out.println(hornistDao.findByAll());
+		System.out.println("hornistByList => "+"\n "+hornistDao.findByAll());
 	}
+	
+	@Test
+	void hornistByNumberList()throws Exception{
+	
+		System.out.println("hornistByNumberList => "+"\n "+hornistDao.findByHornistNo(1));
+	
+	}
+	
+	@Test
+	void hornistByWeatherList()throws Exception{
+		
+		System.out.println("hornistByWeatherList => "+"\n "+hornistDao.findByHornistWeather("cloudy"));
+		
+	}
+	
+	
 
 }
