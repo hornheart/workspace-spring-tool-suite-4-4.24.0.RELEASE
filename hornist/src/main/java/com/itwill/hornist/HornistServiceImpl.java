@@ -12,7 +12,6 @@ public class HornistServiceImpl implements HornistService{
 
 	@Override
 	public List<Hornist> hornist_list() throws Exception{
-		// TODO Auto-generated method stub
 		return hornistDao.findByAll();
 	}
 	
@@ -21,5 +20,9 @@ public class HornistServiceImpl implements HornistService{
 		return hornistDao.findByHornistNo(no);//번호로 1개보기
 	}
 	 
+	@Override
+	public Hornist findByHornistWeather(String weather) throws Exception{
+		return hornistDao.findByHornistWeather(weather);
+	}
 	
 }

@@ -20,14 +20,14 @@ class HornistDaoImplMyBatisTest extends HornistSpringApplicationTests {
 	@Test
 	void hornistByNumberList()throws Exception{
 	
-		System.out.println("hornistByNumberList => "+"\n "+hornistDao.findByHornistNo(1));
+		System.out.println("hornistByNumberList => "+"\n "+hornistDao.findByHornistNo(5));
 	
 	}
 	
 	@Test
 	void hornistByWeatherList()throws Exception{
 		
-		System.out.println("hornistByWeatherList => "+"\n "+hornistDao.findByHornistWeather("cloudy"));
+		System.out.println("hornistByWeatherList => "+"\n "+hornistDao.findByHornistWeather("sunny"));
 		
 	}
 	
